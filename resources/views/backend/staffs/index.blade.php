@@ -108,7 +108,6 @@
     @include('backend.header.content_header',['name'=>'staffs.label','key'=>'staffs.list'])
     @include('backend.staffs._modal_excel')
     <section class="content overlay">
-        @permission('staffs.update')
         <div class="row">
             <div class="col-md-4">
                 <div class="btn-group">
@@ -116,51 +115,21 @@
                         <span class="glyphicon glyphicon-plus"></span>&nbsp;{!! trans('system.action.create') !!}
                     </a>
                 </div>
-                <div class="btn-group">
-                    <a href="{!! route('admin.staffs.create-bulk') !!}" class='btn btn-info btn-flat'>
-                        <span class="glyphicon glyphicon-import"></span>&nbsp;{!! trans('system.action.import') !!}
-                    </a>
-                </div>
-                <div class="btn-group">
-                    <span class='btn btn-success btn-flat show-user-export'>
-                        <span class="glyphicon glyphicon-export"></span>&nbsp;{!! trans('system.action.export') !!}
-                    </span>
-                </div>
             </div>
         </div>
-        @endpermission
         <div class="box">
-            {{--<div class="box-header">
-            </div>--}}
             <?php $i = 1; ?>
             <div class="box-body no-padding1">
                 <div class="table-responsive">
-                    <div class="tab">
-                        <span class="active-staff">
-                            <a href="{!! route('admin.staffs.index') !!}"
-                            class="active-tab"
-                            style="outline: none;">
-                             Đang hoạt động
-                            </a>
-                        </span>
-                        <span class="noactive-staff">
-                            <a href="{!! route('admin.staffs.index', ['type' => 0]) !!}"
-                            style="outline: none;">
-                             Không hoạt động
-                            </a>
-                        </span>
-                    </div>
                     <table class="table table-striped table-bordered table-hover" id="tableUser">
                         <thead>
                             <tr>
                                 <th style="text-align: center; vertical-align: middle;">{!! trans('system.no.') !!}</th>
                                 <th style="text-align: center; vertical-align: middle;">{!! trans('staffs.code') !!}</th>
                                 <th style="text-align: center; vertical-align: middle; min-width: 100px">{!! trans('staffs.fullname') !!}</th>
-                                <th style="text-align: center; vertical-align: middle;">{!! trans('contracts.company_id') !!}</th>
                                 <th style="text-align: center; vertical-align: middle;">{!! trans('contracts.department_id') !!}</th>
                                 <th style="text-align: center; vertical-align: middle;">{!! trans('staffs.addresses') !!}</th>
                                 <th style="text-align: center; vertical-align: middle; white-space: nowrap">{!! trans('staffs.date_of_birth') !!}</th>
-                                <th style="text-align: center; vertical-align: middle; white-space: nowrap">{!! trans('staffs.code_timekeeping') !!}<br>Mã phụ</th>
                                 <th style="text-align: center; vertical-align: middle;">{!! trans('system.action.label') !!}</th>
                             </tr>
                         </thead>
@@ -176,10 +145,6 @@
                                     <td style="vertical-align: middle;text-align: left">
                                         {!! $item->fullname !!}
                                     </td>
-
-                                    <td style="text-align: center; vertical-align: middle;">
-                                        {!! $item->company->shortened_name !!}
-                                    </td>
                                     <td style="text-align: left; vertical-align: middle;">
                                         {!! $item->department->name !!}
                                     </td>
@@ -189,52 +154,19 @@
                                     <td style="text-align: center; vertical-align: middle;">
                                         <span class="label label-default">{!! date('d/m/Y', strtotime($item->date_of_birth)) !!}</span>
                                     </td>
-                                    <td style="text-align: center; vertical-align: middle; white-space: nowrap">
-                                        {!! $item->code_timekeeping !!}
-                                        @if($item->code_timekeeping_subs)
-                                            <br>--<br>
-                                            {!! $item->code_timekeeping_subs !!}
-                                        @endif
-                                    </td>
                                     <td style="text-align: center; vertical-align: middle; white-space: nowrap;">&nbsp;&nbsp;
                                         <div class="row">
-                                            @permission('staffs.update')
-                                            @if($item->active)
-                                                <div class="col-md-1">
-                                                    <a data-toggle="tooltip" title="Đổi mật khẩu"
-                                                       href="{!! route('admin.staffs.update_password', $item->id) !!}"
-                                                       class="btn btn-default btn-xs"><i class="text-info fa fa-key"></i> </a>
-                                                </div>
-                                            @endif
                                             <div class="col-md-1">
                                                 <a data-toggle="tooltip" title="Cập nhật"
                                                    href="{!! route('admin.staffs.edit', $item->id) !!}"
-                                                   class="btn btn-xs btn-default"><i
-                                                            class="text-warning glyphicon glyphicon-edit"></i></a>
+                                                   class="btn btn-xs btn-default"><i class="text-warning glyphicon glyphicon-edit"></i></a>
                                             </div>
-                                            @endpermission
-
-                                            @permission('staffs.delete')
                                             <div class="col-md-1">
                                                 <a data-toggle="tooltip" title="Xóa" href="javascript:void(0)"
                                                    link="{!! route('admin.staffs.destroy', $item->id) !!}"
-                                                   class="btn-confirm-del btn btn-default btn-xs"><i
-                                                            class="text-danger glyphicon glyphicon-remove"></i></a>
+                                                   class="btn-confirm-del btn btn-default btn-xs"><i class="text-danger glyphicon glyphicon-remove"></i></a>
                                             </div>
-                                            @endpermission
-
-                                            @permission('staffs.roles')
-                                            @if($item->active == 1 && \Auth::id() != $item->id)
-                                                <div class="col-md-1">
-                                                    <a data-toggle="tooltip" title="Thêm quyền cho nhân viên"
-                                                       href="{!! route('admin.staffs.roles', $item->id) !!}"
-                                                       class="btn btn-xs btn-default"><i
-                                                                class="fas fa-user-plus"></i></a>
-                                                </div>
-                                            @endif
-                                            @endpermission
                                         </div>
-
                                     </td>
                                 </tr>
                             @endforeach
@@ -265,14 +197,11 @@
         }
         $(document).ready(function() {
             $(".select2").select2({width: '100%'});
-            $('.show-user-excel').on('click', function (e) {
-                $('#modal-excel').modal("show");
-            });
             $('#tableUser thead tr').clone(true).appendTo('#tableUser thead');
             $('#tableUser thead tr:eq(1) th').each(function (i) {
-                if (i == 6) {
+                if (i == 5) {
                     $(this).html('<input type="text" class="search-form datepicker date" autocomplete="off" />');
-                } else if (i != 0 && i != 8) {
+                } else if (i != 0 && i != 6) {
                     $(this).html('<input type="text" class="search-form input-text" autocomplete="off" />');
                 } else {
                     $(this).html('');
@@ -301,10 +230,10 @@
                 rowReorder: true,
                 // ordering: false,
                 pagingType: "full_numbers",
-                columnDefs: [
-                    {orderable: false, className: 'reorder', targets: [7,8]},
-                    {orderable: false, targets: 0}
-                ],
+                // columnDefs: [
+                //     {orderable: false, className: 'reorder', targets: [7,8]},
+                //     {orderable: false, targets: 0}
+                // ],
                 language: {
                     "info": "Hiển thị _START_ - _END_ của _TOTAL_ kết quả",
                     "paginate": {
@@ -320,34 +249,6 @@
                 dom: '<"top "i>rt<"bottom"flp>',
             });
             window.setNoAfterSearchDatatables(table, 0)
-            let users = {!! json_encode($users) !!};
-            var userIds = [];
-            $('.show-user-export').on('click', function (e) {
-                let test = table.rows({search: 'applied'}).nodes()
-                $.each(test, function (i, e) {
-                    userIds.push(e.dataset.id)
-                })
-                $('#modal-excel').modal("show");
-                // userIds = $('.user-id').map((i, e) => e.value).get();
-            })
-            $("#modal-excel").on("hidden.bs.modal", function () {
-                userIds = []
-                $(this).removeData();
-                $(this).find('input.user-input-excel').remove()
-                $('#show').html('')
-            });
-            $('#btn-export').on('click', function (e) {
-                e.preventDefault();
-                if (userIds.length === 0) {
-                    toastr.warning('Không có dữ liệu để xuất.')
-                    return false
-                }
-                for (var key in userIds) {
-                    let input1 = `<input type="hidden" class="user-input-excel" name="userIds[${key}]" value="${userIds[key]}">`
-                    $('#excel-form').append(input1);
-                }
-                document.getElementById('excel-form').submit();
-            })
             
         });
     </script>

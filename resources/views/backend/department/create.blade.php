@@ -23,107 +23,42 @@
             <th class="table_right_middle " style="width: 15%;">
                 {!! trans('departments.code') !!}
             </th>
-            <td>
+            <td style="width: 70%;"> 
                 {!! Form::text('code', old('code'), ['class' => 'form-control']) !!}
             </td>
-            <th class="table_right_middle " style="width: 15%;">
-            </th>
-            <td>
-            </td>
+            <th class="table_right_middle " style="width: 15%;"></th>
         </tr>
 
         <tr>
             <th class="table_right_middle " style="width: 15%;">
                 {!! trans('departments.name') !!}
             </th>
-            <td>
+            <td style="width: 70%;"> 
                 {!! Form::text('name', old('name'), ['class' => 'form-control',  'required']) !!}
             </td>
-            <th class="table_right_middle " style="width: 15%;">
-            </th>
-            <td>
-            </td>
+            <th class="table_right_middle " style="width: 15%;"></th>
         </tr>
-        <tr>
-            <th class="table_right_middle " style="width: 15%;">
-                {!! trans('departments.name_es') !!}
-            </th>
-            <td>
-                {!! Form::text('name_es', old('name_es'), ['class' => 'form-control']) !!}
-            </td>
-            <th class="table_right_middle " style="width: 15%;">
-            </th>
-            <td>
-            </td>
-        </tr>
+
         <tr>
             <th class="table_right_middle" style="width: 15%;">
                 {!! trans('departments.telephone') !!}
             </th>
-            <td>
+            <td style="width: 70%;"> 
                 {!! Form::text('telephone', old('telephone'), ['class' => 'form-control', 'required']) !!}
             </td>
+            <th class="table_right_middle " style="width: 15%;"></th>
         </tr>
-        <tr class="company-id">
-            <th class="table_right_middle">
-                {!! trans('departments.company_id') !!}
-            </th>
-            <td>
-            @foreach($companiesPer as $key=>$company)
-                    <label>
-                        {!! Form::checkbox('company_id[]', $key, old('company_id'), [ 'class' => 'minimal' ]) !!}
-                        {!! $company !!}
-                    </label>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            @endforeach
-            </td>
-        </tr>
-        <tr>
-            <th class="table_right_middle">
-                {!! trans('departments.time_in_works') !!}
-            </th>
-            <td>
-                <label style="padding-top: 5px">
-                	{!! Form::radio('type', '1', old('type'),  ['id' => 'type']) !!}
-                    <label>{!! trans('departments.office_time') !!}</label>
-                </label>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <label>
-                    {!! Form::radio('type', '2', old('type'),  ['id' => 'type']) !!}
-                    <label>{!! trans('departments.shifts_time') !!}</label>
-                </label>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                @if ($errors->has('type'))
-                    <p class="text-danger">{{ $errors->first('type') }}</p>
-                @endif
-            </td>
-        </tr>
-        <tr>
-            <th class="table_right_middle">
-                {!! trans('departments.address') !!}
-            </th>
-            <td>
-                {!! Form::text('address', old('address'), ['class' => 'form-control' , 'required']) !!}
-            </td>
 
-        </tr>
-        <tr>
-            <th class="table_right_middle">
-                {!! trans('departments.address_es') !!}
-            </th>
-            <td>
-                {!! Form::text('address_es', old('address_es'), ['class' => 'form-control' ]) !!}
-            </td>
-
-        </tr>
         <tr>
             <th class="table_right_middle">
                 {!! trans('departments.description') !!}
             </th>
-            <td>
+            <td style="width: 70%;"> 
                 {!! Form::textarea('description', old('description'), ['class' => 'form-control']) !!}
             </td>
+            <th class="table_right_middle " style="width: 15%;"></th>
         </tr>
+
         <tr>
             <td class="text-center table_right_middle1" colspan="4">
                 <label>
@@ -131,7 +66,9 @@
                     {!! trans('system.status.active') !!}
                 </label>
             </td>
+            <th class="table_right_middle " style="width: 15%;"></th>
         </tr>
+        
         <tr>
             <td colspan="4" class="text-center">
                 {!! HTML::link(route( 'admin.departments.index' ), trans('system.action.cancel'), ['class' => 'btn btn-danger btn-flat']) !!}
