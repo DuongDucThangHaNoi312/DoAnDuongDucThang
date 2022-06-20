@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" type="text/css" href="datePicker.css">
+	<title>tiny date picker</title>
+</head>
+<body>
+<div id="content-wrapper">
+	<input class="date date-1" value="" data-from="theFlight" placeholder="YYYY-MM-DD HH:MM APM" data-timeformat="HH:MM PM" />
+	<input class="date date-1" value="" data-to="theFlight" placeholder="YYYY-MM-DD HH:MM APM" data-timeformat="HH:MM PM" />
+</div>
+<script type="text/javascript" src="calendar.js"></script>
+<script type="text/javascript" src="datePicker.js"></script>
+
+<script type="text/javascript">
+		var options = {
+			weekDays: ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'],
+			months: ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni',
+				'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'],
+
+			sundayBased: false,
+			renderWeekNo: true,
+			equalHight: true,
+
+			/**
+			 * Some testings for input with no value but it should be time only picker...
+			 * @param  {[type]} element [description]
+			 * @return {String}         The value of the input field
+			 */
+			readValue: function(element) {
+				if (!element.value && element.getAttribute('data-type') === 'time') { // initial time if empty
+					return new Date().toTimeString().split(' ')[0]; // triggers default behavior
+				}
+
+				return element.value; // triggers default behavior
+			}
+		};
+
+		window.myDatePicker_1 = new DatePicker('.date-1', options);
+</script>
+</body>
+</html>

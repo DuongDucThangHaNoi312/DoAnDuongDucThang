@@ -1,0 +1,164 @@
+@font-face {
+  font-family: 'clainc-icon';
+  src:  url('fonts/clainc-icon.eot?wmtxhn');
+  src:  url('fonts/clainc-icon.eot?wmtxhn#iefix') format('embedded-opentype'),
+    url('fonts/clainc-icon.ttf?wmtxhn') format('truetype'),
+    url('fonts/clainc-icon.woff?wmtxhn') format('woff'),
+    url('fonts/clainc-icon.svg?wmtxhn#clainc-icon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="clainc-icon-"], [class*=" clainc-icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'clainc-icon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.clainc-icon-noun_Heart_2077518-1:before {
+  content: "\e92d";
+}
+.clainc-icon-heart-1:before {
+  content: "\e92c";
+}
+.clainc-icon-brain-inside-human-head:before {
+  content: "\e927";
+}
+.clainc-icon-baby:before {
+  content: "\e928";
+}
+.clainc-icon-check1:before {
+  content: "\e929";
+}
+.clainc-icon-kidneys:before {
+  content: "\e92a";
+}
+.clainc-icon-broken-bone:before {
+  content: "\e92b";
+}
+.clainc-icon-dental-care:before {
+  content: "\e911";
+}
+.clainc-icon-dental-floss:before {
+  content: "\e912";
+}
+.clainc-icon-braces:before {
+  content: "\e913";
+}
+.clainc-icon-medicine:before {
+  content: "\e914";
+}
+.clainc-icon-shield:before {
+  content: "\e915";
+}
+.clainc-icon-save-the-earth:before {
+  content: "\e916";
+}
+.clainc-icon-microscope:before {
+  content: "\e917";
+}
+.clainc-icon-medicines:before {
+  content: "\e918";
+}
+.clainc-icon-phone:before {
+  content: "\e919";
+}
+.clainc-icon-electrocardiogram-inside-heart:before {
+  content: "\e91a";
+}
+.clainc-icon-stethoscope-1:before {
+  content: "\e91b";
+}
+.clainc-icon-stethoscope:before {
+  content: "\e91c";
+}
+.clainc-icon-medical:before {
+  content: "\e91d";
+}
+.clainc-icon-ambulance1:before {
+  content: "\e91e";
+}
+.clainc-icon-doctor:before {
+  content: "\e91f";
+}
+.clainc-icon-baby-boy:before {
+  content: "\e920";
+}
+.clainc-icon-eye:before {
+  content: "\e921";
+}
+.clainc-icon-lungs:before {
+  content: "\e922";
+}
+.clainc-icon-kidney:before {
+  content: "\e923";
+}
+.clainc-icon-tooth1:before {
+  content: "\e924";
+}
+.clainc-icon-brain:before {
+  content: "\e925";
+}
+.clainc-icon-heart:before {
+  content: "\e926";
+}
+.clainc-icon-check:before {
+  content: "\e906";
+}
+.clainc-icon-dental:before {
+  content: "\e907";
+}
+.clainc-icon-tooth-1:before {
+  content: "\e908";
+}
+.clainc-icon-teeth:before {
+  content: "\e909";
+}
+.clainc-icon-tooth-2:before {
+  content: "\e90a";
+}
+.clainc-icon-ambulance:before {
+  content: "\e90b";
+}
+.clainc-icon-question:before {
+  content: "\e90c";
+}
+.clainc-icon-calendar-1:before {
+  content: "\e90d";
+}
+.clainc-icon-noun_heart-beat_1684580:before {
+  content: "\e90e";
+}
+.clainc-icon-noun_Doctor_1030196:before {
+  content: "\e90f";
+}
+.clainc-icon-calendar:before {
+  content: "\e910";
+}
+.clainc-icon-play-button:before {
+  content: "\e902";
+}
+.clainc-icon-operating-room:before {
+  content: "\e903";
+}
+.clainc-icon-prize-badge-with-star-and-ribbon:before {
+  content: "\e904";
+}
+.clainc-icon-fast-forward-double-right-arrows:before {
+  content: "\e900";
+}
+.clainc-icon-tooth:before {
+  content: "\e901";
+}
+.clainc-icon-information-button:before {
+  content: "\e905";
+}

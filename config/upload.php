@@ -1,0 +1,26 @@
+<?php
+    return [
+        'customer-transactions' => 'assets/media/files/customer-transactions/',
+        'product_category' 	=> 'assets/media/images/product_categories/',
+		'product' 			=> 'assets/media/images/products/',
+		'brand'				=> 'assets/media/images/brands/',
+		'supplier'			=> 'assets/media/images/suppliers/',
+		'promotion'			=> 'assets/media/images/promotions/',
+		'slider'			=> 'assets/media/images/sliders/',
+		'banner_category'		=> 'assets/media/images/banners/categories/',
+		'banner_advertisement' 	=> 'assets/media/images/banners/below-slider/',
+		'news' 		=> 'assets/media/images/news/',
+		'banks'		=> 'assets/media/images/banks/',
+		'popup'		=> 'assets/media/images/popups/',
+		'affiliate_icon'=> 'assets/media/images/affiliate-icon/',
+		'flash_sale'	=> 'assets/media/images/flash-sales/',
+		'image'		=> 'assets/media/images/uploads/',
+		'avatar'	=> 'assets/media/images/avatars/',
+		'download'		=> 'assets/media/images/downloads/',
+		'review'		=> 'assets/media/images/reviews/',
+		'static'		=> 'assets/media/images/statics/',
+		'order'		=> 'assets/media/images/orders/',
+		'tmp'		=> 'assets/media/files/tmp/',
+		'users'		=> 'assets/media/images/users/',
+		'contracts' => 'assets/media/files/contracts/'
+    ];

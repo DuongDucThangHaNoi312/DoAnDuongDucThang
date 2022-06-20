@@ -1,0 +1,90 @@
+
+/* ----- year.js ------ */
+.cal-wrapper {
+	width: 855px;
+	margin: 0 auto;
+	position: relative;
+}
+.cal-wrapper:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.cal-box {
+	float: left;
+	position: relative;
+}
+.month {
+	margin: 17px 37px 10px;
+	font-size: 20px;
+}
+
+/* ----- month.js ------ */
+
+.month-cal {
+	margin: 54px auto;
+}
+.month-cal .cal-month {
+	width: 855px;
+	font-size: 13px;
+}
+.previous-month, .next-month, .current-month, .week-no, .week-day {
+	text-align: center;
+}
+.month-cal .current-month, .month-cal .previous-month, .month-cal .next-month {
+	height: 100px;
+	text-align: left;
+	vertical-align: top;
+	background-color: rgba(255, 255, 255, 0.05);
+	border-left: 1px solid #444;
+	border-bottom: 1px solid #444;
+}
+
+.month-cal .current-month:not(.disabled):before,
+.month-cal .previous-month:not(.disabled):before,
+.month-cal .next-month:not(.disabled):before {
+	width: 98%;
+	height: 98%;
+	top: 1%;
+	left: 1%;
+	border-radius: 0;
+	margin: 0;
+	/*background-color: rgba(255, 255, 255, .1);*/
+}
+
+.month-cal .week-no {
+	text-align: left;
+	vertical-align: top;
+	/*padding: 6px 3px 0 0;*/
+}
+
+.single-event {
+	display: block;
+	width: 107px;
+	line-height: 1.3em;
+	font-size: 12px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	background-color: rgba(255, 255, 255, 0.05);
+	margin: 2px 0;
+	padding: 0 4px;
+	box-sizing: border-box;
+	border: 1px solid transparent;
+	color: #aaa;
+}
+.event-list {
+	display: block;
+	height: 75px;
+	overflow-y: auto;
+}
+.month-cal .single-event:active {
+	border: 1px solid #C44;
+}
+.month-cal .previous-month:active:before,
+.month-cal .next-month:active:before,
+.month-cal .current-month:active:before {
+	border: 1px solid transparent;
+}
+

@@ -1,0 +1,294 @@
+.ajax_overlay {}
+
+.ajax_loader {
+    /*background: url("ajax-loader_blue.gif") no-repeat center center transparent;*/
+    width:100%;
+    position: fixed;
+    height:100%;
+}
+
+.scroll-top-wrapper {
+    position: fixed;
+    opacity: 0;
+    visibility: hidden;
+    overflow: hidden;
+    text-align: center;
+    z-index: 99999999;
+    background-color: #777777;
+    color: #eeeeee;
+    width: 50px;
+    height: 48px;
+    line-height: 48px;
+    right: 30px;
+    bottom: 30px;
+    padding-top: 2px;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+}
+.scroll-top-wrapper:hover {
+    background-color: #888888;
+}
+.scroll-top-wrapper.show {
+    visibility:visible;
+    cursor:pointer;
+    opacity: 1.0;
+}
+.scroll-top-wrapper i.fa {
+    line-height: inherit;
+}
+
+.a_cursor {
+    cursor: pointer;
+}
+
+.a_none {
+    color: white !important;
+}
+
+.a_default {
+    color: white !important;
+    text-decoration: none;
+}
+
+.pagination {
+    margin: 0 !important;
+}
+.borderless td, .borderless th {
+    border: none !important;
+}
+.checkbox_prop {
+    margin: 0 4px 4px 0;
+    width: 21px;
+    height: 21px;
+    border: 2px solid #ddd;
+    float: left;
+    list-style: none;
+}
+
+.checkbox_prop-value {
+    display: block;
+    width: 15px;
+    height: 15px;
+    text-indent: -10000px;
+    overflow: hidden;
+    background: #ccc;
+    margin-top: 1px;
+    margin-left: 1px;
+}
+
+
+h1 {
+    font-size: 25px;
+}
+
+.page-header {
+    margin-top: 0;
+}
+
+/*.table tbody>tr>td.vert-center, .table thead>tr>td.vert-center, .table thead>tr>th.vert-center {
+    vertical-align: middle;
+    text-align: center;
+}*/
+
+.table_center_middle tbody>tr>td, .table_center_middle thead>tr>td, .table_center_middle thead>tr>th {
+    vertical-align: middle;
+    text-align: center;
+}
+
+.table_right_middle {
+    vertical-align: middle !important;
+    text-align: right !important;
+}
+
+.borderless td, .borderless th {
+    border: none !important;
+}
+
+.table tbody>tr>td.vert-center, .table thead>tr>td.vert-center, .table thead>tr>th.vert-center {
+    vertical-align: middle;
+    text-align: center;
+}
+
+.a_tooltip {
+    cursor: pointer;
+    color: gray;
+}
+
+.select2-selection__choice a {
+    color: white !important;
+}
+
+.select2-results__option a {
+    color: #333333 !important;
+}
+
+.select2-results__option--highlighted a {
+    color: white !important;
+}
+
+@media only screen and (max-width: 992px) {
+    label#clock {
+        display: none;
+    }
+}
+
+.element1 {
+    /*display: none;*/
+    height: 100%;
+    position: fixed;
+    width: 100%;
+    text-align: center;
+    background: rgba(255, 255, 255, .4);
+    z-index: 9999;
+}
+
+.loading1 {
+    height: 100px;
+    position: relative;
+    width: 80px;
+    display: inline-block;
+    top: 45%
+}
+
+.loading1>div {
+    background-color: #FFF;
+    height: 30px;
+    position: absolute;
+    width: 12px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    -webkit-transform: scale(.4);
+    -moz-transform: scale(.4);
+    -o-transform: scale(.4);
+    -webkit-animation-name: loading1;
+    -webkit-animation-duration: 1.04s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-direction: linear;
+    -moz-animation-name: loading1;
+    -moz-animation-duration: 1.04s;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-direction: linear;
+    -o-animation-name: loading1;
+    -o-animation-duration: 1.04s;
+    -o-animation-iteration-count: infinite;
+    -o-animation-direction: linear
+}
+
+.loading1>div:nth-child(1) {
+    left: 0;
+    top: 36px;
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+    -webkit-animation-delay: 0.39s;
+    -moz-animation-delay: 0.39s;
+    -o-animation-delay: 0.39s
+}
+
+.loading1>div:nth-child(2) {
+    left: 10px;
+    top: 13px;
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    -webkit-animation-delay: 0.52s;
+    -moz-animation-delay: 0.52s;
+    -o-animation-delay: 0.52s
+}
+
+.loading1>div:nth-child(3) {
+    left: 34px;
+    top: 4px;
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    -webkit-animation-delay: 0.65s;
+    -moz-animation-delay: 0.65s;
+    -o-animation-delay: 0.65s
+}
+
+.loading1>div:nth-child(4) {
+    right: 10px;
+    top: 13px;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    -webkit-animation-delay: 0.78s;
+    -moz-animation-delay: 0.78s;
+    -o-animation-delay: 0.78s
+}
+
+.loading1>div:nth-child(5) {
+    right: 0;
+    top: 36px;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -webkit-animation-delay: 0.91s;
+    -moz-animation-delay: 0.91s;
+    -o-animation-delay: 0.91s
+}
+
+.loading1>div:nth-child(6) {
+    right: 10px;
+    bottom: 9px;
+    -webkit-transform: rotate(135deg);
+    -moz-transform: rotate(135deg);
+    -o-transform: rotate(135deg);
+    -webkit-animation-delay: 1.04s;
+    -moz-animation-delay: 1.04s;
+    -o-animation-delay: 1.04s
+}
+
+.loading1>div:nth-child(7) {
+    bottom: 0;
+    left: 34px;
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -webkit-animation-delay: 1.17s;
+    -moz-animation-delay: 1.17s;
+    -o-animation-delay: 1.17s
+}
+
+.loading1>div:nth-child(8) {
+    left: 10px;
+    bottom: 9px;
+    -webkit-transform: rotate(-135deg);
+    -moz-transform: rotate(-135deg);
+    -o-transform: rotate(-135deg);
+    -webkit-animation-delay: 1.3s;
+    -moz-animation-delay: 1.3s;
+    -o-animation-delay: 1.3s
+}
+
+@-webkit-keyframes loading1 {
+    0% {
+        background-color: #FCD781
+    }
+    100% {
+        background-color: #FFF
+    }
+}
+
+@-moz-keyframes loading1 {
+    0% {
+        background-color: #FCD781
+    }
+    100% {
+        background-color: #FFF
+    }
+}
+
+@-o-keyframes loading1 {
+    0% {
+        background-color: #FCD781
+    }
+    100% {
+        background-color: #FFF
+    }
+}

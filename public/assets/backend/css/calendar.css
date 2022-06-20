@@ -1,0 +1,134 @@
+#modal-event .modal-header {
+    background-color: #3c8dbc;
+    padding: 20px;
+    text-align: center;
+}
+
+.modal-header .close {
+    margin-top: -10px !important;
+}
+
+#modal-event .modal-body label {
+    line-height: 30px;
+}
+
+div.schedule .box-body ul li {
+    display: inline;
+}
+
+.box {
+    border-top: none !important;
+}
+
+button {
+    outline: none !important;
+}
+
+.fc-past {
+    background: #F5F5F6;
+}
+
+.fc-today {
+    background-color: inherit !important;
+}
+
+td.fc-day {
+    position: relative;
+}
+
+td.fc-day span {
+    position: absolute;
+    font-size: 20px;
+}
+
+td.fc-day span.morning {
+    left: 0;
+    top: -5px;
+}
+
+td.fc-day span.afternoon {
+    left: 0;
+    top: -5px;
+    /*transform: rotate(90);*/
+}
+
+td.fc-day span.morning-dept {
+    right: 0;
+    bottom: -5px;
+}
+
+td.fc-day span.afternoon-dept {
+    right: 0;
+    bottom: -5px;
+    /*transform: rotate(90);*/
+}
+
+div.fc-toolbar .fc-center h2 {
+    text-transform: capitalize;
+}
+
+span.fc-list-heading-main {
+    text-transform: capitalize;
+}
+
+.fc-event-time, .fc-event-title {
+    padding: 0 1px;
+    white-space: normal;
+}
+
+td.fc-day.fc-sat {
+    position: relative;
+}
+
+td div.setBgAfternoon {
+    width: 100%;
+    height: 100%;
+    background: #B5CECC;
+    clip-path: polygon(100% 0, 0 100%, 100% 100%);
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+
+td div.setBgMorning {
+    width: 100%;
+    height: 100%;
+    background: red;
+    clip-path: polygon(100% 0%, 0% 0%, 0% 100%);
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.setBgFutureWeek {
+    /*background-color: #F5F5F6;*/
+    background-color: #ff9f89;
+}
+
+.fc-scroller {
+    overflow-y: hidden !important;
+}
+
+.countAccept, .countPending {
+    font-weight: 700;
+}
+
+.fc-day-number {
+    font-weight: 500 !important;
+}
+.fc-toolbar {
+    padding: 0 10px !important;
+    margin-top: 10px !important;
+    margin-bottom: 2px !important;
+}
+td.fc-day span.shift-title {
+    bottom: 0;
+    font-size: 12px;
+    z-index: 1000;
+    cursor: context-menu;
+    font-weight: 600;
+    outline: none;
+    border: none;
+    /*background-image: repeating-radial-gradient(red, yellow 10%, green 15%);*/
+    /*background-image: linear-gradient(to right, red,orange,yellow,green,blue,indigo,violet);*/
+}
