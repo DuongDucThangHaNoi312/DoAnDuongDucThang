@@ -53,76 +53,12 @@
             </td>
         </tr>
         <tr>
-            <th class="table_right_middle " style="width: 15%;">
-                {!! trans('departments.name_es') !!}
-            </th>
-            <td>
-                {!! Form::text('name_es', old('name',$department->name_es), ['class' => 'form-control', 'disabled']) !!}
-            </td>
-            <th class="table_right_middle " style="width: 15%;">
-            </th>
-            <td>
-            </td>
-        </tr>
-        <tr>
             <th class="table_right_middle" style="width: 15%;">
                 {!! trans('departments.telephone') !!}
             </th>
             <td>
                 {!! Form::text('telephone', old('telephone',$department->telephone), ['class' => 'form-control', 'disabled', 'maxlength' => 13, 'required']) !!}
             </td>
-        </tr>
-        <tr>
-            <th class="table_right_middle">
-                {!! trans('departments.time_in_works') !!}
-            </th>
-            <td >
-                <label style="padding-top: 5px">
-                    {!! Form::radio('type', '1', old('type',$department->type)== '1' ? 'checked' : '',  ['id' => 'type','disabled']) !!}
-                    <label>{!! trans('departments.office_time') !!}</label>
-                </label>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <label>
-                    {!! Form::radio('type', '2', old('type',$department->type)== '2' ? 'checked' : '',  ['id' => 'type','disabled']) !!}
-                    <label>{!! trans('departments.shifts_time') !!}</label>
-                </label>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <label>
-                    {!! Form::radio('type', '3', old('type',$department->type)== '3 ' ? 'checked' : '',  ['id' => 'type','disabled']) !!}
-                    <label>{!! trans('departments.shifts_and_ot_time') !!}</label>
-                </label>
-
-            </td>
-        </tr>
-        <tr>
-            <th class="table_right_middle">
-                {!! trans('departments.company_id') !!}
-            </th>
-            <td>
-                <label>
-                    {!! Form::checkbox('company_id', $department->company->id, old('company_id',$department->company->id), [ 'class' => 'minimal company_id']) !!}
-                    {!! $department->company->shortened_name !!}
-                </label>
-
-            </td>
-        </tr>
-        <tr>
-        <tr>
-            <th class="table_right_middle">
-                {!! trans('departments.address') !!}
-            </th>
-            <td>
-                {!! Form::text('address', old('address',$department->address), ['class' => 'form-control', 'disabled']) !!}
-            </td>
-        </tr>
-        <tr>
-            <th class="table_right_middle">
-                {!! trans('departments.address_es') !!}
-            </th>
-            <td>
-                {!! Form::text('address_es', old('address_es',$department->address_es), ['class' => 'form-control' , 'disabled']) !!}
-            </td>
-
         </tr>
         <tr>
             <th class="table_right_middle">
@@ -136,6 +72,9 @@
     </table>
 
     {!! Form::close() !!}
+    <div style="margin-left: 45%;padding-top: 2%">
+        {!! HTML::link(route( 'admin.departments.index' ), trans('system.action.return'), ['class' => 'btn btn-danger btn-flat back','id'=>'cancel']) !!}
+    </div>
 @stop
 @section('footer')
     <script src="{!! asset('assets/backend/plugins/iCheck/icheck.min.js') !!}"></script>

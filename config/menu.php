@@ -14,12 +14,19 @@ return [
         'glyphicon' => 'fas fa-users fa-fw',
         'hide' => false,
     ],
+    
     [
-        'name' => 'roles.label',
-        'glyphicon' => 'fas fa-cogs fa-fw',
-        'route' => 'admin.roles.index',
+        'name' => 'equipment.label',
+        'route' => 'admin.equipments.index',
+        'glyphicon' => 'fas fa-solid fa-chair',
         'hide' => false,
-        'role' => ['system'],
     ],
+    // [
+    //     'name' => 'roles.label',
+    //     'glyphicon' => 'fas fa-cogs fa-fw',
+    //     'route' => 'admin.roles.index',
+    //     'hide' => false,
+    //     'role' => ['system'],
+    // ],
     
 ];

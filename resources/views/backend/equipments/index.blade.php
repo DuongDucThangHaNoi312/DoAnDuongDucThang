@@ -1,6 +1,6 @@
 @extends('backend.master')
 @section('title')
-    {!! trans('system.action.list') !!} {!! trans('staffs.label') !!}
+    {!! trans('system.action.list') !!} {!! trans('equipments.label') !!}
 @stop
 @section('head')
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -105,13 +105,11 @@
     <link rel="stylesheet" type="text/css" href="{!! asset('assets/backend/plugins/bootstrap-datepicker/css/bootstrap-datepicker.css') !!}"/>
 @stop
 @section('content')
-    @include('backend.header.content_header',['name'=>'staffs.label','key'=>'staffs.list'])
-    @include('backend.staffs._modal_excel')
     <section class="content overlay">
         <div class="row">
             <div class="col-md-4">
                 <div class="btn-group">
-                    <a href="{!! route('admin.staffs.create') !!}" class='btn btn-primary btn-flat'>
+                    <a href="{!! route('admin.equipments.create') !!}" class='btn btn-primary btn-flat'>
                         <span class="glyphicon glyphicon-plus"></span>&nbsp;{!! trans('system.action.create') !!}
                     </a>
                 </div>
@@ -125,39 +123,35 @@
                         <thead>
                             <tr>
                                 <th style="text-align: center; vertical-align: middle;">{!! trans('system.no.') !!}</th>
-                                <th style="text-align: center; vertical-align: middle;">{!! trans('departments.name') !!}</th>
-                                <th style="text-align: center; vertical-align: middle;">{!! trans('departments.code') !!}</th>
-                                <th style="text-align: center; vertical-align: middle;">{!! trans('departments.telephone') !!}</th>
+                                <th style="text-align: center; vertical-align: middle;">Loại</th>
+                                <th style="text-align: center; vertical-align: middle;">Mã</th>
                                 <th style="text-align: center; vertical-align: middle; width: 14%">{!! trans('system.action.label') !!}</th>
                             </tr>
                         </thead>
-                        @if (count($departmentGroupsName) > 0)
+                        @if (count($equipments) > 0)
                         <tbody>
                             <?php $i = 1; ?>
-                            @foreach ($departmentGroupsName as $key => $value)
+                            @foreach ($equipments as $key => $value)
                                 <tr>
                                     <td style="text-align: center; vertical-align: middle;"> {!! $i++ !!}</td>
-                                    <td style="text-align: center; vertical-align: middle;">
-                                        <a>{!! $key !!}</a>
-                                    </td>
-                                    <td style="text-align: center; vertical-align: middle;"> {!! $value[0]->code !!}</td>
-                                    <td style="text-align: center; vertical-align: middle;">{!! $value[0]->telephone !!}</td>
+                                    <td style="text-align: center; vertical-align: middle;">{!! $typeEquipments[$value->type] !!}</td>
+                                    <td style="text-align: center; vertical-align: middle;">{!! $value->code !!}</td>
                                     <td style="text-align: center; vertical-align: middle;">
                                         <div class="col-md-1">
-                                            <a href="{!! route('admin.departments.show', $value[0]->id) !!}" class="btn-detail btn btn-default btn-xs"
+                                            <a href="{!! route('admin.equipments.show', $value->id) !!}" class="btn-detail btn btn-default btn-xs"
                                                 data-toggle="tooltip" data-placement="top" title="{!! trans('system.action.detail') !!}">
                                                 <i class="text-info glyphicon glyphicon-eye-open"></i>
                                             </a>
                                         </div>
                                         <div class="col-md-1">
-                                            <a href="{!! route('admin.departments.edit', $value[0]->id) !!}" data-toggle="tooltip" data-placement="top"
+                                            <a href="{!! route('admin.equipments.edit', $value->id) !!}" data-toggle="tooltip" data-placement="top"
                                                 class="btn btn-xs btn-default" title="{!! trans('system.action.update') !!}"><i
                                                     class="text-warning glyphicon glyphicon-edit"></i></a>
                                         </div>
                                        
                                         <div class="col-md-1">
                                             <a href="javascript:void(0)" data-toggle="tooltip" data-placement="top"
-                                                link="{!! route('admin.departments.destroy', $value[0]->id) !!}"
+                                                link="{!! route('admin.equipments.destroy', $value->id) !!}"
                                                 class="btn-confirm-del btn btn-default btn-xs"
                                                 title="{!! trans('system.action.delete') !!}">
                                                 <i class="text-danger glyphicon glyphicon-remove"></i>
@@ -195,9 +189,7 @@
             $(".select2").select2({width: '100%'});
             $('#tableUser thead tr').clone(true).appendTo('#tableUser thead');
             $('#tableUser thead tr:eq(1) th').each(function (i) {
-                if (i == 5) {
-                    $(this).html('<input type="text" class="search-form datepicker date" autocomplete="off" />');
-                } else if (i != 0 && i != 6) {
+                if (i == 1 || i == 2) {
                     $(this).html('<input type="text" class="search-form input-text" autocomplete="off" />');
                 } else {
                     $(this).html('');

@@ -45,22 +45,10 @@ class User extends Authenticatable
             'date_of_birth' => 'required',
             'gender'        => 'required',
             'phone'         => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
-            're_password'   => 'same:password',
             'email'         => 'nullable|max:50|min:10|email|unique:users,email' . ($id == 0 ? '' : ',' . $id),
-            'bank_name'     => 'required_with:bank_account',
-            'bank_account'  => 'required_with:bank_name',
-            'driver_license_no'     => 'required_with:driver_license_class',
-            'driver_license_class'  => 'required_with:driver_license_no',
-            'driver_license_expire' => 'nullable|required_with:driver_license_class|date_format:d/m/Y',
-            'emergency_contact'     => 'required_with:emergency_phone|required|max:255',
-            'emergency_phone'       => 'required_with:emergency_contact|regex:/^([0-9\s\-\+\(\)]*)$/|min:10required|max:15',
         ];
     }
 
-    public function families()
-    {
-        return $this->hasMany(StaffFamily::class, 'staff_id');
-    }
 
     public static function rule_image()
     {

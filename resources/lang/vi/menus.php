@@ -153,5 +153,9 @@ return [
 
     'salary_choose_container' => "Khoán chọn vỏ",
     'salary_declaration' => "Khoán tờ khai ",
+
+    'equipment' => [
+        'label' => 'Trang thiết bị',
+    ],
     
 ];

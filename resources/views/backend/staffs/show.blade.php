@@ -129,7 +129,7 @@
                                 {!! trans('staffs.genders.label') !!}
                             </th>
                             <td>
-                                {!! Form::select('gender', ['gender' => trans('system.gender')] + \App\Defines\Staff::getGendersForOption(), old('gender',$user->gender), ['class' => 'form-control select2', 'required']) !!}
+                                {!! Form::select('gender', ['gender' => trans('system.gender')] + \App\Defines\Staff::getGendersForOption(), old('gender', $user->gender), ['class' => 'form-control select2', 'required']) !!}
                             </td>
                         </tr>
                         <tr>
@@ -174,97 +174,9 @@
                                 {!! Form::number('phone', old('phone', $user->phone), ['class' => 'form-control']) !!}
                             </td>
                         </tr>
+                        
                         <tr>
-                            <th class="table_right_middle">
-                                {!! trans('staffs.staff_start') !!}
-                            </th>
-                            <td>
-                                {!! Form::text('staff_start', old('staff_start', $user->staff_start ? date("d/m/Y", strtotime($user->staff_start)) : null), ['class' => 'form-control datepicker1', 'required']) !!}
-                            </td>
-                            <th class="table_right_middle">
-                                {!! trans('staffs.code_timekeeping') !!}
-                            </th>
-                            <td>
-                                <div class="input-group">
-                                    {!! Form::text('code_timekeeping', old('code_timekeeping', $user->code_timekeeping), ['class' => 'form-control']) !!}
-                                    <span class="input-group-btn">
-                                        <button type="button" class="btn btn-primary btn-flat" title="Mã phụ" style="cursor: default">{!! $user->code_timekeeping_subs !!}</button>
-                                    </span>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th class="table_right_middle">
-                                {!! trans('staffs.tax_code') !!}
-                            </th>
-                            <td>
-                                {!! Form::number('tax_code', old('tax_code', $user->tax_code), ['class' => 'form-control']) !!}
-                            </td>
-                            <th class="table_right_middle">
-                                {!! trans('staffs.insurance_no') !!}
-                            </th>
-                            <td>
-                                {!! Form::text('insurance_no', old('insurance_no', $user->insurance_no), ['class' => 'form-control']) !!}
-                            </td>
-                        </tr>
-                        <tr>
-                            <th class="table_right_middle" style="width: 15% !important;">
-                                {!! trans('staffs.bank_name') !!}
-                            </th>
-                            <td style="width: 35%;">
-                                {!! Form::select('bank_name', ['' => trans('system.dropdown_choice')] + $banks, old('bank_name', $user->bank_name), ['class' => 'form-control select2']) !!}
-                            </td>
-                            <th class="table_right_middle" style="width: 15%;">
-                                {!! trans('staffs.bank_account') !!}
-                            </th>
-                            <td>
-                                {!! Form::text('bank_account', old('bank_account', $user->bank_account), ['class' => 'form-control']) !!}
-                            </td>
-                        </tr>
-                        <tr>
-                            <th class="table_right_middle">
-                                {!! trans('staffs.driver_license_no') !!}
-                            </th>
-                            <td>
-                                {!! Form::number('driver_license_no', old('driver_license_no', $user->driver_license_no), ['class' => 'form-control']) !!}
-                            </td>
-                            <th class="table_right_middle">
-                                {!! trans('staffs.driver_license_class') !!}
-                            </th>
-                            <td>
-                                {!! Form::select('driver_license_class', ['' => trans('system.dropdown_choice')] + \App\Defines\Staff::getDriverLicensesForOption(), old('driver_license_class', $user->driver_license_class), ['class' => 'form-control select2']) !!}
-                            </td>
-                        </tr>
-                        <tr>
-                            <th class="table_right_middle">
-                                {!! trans('staffs.driver_license_expire') !!}
-                            </th>
-                            <td>
-                                {!! Form::text('driver_license_expire', old('driver_license_expire', $user->driver_license_expire ? date("d/m/Y", strtotime($user->driver_license_expire)) : null), ['class' => 'form-control datepicker1']) !!}
-                            </td>
-                            <th class="table_right_middle">
-                                {!! trans('staffs.qualifications.label') !!}
-                            </th>
-                            <td>
-                                {!! Form::select('qualification', ['' => trans('system.dropdown_choice')] + \App\Defines\Staff::getQualificationsForOption(), old('qualification', $user->qualification), ['class' => 'form-control select2']) !!}
-                            </td>
-                        </tr>
-                        <tr>
-                            <th class="table_right_middle">
-                                {!! trans('staffs.emergency_contact') !!}
-                            </th>
-                            <td>
-                                {!! Form::text('emergency_contact', old('emergency_contact', $user->emergency_contact), ['class' => 'form-control']) !!}
-                            </td>
-                            <th class="table_right_middle">
-                                {!! trans('staffs.emergency_phone') !!}
-                            </th>
-                            <td>
-                                {!! Form::number('emergency_phone', old('emergency_phone', $user->emergency_phone), ['class' => 'form-control']) !!}
-                            </td>
-                        </tr>
-                        <tr>
-                            <th class="table_right_middle">
+                            {{-- <th class="table_right_middle">
                                 {!! trans('staffs.image') !!}
                             </th>
                             <td colspan="4">
@@ -277,80 +189,19 @@
                                             <br/><i class="text-danger remove glyphicon glyphicon-remove"></i>
                                         </span>
                                     @endforeach
-                                    @if($errors->has('image'))
-                                        <span class="text-danger">{{ $errors->first('image') }}</span>
-                                    @endif
                                 </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="4">
-                                <strong>{!! trans('staffs.family') !!}</strong>
-                                <table class="table table-bordered family">
-                                    <thead style="background: #3C8DBC;color: white;">
-                                    <tr>
-                                        <th style="text-align: center; vertical-align: middle;">{!! trans('system.no.') !!}</th>
-                                        <th style="text-align: center; vertical-align: middle; white-space: nowrap;">{!! trans('staffs.family_relationships.label') !!}</th>
-                                        <th style="text-align: center; vertical-align: middle; white-space: nowrap;">{!! trans('staffs.fullname') !!}</th>
-                                        <th style="text-align: center; vertical-align: middle; white-space: nowrap;">{!! trans('staffs.tax_code') !!}</th>
-                                        <th style="text-align: center; vertical-align: middle; white-space: nowrap;">{!! trans('staffs.dob') !!}</th>
-                                        <th style="text-align: center; vertical-align: middle; white-space: nowrap;">{!! trans('staffs.genders.label') !!}</th>
-                                        <th style="text-align: center; vertical-align: middle; white-space: nowrap;">{!! trans('staffs.dependent') !!}</th>
-                                        <th style="text-align: center; vertical-align: middle; white-space: nowrap;">{!! trans('staffs.dependent_from') !!}</th>
-                                        <th style="text-align: center; vertical-align: middle; white-space: nowrap;">{!! trans('staffs.dependent_to') !!}</th>
-                                        <th style="text-align: center; vertical-align: middle; white-space: nowrap;">{!! trans('system.action.label') !!}</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <?php
-                                        $family_relationship_id = old('family_relationship_id', $families->pluck('id')->toArray());
-                                        $family_relationship = old('family_relationship', $families->pluck('relationship')->toArray());
-                                        $family_fullname = old('family_fullname', $families->pluck('fullname')->toArray());
-                                        $family_tax_code = old('family_tax_code', $families->pluck('tax_code')->toArray());
-                                        $family_dob = old('family_dob', $families->pluck('dob')->toArray());
-                                        $family_gender = old('family_gender', $families->pluck('gender')->toArray());
-                                        $family_dependent = old('family_dependent', $families->pluck('dependent')->toArray());
-                                        $family_dependent_from = old('family_dependent_from', $families->pluck('dependent_from')->toArray());
-                                        $family_dependent_to = old('family_dependent_to', $families->pluck('dependent_to')->toArray());
-                                    ?>
-                                    @for ($i = 0; $i < count($family_relationship); $i++)
-                                        <tr>
-                                            <td style="text-align: center; vertical-align: middle;">{!! $i+1 !!}</td>
-                                            <td style="vertical-align: middle;">
-                                                {!! Form::select("family_relationship[$i]", ['' => trans('system.dropdown_choice')] + \App\Defines\Staff::getFamilyRelationshipsForOption(), old("family_relationship[$i]", $family_relationship[$i]), ['class' => 'form-control select2', 'required']) !!}
-                                                {!! Form::hidden("family_relationship_id[$i]", $family_relationship_id[$i]) !!}
-                                            </td>
-                                            <td style="vertical-align: middle;">
-                                                {!! Form::text('family_fullname[]', old('family_fullname[]', $family_fullname[$i]), ['class' => 'form-control', 'required']) !!}
-                                            </td>
-                                            <td style="vertical-align: middle;">
-                                                {!! Form::number('family_tax_code[]', old('family_tax_code[]', $family_tax_code[$i]), ['class' => 'form-control']) !!}
-                                            </td>
-                                            <td style="text-align: center; vertical-align: middle;">
-                                                {!! Form::text("family_dob[$i]", old("family_dob[$i]", $family_dob[$i] ? date("d/m/Y", strtotime($family_dob[$i])) : null), ['class' => 'form-control datepicker', 'required']) !!}
-                                            </td>
-                                            <td style="text-align: center; vertical-align: middle;">
-                                                {!! Form::select("family_gender[$i]", ['' => trans('system.dropdown_choice')] + \App\Defines\Staff::getGendersForOption(), old("family_gender[$i]", $family_gender[$i]), ['class' => 'form-control select2']) !!}
-                                            </td>
-                                            <td style="vertical-align: middle;">
-                                                {!! Form::select("family_dependent[$i]", [0 => trans('system.no'), 1 => trans('system.yes')], old("family_dependent[$i]", $family_dependent[$i]), ['class' => 'form-control select2']) !!}
-                                            </td>
-                                            <td style="text-align: center; vertical-align: middle;">
-                                                {!! Form::select("family_dependent_from[$i]", ['' => trans('system.dropdown_choice')] + $monthYear, old("family_dependent_from[$i]", date("m/Y", strtotime($family_dependent_from[$i]))), ['class' => 'form-control select2']) !!}
-                                            </td>
-                                            <td style="text-align: center; vertical-align: middle;">
-                                                {!! Form::select("family_dependent_to[$i]", ['' => trans('system.dropdown_choice')] + $monthYear, old("family_dependent_to[$i]", date("m/Y", strtotime($family_dependent_to[$i]))), ['class' => 'form-control select2']) !!}
-                                            </td>
-                                            <td style="text-align: center; vertical-align: middle;">
-                                                <a href="javascript:void(0);" class="btn btn-xs btn-default remove-family">
-                                                    <i class="text-danger fa fa-minus"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    @endfor
-                                    </tbody>
-                                </table>
+                            </td> --}}
+                            <th class="table_right_middle">
+                                Văn phòng
                             </th>
+                            <td>
+                                <select name="deparment" class="select2">
+                                    <option value="">{!! trans('system.dropdown_all') !!}</option>
+                                    @foreach ($departments as $key => $value)
+                                    <option value="{!! $key !!}" {!! $user->department_id == $key ? 'selected' : "" !!}>{!! $value !!}</option>
+                                    @endforeach
+                                </select>
+                            </td>
                         </tr>
                         <tr id="t" class="@if($user->active == 0) hidden @endif">
                             <td align="center" colspan="4">
@@ -364,16 +215,6 @@
                         </tr>
                     </table>
                 </div>
-            </div>
-            <div class="row @if($user->active == 0) hidden @endif users col-md-12 box box-info users">
-                <div class="col-md-12">
-                    {!! Form::label('role', trans('staffs.roles') ) !!}
-                </div>
-                @foreach($roles as $role)
-                    <div class="col-md-3">
-                        {!! Form::checkbox('roles[]', $role->id,old('roles', isset($uRoles[$role->id]) ? $role->id : '' ),['class' => 'minimal roles'])!!} {!! $role->display_name !!}
-                    </div>
-                @endforeach
             </div>
         </div>
     </div>
@@ -452,63 +293,6 @@
             } else {
                 alert("Your browser doesn't support to File API")
             }
-            var counterFamily = {!! count($family_relationship_id) + 1 !!};
-            $(".add-family").on("click", function () {
-                var newRow = $("<tr>");
-                var cols = "";
-                cols += '<td style="text-align: center; vertical-align: middle;">' + counterFamily + '</td>';
-                cols += '<td style="vertical-align: middle; white-space: nowrap;">';
-                cols += '{!! Form::select('family_relationship[]', ['' => trans('system.dropdown_choice')] + \App\Defines\Staff::getFamilyRelationshipsForOption(), null, ['class' => 'form-control select2', 'required']) !!}';
-                cols += '</td>';
-                cols += '<td style="vertical-align: middle;">';
-                cols += '{!! Form::text('family_fullname[]',  null, ['class' => 'form-control', 'required']) !!}';
-                cols += '</td>';
-                cols += '<td style="vertical-align: middle;">';
-                cols += '{!! Form::number('family_tax_code[]', null, ['class' => 'form-control']) !!}';
-                cols += '</td>';
-                cols += '<td style="text-align: center; vertical-align: middle;">';
-                cols += '{!! Form::text('family_dob[]',  null, ['class' => 'form-control datepicker']) !!}';
-                cols += '</td>';
-                cols += '<td style="text-align: center; vertical-align: middle; white-space: nowrap;">';
-                cols += '{!! Form::select('family_gender[]', ['' => trans('system.dropdown_choice')] + \App\Defines\Staff::getGendersForOption(), null, ['class' => 'form-control select2', 'required']) !!}';
-                cols += '</td>';
-                cols += '<td style="vertical-align: middle;">';
-                cols += '{!! Form::select('family_dependent[]', [0 => trans('system.no'), 1 => trans('system.yes')], null, ['class' => 'form-control select2']) !!}';
-                cols += '</td>';
-                cols += '<td style="vertical-align: middle;">';
-                cols += '{!! Form::select("family_dependent_from[]", ['' => trans('system.dropdown_choice')] + $monthYear, null, ['class' => 'form-control select2']) !!}';
-                cols += '</td>';
-                cols += '<td style="vertical-align: middle;">';
-                cols += '{!! Form::select("family_dependent_to[]", ['' => trans('system.dropdown_choice')] + $monthYear, null, ['class' => 'form-control select2']) !!}';
-                cols += '</td>';
-                cols += '<td style="text-align: center; vertical-align: middle;">';
-                cols += '<a href="javascript:void(0);" class="btn btn-xs btn-default remove-family">';
-                cols += '<i class="text-danger fa fa-minus"></i>';
-                cols += '</a>';
-                cols += '</td>';
-                newRow.append(cols);
-                $("table.family").append(newRow);
-                counterFamily++;
-                $('.datepicker').datepicker({
-                    format: 'dd/mm/yyyy',
-                    autoclose: true,
-                    endDate: '-1d',
-                    language: 'vi',
-                });
-                $(".select2").select2({width: '100%'});
-            });
-            $(document).on("click", ".remove-family", function (event) {
-                $(this).closest("tr").remove();
-                counterFamily -= 1;
-                var tmp = 1;
-                $("table.family tbody td:first-child").each(function () {
-                    $(this).html(tmp++);
-                });
-            });
-            $('.roles').on('ifClicked', function() {
-                $('.roles').not(this).iCheck('uncheck');
-
-            });
         });
     </script>
 @stop

@@ -179,16 +179,27 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="table_right_middle">
+                                    {{-- <th class="table_right_middle">
                                         {!! trans('staffs.image') !!}
                                     </th>
-                                    <td colspan="4">
+                                    <td >
                                         <div class="field" align="left">
                                             <input type="file" id="files" name="image[]" multiple />
                                         </div>
                                         @if($errors->has('image'))
                                             <span class="text-danger">{{ $errors->first('image') }}</span>
                                         @endif
+                                    </td> --}}
+                                    <th class="table_right_middle">
+                                        Văn phòng
+                                    </th>
+                                    <td>
+                                        <select name="deparment" class="select2">
+                                            <option value="">{!! trans('system.dropdown_all') !!}</option>
+                                            @foreach ($departments as $key => $value)
+                                            <option value="{!! $key !!}">{!! $value !!}</option>
+                                            @endforeach
+                                        </select>
                                     </td>
                                 </tr>
                                 <tr>

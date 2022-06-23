@@ -92,6 +92,10 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Backend', 'as' => 'admin.'], 
         Route::get('departments/edit/team/{id}', ['as' => 'departments.edit-team', 'role' => 'admin.departments.edit-team', 'uses' => 'CalendarDepartmentController@editTeam']);
         Route::post('departments/save/team/{id}', ['as' => 'departments.save-edit-team', 'role' => 'admin.departments.edit-team', 'uses' => 'CalendarDepartmentController@saveEditTeam']);
         Route::delete('departments/delete/team/{id}', ['as' => 'departments.delete-team', 'role' => 'admin.departments.delete-team', 'uses' => 'CalendarDepartmentController@deleteTeam']);
+       
+        
+        // thiết bị
+        Route::resource('equipments', 'EquipmentController');
     });
 });
 

@@ -1,6 +1,6 @@
 @extends('backend.master')
 @section('title')
-    {!! trans('system.action.edit') !!} - {!! trans('departments.label') !!}
+    {!! trans('system.action.edit') !!} - {!! trans('equipments.label') !!}
 @stop
 @section('head')
     <link rel="stylesheet" type="text/css" href="{!! asset('assets/backend/plugins/iCheck/all.css') !!}" />
@@ -9,22 +9,22 @@
 @section('content')
     <section class="content-header">
         <h1>
-            {!! trans('departments.label') !!}
+            {!! trans('equipments.label') !!}
             <small>{!! trans('system.action.edit') !!}</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="{!! route('admin.home') !!}">{!! trans('system.home') !!}</a></li>
-            <li><a href="{!! route('admin.departments.index') !!}">{!! trans('departments.label') !!}</a></li>
+            <li><a href="{!! route('admin.equipments.index') !!}">{!! trans('equipments.label') !!}</a></li>
         </ol>
     </section>
-    {!! Form::open(['url' => route('admin.departments.update', $department->id), 'method' => 'PUT', 'role' => 'form']) !!}
+    {!! Form::open(['url' => route('admin.equipments.update', $equipment->id), 'method' => 'PUT', 'role' => 'form']) !!}
     <table class='table borderless'>
         <tr>
             <th class="table_right_middle " style="width: 15%;">
-                {!! trans('departments.code') !!}
+                Loại
             </th>
             <td>
-                {!! Form::text('code', old('code', $department->code), ['class' => 'form-control']) !!}
+                {!! Form::text('type', old('type', $typeEquipments[$equipment->type]), ['class' => 'form-control', 'readonly']) !!}
             </td>
             <th class="table_right_middle " style="width: 15%;">
             </th>
@@ -33,43 +33,19 @@
         </tr>
         <tr>
             <th class="table_right_middle " style="width: 15%;">
-                {!! trans('departments.name') !!}
+                Mã
             </th>
             <td>
-                {!! Form::text('name', old('name', $department->name), ['class' => 'form-control', 'required']) !!}
+                {!! Form::text('code', old('code', $equipment->code), ['class' => 'form-control', 'required']) !!}
             </td>
             <th class="table_right_middle " style="width: 15%;">
             </th>
             <td>
-            </td>
-        </tr>
-        <tr>
-            <th class="table_right_middle" style="width: 15%;">
-                {!! trans('departments.telephone') !!}
-            </th>
-            <td>
-                {!! Form::text('telephone', old('telephone', $department->telephone), ['class' => 'form-control', 'maxlength' => 13, 'required']) !!}
-            </td>
-        </tr>
-        <tr>
-            <th class="table_right_middle">
-                {!! trans('departments.description') !!}
-            </th>
-            <td>
-                {!! Form::textarea('description', old('tax_code', $department->description), ['class' => 'form-control']) !!}
-            </td>
-        </tr>
-        <tr>
-            <td class="text-center table_right_middle1" colspan="4">
-                <label>
-                    {!! Form::checkbox('status', 1, old('status', $department->status), ['class' => 'minimal']) !!}
-                    {!! trans('system.status.active') !!}
-                </label>
             </td>
         </tr>
         <tr>
             <td colspan="4" class="text-center">
-                {!! HTML::link(route('admin.departments.index'), trans('system.action.cancel'), ['class' => 'btn btn-danger btn-flat']) !!}
+                {!! HTML::link(route('admin.equipments.index'), trans('system.action.cancel'), ['class' => 'btn btn-danger btn-flat']) !!}
                 {!! Form::submit(trans('system.action.save'), ['class' => 'btn btn-primary btn-flat']) !!}
             </td>
         </tr>
