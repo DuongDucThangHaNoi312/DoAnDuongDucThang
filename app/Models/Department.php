@@ -24,5 +24,11 @@ class Department extends Model
             'telephone' => 'required|regex:/(0)[0-9]/iD|numeric|min:10',
         ];
     }
+
+    public static function countActiveDepts()
+    {
+        return self::where('status', 1)
+            ->count();
+    }
     
 }

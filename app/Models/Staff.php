@@ -46,4 +46,10 @@ class Staff extends Authenticatable
     {
         return $this->hasMany(StaffDayOff::class);
     }
+
+    public static function countActives()
+    {
+        return User::where('status', 1)
+            ->count();
+    }
 }

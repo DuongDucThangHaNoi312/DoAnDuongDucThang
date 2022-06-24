@@ -408,4 +408,9 @@ class User extends Authenticatable
         return self::whereIn('id', $userIds)
             ->get();
     }
+
+    public static function countActives()
+    {
+        return self::count();
+    }
 }

@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-md-4 col-sm-6 col-xs-12">
+    {{-- <div class="col-md-4 col-sm-6 col-xs-12">
         <div class="info-box">
             <a href="{!! route('admin.companies.index') !!}">
                 <span class="info-box-icon bg-yellow"><i class="fas fa-landmark"></i></span>
@@ -9,7 +9,7 @@
                 <span class="info-box-number">{!! \App\Models\Company::countActiveCompanies() !!}</span>
             </div>
         </div>
-    </div>
+    </div> --}}
     <div class="col-md-4 col-sm-6 col-xs-12">
         <div class="info-box">
             <a href="{!! route('admin.staffs.index') !!}">
@@ -17,7 +17,7 @@
             </a>
             <div class="info-box-content">
                 <span class="info-box-text">Tổng nhân viên</span>
-                <span class="info-box-number">{!! $countStaffs !!}</span>
+                <span class="info-box-number">{!! App\User::countActives() !!}</span>
             </div>
         </div>
     </div>
@@ -33,7 +33,7 @@
         </div>
     </div>
 </div>
-<div class="row">
+{{-- <div class="row">
     <div class="col-md-12">
         <div class="box box-primary">
             <div class="box-header with-border">
@@ -71,7 +71,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 
 <script>
     !(function ($) {
