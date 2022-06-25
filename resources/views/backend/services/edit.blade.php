@@ -1,6 +1,6 @@
 @extends('backend.master')
 @section('title')
-    {!! trans('system.action.edit') !!} - {!! trans('equipments.label') !!}
+    {!! trans('system.action.edit') !!} - {!! trans('services.label') !!}
 @stop
 @section('head')
     <link rel="stylesheet" type="text/css" href="{!! asset('assets/backend/plugins/iCheck/all.css') !!}" />
@@ -9,48 +9,39 @@
 @section('content')
     <section class="content-header">
         <h1>
-            {!! trans('equipments.label') !!}
+            {!! trans('services.label') !!}
             <small>{!! trans('system.action.edit') !!}</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="{!! route('admin.home') !!}">{!! trans('system.home') !!}</a></li>
-            <li><a href="{!! route('admin.equipments.index') !!}">{!! trans('equipments.label') !!}</a></li>
+            <li><a href="{!! route('admin.services.index') !!}">{!! trans('services.label') !!}</a></li>
         </ol>
     </section>
-    {!! Form::open(['url' => route('admin.equipments.update', $equipment->id), 'method' => 'PUT', 'role' => 'form']) !!}
+    {!! Form::open(['url' => route('admin.services.update', $service->id), 'method' => 'PUT', 'role' => 'form']) !!}
     <table class='table borderless'>
         <tr>
-            <th class="table_right_middle " style="width: 15%;">
-                Loại
+            <th class="table_right_middle" style="width: 15%">
+                Tên dịch vụ
             </th>
             <td>
-                <select name="type" class="select2" style="width: 70%">
-                    <option value="">{!! trans('system.dropdown_all') !!}</option>
-                    @foreach (\App\Defines\Equipment::OptionEquipment() as $key => $value)
-                    <option value="{!! $key !!}" {!! $key == $equipment->type ? 'selected' : '' !!}>{!! $value !!}</option>
-                    @endforeach
-                </select>
+                {!! Form::text('name', old('', $service->name), ['class' => 'form-control',  'required', '']) !!}
             </td>
-            <th class="table_right_middle " style="width: 15%;">
-            </th>
-            <td>
-            </td>
+            <th class="table_right_middle " style="width: 15%;"></th>
         </tr>
+
         <tr>
-            <th class="table_right_middle " style="width: 15%;">
-                Mã
+            <th class="table_right_middle" style="width: 15%">
+                Đơn giá
             </th>
-            <td>
-                {!! Form::text('code', old('code', $equipment->code), ['class' => 'form-control', 'required']) !!}
+            <td style="width: 70%;"> 
+                {!! Form::text('price', old('', $service->price), ['class' => 'form-control currency', '', '']) !!}
             </td>
-            <th class="table_right_middle " style="width: 15%;">
-            </th>
-            <td>
-            </td>
+            <th class="table_right_middle " style="width: 15%;"></th>
         </tr>
+        
         <tr>
             <td colspan="4" class="text-center">
-                {!! HTML::link(route('admin.equipments.index'), trans('system.action.cancel'), ['class' => 'btn btn-danger btn-flat']) !!}
+                {!! HTML::link(route('admin.services.index'), trans('system.action.cancel'), ['class' => 'btn btn-danger btn-flat']) !!}
                 {!! Form::submit(trans('system.action.save'), ['class' => 'btn btn-primary btn-flat']) !!}
             </td>
         </tr>
@@ -66,6 +57,7 @@
     <script src="{!! asset('assets/backend/plugins/input-mask/jquery.inputmask.min.js') !!}"></script>
     <script>
         ! function($) {
+            callInputMaskInteger();
             $(function() {
                 $(".select2").select2({
                     width: '100%'

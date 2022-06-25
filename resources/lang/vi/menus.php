@@ -157,5 +157,10 @@ return [
     'equipment' => [
         'label' => 'Trang thiết bị',
     ],
+
+    'services' => [
+        'label' => 'Dịch vụ',
+    ],
+    
     
 ];

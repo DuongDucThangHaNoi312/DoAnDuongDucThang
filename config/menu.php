@@ -21,6 +21,13 @@ return [
         'glyphicon' => 'fas fa-solid fa-chair',
         'hide' => false,
     ],
+
+    [
+        'name' => 'services.label',
+        'route' => 'admin.services.index',
+        'glyphicon' => 'fa fa-solid fa-mug-tea',
+        'hide' => false,
+    ],
     // [
     //     'name' => 'roles.label',
     //     'glyphicon' => 'fas fa-cogs fa-fw',

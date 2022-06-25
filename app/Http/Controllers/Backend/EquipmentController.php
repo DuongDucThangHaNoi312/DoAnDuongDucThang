@@ -33,7 +33,6 @@ class EquipmentController extends Controller
         // if ($validator->fails()) {
         //     return back()->withErrors($validator)->withInput();
         // }
-       
         Equipment::create([
             'type' => $data['type'],
             'code' => $data['code'],
@@ -78,8 +77,21 @@ class EquipmentController extends Controller
             Session::flash('alert-class', 'danger');
             return redirect()->route('admin.equipments.index');
         }
-
         $equipment->update($data);
+        Session::flash('message', trans('system.success'));
+        Session::flash('alert-class', 'success');
+        return redirect()->route('admin.equipments.index');
+    }
+
+    public function destroy($id)
+    {
+        $equipment = Equipment::find(intval($id));    
+        if (is_null($equipment)) {
+            Session::flash('message', trans('system.have_an_error'));
+            Session::flash('alert-class', 'danger');
+            return redirect()->route('admin.equipments.index');
+        }
+        $equipment->delete();
         Session::flash('message', trans('system.success'));
         Session::flash('alert-class', 'success');
         return redirect()->route('admin.equipments.index');

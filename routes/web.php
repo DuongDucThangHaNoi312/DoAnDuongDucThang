@@ -96,6 +96,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Backend', 'as' => 'admin.'], 
         
         // thiết bị
         Route::resource('equipments', 'EquipmentController');
+
+        // dịch vụ
+        Route::resource('services', 'ServiceController');
     });
 });
 
