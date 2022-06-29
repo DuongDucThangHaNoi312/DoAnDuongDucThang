@@ -51,15 +51,6 @@ class LaratrustSeeder extends Seeder
                 }
             }
 
-            // Create default user for each role
-////            $user = \App\User::create([
-//                'fullname'  => ucfirst($key),
-//                'email'     => $key . '@' . env('APP_NAME', 'bctech.vn'),
-//                'password'  => bcrypt('123@123'),
-//                'activated' => 1,
-//                'remember_token'    => str_random(10),
-//            ]);
-//            $user->attachRole($role);
         }
     }
 

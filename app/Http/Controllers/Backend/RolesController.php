@@ -19,7 +19,9 @@ class RolesController extends Controller
      */
     public function index(Request $request)
     {
-        $roles = Role::orderBy('id','ASC')->paginate(5);
+        $roles = Role::orderBy('id','ASC')
+            ->paginate(10);
+
         return view('backend.roles.index',compact('roles'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
     }
@@ -31,7 +33,6 @@ class RolesController extends Controller
      */
     public function create()
     {
-       // \App\Commons\Pemission::sync();
         Pemission::sync();
         $pGroups = Permission::whereNotNull('module')->groupBy('module')->select('module')->get()->toArray();
         $pGroups = array_column($pGroups, 'module', 'module');
@@ -39,7 +40,6 @@ class RolesController extends Controller
             $tmp = Permission::where('module', $key)->orderBy('action')->select('id', 'display_name', 'action')->get()->toArray();
             $pGroups[$key] = array_column($tmp, 'id', 'action');
         }
-
 
         return view('backend.roles.create',compact('pGroups'));
     }

@@ -22,6 +22,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Backend', 'as' => 'admin.'], 
         Route::get('', ['as' => 'home', 'uses' => 'HomeController@index']);
         Route::post('get-district-by-province', ['as' => 'get-district-by-province', 'uses' => 'HomeController@getDistrictByProvince']);
         Route::get('404', ['as' => '404', 'uses' => 'HomeController@get404']);
+        Route::get('403', ['as' => '403', 'uses' => 'HomeController@get403']);
         Route::get('logout', ['as' => 'logout', 'uses' => "HomeController@getLogout"]);
         Route::get('change-password', ['as' => 'change-password', 'uses' => 'HomeController@changePassword']);
         Route::post('change-password', ['as' => 'change-password', 'uses' => 'HomeController@postChangePassword']);
@@ -32,6 +33,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Backend', 'as' => 'admin.'], 
         Route::resource('users', 'UsersController');
         Route::resource('roles', 'RolesController');
         Route::post('login-as', ['as' => 'login-as', 'uses' => 'HomeController@loginAs']);
+        
+        
         //Công ty
         Route::resource('companies', 'CompaniesController');
         //Phòng ban

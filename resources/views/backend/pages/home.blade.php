@@ -45,16 +45,9 @@
     </section>
 {{--    <div style="border-bottom: 1px solid #ccc; margin: 10px 0 -15px 0"></div>--}}
     <section class="content">
-		<?php $user = auth()->guard('admin')->user(); ?>
-            @if (\Auth::user()->position_id == \App\Define\Constant::POSITION_TP)
-                @include('backend.pages._home_manager')
-            @elseif (\Auth::user()->hasRole('NS') || \Auth::user()->hasRole('NV') || \Auth::user()->hasRole('LEADER') || \Auth::user()->position_id == 5)
-                @include('backend.pages._home_staff')
-            @elseif (\Auth::user()->hasRole('system') || \Auth::user()->hasRole('TGD'))
-                @include('backend.pages._home_system')
-            @else
-                <h1>Nhân viên chưa có hợp đồng hoặc chưa được cài đặt vai trò.</h1>
-            @endif
+		<?php $user = auth()->guard('admin')->user();?>
+        @include('backend.pages._home_system')
+           
     </section>
 @stop
 @section('footer')
@@ -70,12 +63,4 @@
     <script type="text/javascript" charset="utf8"
             src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
 
-    <script>
-        !(function( $ ) {
-            $(function() {
-
-
-            });
-        })(window.jQuery);
-    </script>
 @stop

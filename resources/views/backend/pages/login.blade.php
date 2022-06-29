@@ -39,15 +39,15 @@
                 </div>
                 <div class="row">
                     <div class="col-xs-4">
-                        {!! Form::submit(trans('forms.login'), ['class' => 'btn btn-primary btn-block btn-flat']) !!}
+                        {!! Form::submit('Đăng Nhập', ['class' => 'btn btn-primary btn-block btn-flat']) !!}
                     </div>
-                    <div class="col-xs-8">
+                    {{-- <div class="col-xs-8">
                         <div class="checkbox icheck">
                             <label>
                                 <input type="checkbox"> Ghi nhớ đăng nhập
                             </label>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             {!! Form::close() !!}
             @if($errors->count())

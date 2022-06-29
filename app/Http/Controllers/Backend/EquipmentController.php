@@ -12,6 +12,19 @@ use Illuminate\Support\Facades\Validator;
 
 class EquipmentController extends Controller
 {
+    public function __construct()
+    {
+        // $this->middleware(function($request, $next) {
+        //     $user = auth()->guard('admin')->user();
+        //     if (($user->admin == 1)) {
+        //         return $next($request);
+
+        //     }
+        //     $msg = "Bạn không có quyền truy cập";
+        //     return redirect()->route('admin.403')->with(['msg' => $msg]);
+        // });
+    }
+
     public function index(Request $request)
     {
         $typeEquipments = \App\Defines\Equipment::OptionEquipment();
