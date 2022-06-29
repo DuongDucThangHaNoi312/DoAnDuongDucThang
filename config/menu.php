@@ -25,15 +25,14 @@ return [
     [
         'name' => 'services.label',
         'route' => 'admin.services.index',
-        'glyphicon' => 'fa fa-solid fa-mug-tea',
+        'glyphicon' => 'fas fa-coins fa-fw',
         'hide' => false,
     ],
-    // [
-    //     'name' => 'roles.label',
-    //     'glyphicon' => 'fas fa-cogs fa-fw',
-    //     'route' => 'admin.roles.index',
-    //     'hide' => false,
-    //     'role' => ['system'],
-    // ],
-    
+    [
+        'name' => 'roles.label',
+        'glyphicon' => 'fas fa-cogs fa-fw',
+        'route' => 'admin.roles.index',
+        'hide' => false,
+        'role' => ['system'],
+    ],
 ];
