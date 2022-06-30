@@ -65,6 +65,7 @@ class Kernel extends HttpKernel
         'ability'   => \Laratrust\Middleware\LaratrustAbility::class,
         'admin'     => \App\Http\Middleware\AdminAuthenticate::class,
         'customer'  => \App\Http\Middleware\CustomerAuthenticate::class,
+        'admin.middleware'  => \App\Http\Middleware\AdminMiddleware::class,
     ];
 
     /**

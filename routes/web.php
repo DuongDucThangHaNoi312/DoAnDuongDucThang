@@ -97,11 +97,27 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Backend', 'as' => 'admin.'], 
         Route::delete('departments/delete/team/{id}', ['as' => 'departments.delete-team', 'role' => 'admin.departments.delete-team', 'uses' => 'CalendarDepartmentController@deleteTeam']);
        
         
-        // thiết bị
-        Route::resource('equipments', 'EquipmentController');
 
-        // dịch vụ
-        Route::resource('services', 'ServiceController');
+        Route::get('services', ['as' => 'services.index', 'uses' => 'ServiceController@index']);
+        Route::get('equipments', ['as' => 'equipments.index', 'uses' => 'EquipmentController@index']);
+
+        Route::group(['middleware' => ['admin.middleware']], function() {
+            // dịch vụ
+            Route::post('services', ['as' => 'services.store', 'uses' => 'ServiceController@store']);
+            Route::get('services/create', ['as' => 'services.create', 'uses' => 'ServiceController@create']);
+            Route::get('services/{id}', ['as' => 'services.show', 'uses' => 'ServiceController@show']);
+            Route::get('services/{id}/edit', ['as' => 'services.edit', 'uses' => 'ServiceController@edit']);
+            Route::put('services/{id}', ['as' => 'services.update', 'uses' => 'ServiceController@update']);
+            Route::delete('services/{id}', ['as' => 'services.destroy', 'uses' => 'ServiceController@destroy']);
+
+            // trang thiết bị
+            Route::post('equipments', ['as' => 'equipments.store', 'uses' => 'EquipmentController@store']);
+            Route::get('equipments/create', ['as' => 'equipments.create', 'uses' => 'EquipmentController@create']);
+            Route::get('equipments/{id}', ['as' => 'equipments.show', 'uses' => 'EquipmentController@show']);
+            Route::get('equipments/{id}/edit', ['as' => 'equipments.edit', 'uses' => 'EquipmentController@edit']);
+            Route::put('equipments/{id}', ['as' => 'equipments.update', 'uses' => 'EquipmentController@update']);
+            Route::delete('equipments/{id}', ['as' => 'equipments.destroy', 'uses' => 'EquipmentController@destroy']);
+        });
     });
 });
 
