@@ -106,12 +106,11 @@
 @stop
 @section('content')
     @include('backend.header.content_header',['name'=>'staffs.label','key'=>'staffs.list'])
-    @include('backend.staffs._modal_excel')
     <section class="content overlay">
         <div class="row">
             <div class="col-md-4">
                 <div class="btn-group">
-                    <a href="{!! route('admin.staffs.create') !!}" class='btn btn-primary btn-flat'>
+                    <a href="{!! route('admin.departments.create') !!}" class='btn btn-primary btn-flat'>
                         <span class="glyphicon glyphicon-plus"></span>&nbsp;{!! trans('system.action.create') !!}
                     </a>
                 </div>

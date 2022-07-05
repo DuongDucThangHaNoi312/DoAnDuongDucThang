@@ -86,7 +86,6 @@
     <script>
         var csrfGlobal = @json(csrf_token());
         var _VND_CODE = @json(\App\Defines\Contract::VND);
-        var _URL_LOG = @json(route('admin.list-logs.show-log'));
     </script>
 </head>
 <?php $user = auth()->guard('admin')->getUser(); ?>

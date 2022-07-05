@@ -106,7 +106,6 @@
 @stop
 @section('content')
     @include('backend.header.content_header',['name'=>'staffs.label','key'=>'staffs.list'])
-    @include('backend.staffs._modal_excel')
     <section class="content overlay">
         <div class="row">
             <div class="col-md-4">
