@@ -60,13 +60,16 @@
         </tr>
 
         <tr>
-            <td class="text-center table_right_middle1" colspan="4">
+            <td colspan="4" class="text-center">
                 <label>
                     {!! Form::checkbox('status', 1, old('status', 1), [ 'class' => 'minimal' ]) !!}
                     {!! trans('system.status.active') !!}
                 </label>
+                <label>
+                    {!! Form::checkbox('is_ph', 1, old('is_ph', 0), [ 'class' => 'minimal' ]) !!}
+                    {!! 'Phòng Họp' !!}
+                </label>
             </td>
-            <th class="table_right_middle " style="width: 15%;"></th>
         </tr>
         
         <tr>

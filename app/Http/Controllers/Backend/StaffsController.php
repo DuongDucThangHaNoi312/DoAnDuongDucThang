@@ -83,6 +83,8 @@ class StaffsController extends Controller
             'ethnicity' => $request->ethnicity,
             'domicile' => $request->domicile,
             'marital_status' => $request->marital_status,
+            'admin' => intval($request->admin),
+            
             
         ]);
         $user = User::create($arrData);
@@ -134,6 +136,8 @@ class StaffsController extends Controller
             'ethnicity' => $request->ethnicity,
             'domicile' => $request->domicile,
             'marital_status' => $request->marital_status,
+            'admin' => intval($request->admin),
+
         ]);
         $user->update($arrData);
       

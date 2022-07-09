@@ -99,5 +99,6 @@ return [
     'roles_user'=>'Thêm mới quyền cho nhân viên',
     'set_role_first'=>'Vui lòng cập nhật vai trò cho nhân viên trước',
     'staff_start' => 'Ngày vào công ty',
-    'domicile'  => 'Nơi sinh'
+    'domicile'  => 'Nơi sinh',
+    'department_id' => 'Phòng ban'
 ];

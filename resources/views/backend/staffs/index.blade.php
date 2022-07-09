@@ -126,9 +126,10 @@
                                 <th style="text-align: center; vertical-align: middle;">{!! trans('system.no.') !!}</th>
                                 <th style="text-align: center; vertical-align: middle;">{!! trans('staffs.code') !!}</th>
                                 <th style="text-align: center; vertical-align: middle; min-width: 100px">{!! trans('staffs.fullname') !!}</th>
-                                <th style="text-align: center; vertical-align: middle;">{!! trans('contracts.department_id') !!}</th>
+                                <th style="text-align: center; vertical-align: middle;">{!! trans('staffs.department_id') !!}</th>
                                 <th style="text-align: center; vertical-align: middle;">{!! trans('staffs.addresses') !!}</th>
                                 <th style="text-align: center; vertical-align: middle; white-space: nowrap">{!! trans('staffs.date_of_birth') !!}</th>
+                                <th style="text-align: center; vertical-align: middle;">{!! Quyền !!}</th>
                                 <th style="text-align: center; vertical-align: middle;">{!! trans('system.action.label') !!}</th>
                             </tr>
                         </thead>
@@ -152,6 +153,13 @@
                                     </td>
                                     <td style="text-align: center; vertical-align: middle;">
                                         <span class="label label-default">{!! date('d/m/Y', strtotime($item->date_of_birth)) !!}</span>
+                                    </td>
+                                    <td style="text-align: center; vertical-align: middle;">
+                                        @if ( $item->admin == 1)
+                                            <span class="label label-success" style="font-size: 14px">Admin</span><br>
+                                        @else
+                                            <span class="label label-default" style="font-size: 14px">User</span><br>
+                                        @endif
                                     </td>
                                     <td style="text-align: center; vertical-align: middle; white-space: nowrap;">&nbsp;&nbsp;
                                         <div class="row">

@@ -217,14 +217,18 @@
                                     </select>
                                 </td>
                             </tr>
-                           
-                            <tr id="t" class="@if($user->active == 0) hidden @endif">
-                                <td align="center" colspan="4">
+
+                            <tr>
+                                <td colspan="4" class="text-center">
                                     <label for="active" style="margin-left: 100px;cursor: pointer;">
                                         <input style="margin-left: 50px; cursor: pointer;" id="active"
                                                @if($user->active == 1) checked="checked" @endif name="active" value="1"
                                                type="checkbox" value="0" class="minimal"/>
                                         {!! trans('system.status.active') !!}
+                                    </label>
+                                    <label>
+                                        {!! Form::checkbox('admin', 1, old('admin', $user->admin), [ 'class' => 'minimal' ]) !!}
+                                        {!! 'Admin' !!}
                                     </label>
                                 </td>
                             </tr>

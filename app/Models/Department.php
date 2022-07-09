@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Model;
 class Department extends Model
 {
     protected $table = 'departments';
-    protected $fillable = ['code', 'name', 'telephone', 'description','status'];
+    protected $fillable = ['code', 'name', 'telephone', 'description', 'status', 'is_ph'];
 
     public static function rules($id = 0)
     {

@@ -203,6 +203,14 @@
                                     </td>
                                 </tr>
                                 <tr>
+                                    <td colspan="4" class="text-center">
+                                        <label>
+                                            {!! Form::checkbox('admin', 1, old('admin', 0), [ 'class' => 'minimal' ]) !!}
+                                            {!! 'Admin' !!}
+                                        </label>
+                                    </td>
+                                </tr>
+                                <tr>
                                     <td align="center" colspan="4">
                                         {!! HTML::link(route( 'admin.staffs.index' ), trans('system.action.cancel'), ['class' => 'btn btn-danger btn-flat','id'=>'cancel']) !!}
                                         {!! Form::submit(trans('system.action.save'), ['class' => 'btn btn-primary btn-flat','id'=>'save']) !!}
@@ -265,5 +273,18 @@
             $(".select2").select2({width: '100%'});
 
         });
+    </script>
+    <script>
+        !function ($) {
+            $(function () {
+                $(".select2").select2({
+                    width: '100%',
+                    placeholder: '  {!! trans('system.dropdown_choice') !!} '
+                });
+                $('input[type="checkbox"].minimal').iCheck({
+                    checkboxClass: 'icheckbox_minimal-red'
+                });
+            });
+        }(window.jQuery);
     </script>
 @stop

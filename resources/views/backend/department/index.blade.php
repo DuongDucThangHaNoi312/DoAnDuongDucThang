@@ -127,6 +127,7 @@
                                 <th style="text-align: center; vertical-align: middle;">{!! trans('departments.name') !!}</th>
                                 <th style="text-align: center; vertical-align: middle;">{!! trans('departments.code') !!}</th>
                                 <th style="text-align: center; vertical-align: middle;">{!! trans('departments.telephone') !!}</th>
+                                <th style="text-align: center; vertical-align: middle;">{!! 'Loại phòng' !!}</th>
                                 <th style="text-align: center; vertical-align: middle; width: 14%">{!! trans('system.action.label') !!}</th>
                             </tr>
                         </thead>
@@ -141,6 +142,13 @@
                                     </td>
                                     <td style="text-align: center; vertical-align: middle;"> {!! $value[0]->code !!}</td>
                                     <td style="text-align: center; vertical-align: middle;">{!! $value[0]->telephone !!}</td>
+                                    <td style="text-align: center; vertical-align: middle;">
+                                        @if ( $value[0]->is_ph == 1)
+                                            <span class="label label-success" style="font-size: 14px">Phòng họp</span><br>
+                                        @else
+                                            <span class="label label-default" style="font-size: 14px">Phòng làm việc</span><br>
+                                        @endif
+                                    </td>
                                     <td style="text-align: center; vertical-align: middle;">
                                         <div class="col-md-1">
                                             <a href="{!! route('admin.departments.show', $value[0]->id) !!}" class="btn-detail btn btn-default btn-xs"

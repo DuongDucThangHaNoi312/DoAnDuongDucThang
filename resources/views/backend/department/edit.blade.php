@@ -65,6 +65,10 @@
                     {!! Form::checkbox('status', 1, old('status', $department->status), ['class' => 'minimal']) !!}
                     {!! trans('system.status.active') !!}
                 </label>
+                <label>
+                    {!! Form::checkbox('is_ph', 1, old('is_ph', $department->is_ph), [ 'class' => 'minimal' ]) !!}
+                    {!! 'Phòng Họp' !!}
+                </label>
             </td>
         </tr>
         <tr>

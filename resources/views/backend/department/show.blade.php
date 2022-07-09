@@ -69,6 +69,19 @@
             </td>
         </tr>
 
+        <tr>
+            <td class="text-center table_right_middle1" colspan="4">
+                <label>
+                    {!! Form::checkbox('status', 1, old('status', $department->status), ['class' => 'minimal', '']) !!}
+                    {!! trans('system.status.active') !!}
+                </label>
+                <label>
+                    {!! Form::checkbox('is_ph', 1, old('is_ph', $department->is_ph), [ 'class' => 'minimal', '' ]) !!}
+                    {!! 'Phòng Họp' !!}
+                </label>
+            </td>
+        </tr>
+
     </table>
 
     {!! Form::close() !!}
@@ -88,6 +101,7 @@
                 $('input[type="checkbox"].minimal').iCheck({
                     checkboxClass: 'icheckbox_minimal-red'
                 });
+                $('.status, .is_ph').prop('disabled',  true);
             });
         }(window.jQuery);
     </script>

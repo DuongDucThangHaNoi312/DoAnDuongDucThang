@@ -48,6 +48,7 @@ class DepartmentsController extends Controller
             'description' => $data['description'],
             'status' => $data['status'],
             'code' => $data['code'],
+            'is_ph' => intval($data['is_ph']),
         ]);
 
         Session::flash('message', trans('system.success'));
