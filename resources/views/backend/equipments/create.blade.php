@@ -42,6 +42,15 @@
             </td>
             <th class="table_right_middle " style="width: 15%;"></th>
         </tr>
+        <tr>
+            <th class="table_right_middle" style="width: 15%">
+                Giá thuê
+            </th>
+            <td style="width: 70%;"> 
+                {!! Form::text('price', old('price'), ['class' => 'form-control currency',  'required']) !!}
+            </td>
+            <th class="table_right_middle " style="width: 15%;"></th>
+        </tr>
         
         <tr>
             <td colspan="4" class="text-center">
@@ -60,6 +69,8 @@
     <script>
         !function ($) {
             $(function () {
+                callInputMaskInteger();
+
                 $(".select2").select2({
                     width: '100%',
                     placeholder: '  {!! trans('system.dropdown_choice') !!} '

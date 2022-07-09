@@ -97,6 +97,8 @@
     <script>
         !function ($) {
             $(function () {
+                callInputMaskInteger();
+
                 $(".select2").select2({width: '100%'});
                 $('input[type="checkbox"].minimal').iCheck({
                     checkboxClass: 'icheckbox_minimal-red'

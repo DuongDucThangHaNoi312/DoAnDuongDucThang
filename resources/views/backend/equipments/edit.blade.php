@@ -49,6 +49,15 @@
             </td>
         </tr>
         <tr>
+            <th class="table_right_middle" style="width: 15%">
+                Giá thuê
+            </th>
+            <td style="width: 70%;"> 
+                {!! Form::text('price', old('price', $equipment->price), ['class' => 'form-control currency',  'required']) !!}
+            </td>
+            <th class="table_right_middle " style="width: 15%;"></th>
+        </tr>
+        <tr>
             <td colspan="4" class="text-center">
                 {!! HTML::link(route('admin.equipments.index'), trans('system.action.cancel'), ['class' => 'btn btn-danger btn-flat']) !!}
                 {!! Form::submit(trans('system.action.save'), ['class' => 'btn btn-primary btn-flat']) !!}
@@ -67,6 +76,8 @@
     <script>
         ! function($) {
             $(function() {
+                callInputMaskInteger();
+
                 $(".select2").select2({
                     width: '100%'
                 });

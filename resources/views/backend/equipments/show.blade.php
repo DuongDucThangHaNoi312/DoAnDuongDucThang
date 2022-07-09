@@ -37,6 +37,15 @@
             </td>
             <th class="table_right_middle " style="width: 15%;"></th>
         </tr>
+        <tr>
+            <th class="table_right_middle" style="width: 15%">
+                Giá thuê
+            </th>
+            <td style="width: 70%;"> 
+                {!! Form::text('price', old('price', $equipment->price), ['class' => 'form-control currency',  'required', 'disabled']) !!}
+            </td>
+            <th class="table_right_middle " style="width: 15%;"></th>
+        </tr>
         
     </table>
 
@@ -53,6 +62,8 @@
     <script>
         !function ($) {
             $(function () {
+                callInputMaskInteger();
+
                 $(".select2").select2({width: '100%'});
                 $('input[type="checkbox"].minimal').iCheck({
                     checkboxClass: 'icheckbox_minimal-red'

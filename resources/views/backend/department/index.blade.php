@@ -128,6 +128,7 @@
                                 <th style="text-align: center; vertical-align: middle;">{!! trans('departments.code') !!}</th>
                                 <th style="text-align: center; vertical-align: middle;">{!! trans('departments.telephone') !!}</th>
                                 <th style="text-align: center; vertical-align: middle;">{!! 'Loại phòng' !!}</th>
+                                <th style="text-align: center; vertical-align: middle;">{!! 'Giá thuê' !!}</th>
                                 <th style="text-align: center; vertical-align: middle; width: 14%">{!! trans('system.action.label') !!}</th>
                             </tr>
                         </thead>
@@ -144,9 +145,14 @@
                                     <td style="text-align: center; vertical-align: middle;">{!! $value[0]->telephone !!}</td>
                                     <td style="text-align: center; vertical-align: middle;">
                                         @if ( $value[0]->is_ph == 1)
-                                            <span class="label label-success" style="font-size: 14px">Phòng họp</span><br>
+                                        <span class="label label-success" style="font-size: 14px">Phòng họp</span><br>
                                         @else
-                                            <span class="label label-default" style="font-size: 14px">Phòng làm việc</span><br>
+                                        <span class="label label-default" style="font-size: 14px">Phòng làm việc</span><br>
+                                        @endif
+                                    </td>
+                                    <td style="text-align: center; vertical-align: middle;"> 
+                                        @if ( $value[0]->is_ph == 1)
+                                            {!! App\Helper\HString::currencyFormat($value[0]->price) !!} 
                                         @endif
                                     </td>
                                     <td style="text-align: center; vertical-align: middle;">
@@ -202,9 +208,8 @@
             $(".select2").select2({width: '100%'});
             $('#tableUser thead tr').clone(true).appendTo('#tableUser thead');
             $('#tableUser thead tr:eq(1) th').each(function (i) {
-                if (i == 5) {
-                    $(this).html('<input type="text" class="search-form datepicker date" autocomplete="off" />');
-                } else if (i != 0 && i != 6) {
+               
+                if (i != 0 && i != 6) {
                     $(this).html('<input type="text" class="search-form input-text" autocomplete="off" />');
                 } else {
                     $(this).html('');

@@ -124,7 +124,8 @@
                             <tr>
                                 <th style="text-align: center; vertical-align: middle;">{!! trans('system.no.') !!}</th>
                                 <th style="text-align: center; vertical-align: middle;">Loại</th>
-                                <th style="text-align: center; vertical-align: middle;">Mã</th>
+                                <th style="text-align: center; vertical-align: middle;">Tên</th>
+                                <th style="text-align: center; vertical-align: middle;">Giá Thuê</th>
                                 <th style="text-align: center; vertical-align: middle; width: 14%">{!! trans('system.action.label') !!}</th>
                             </tr>
                         </thead>
@@ -136,6 +137,7 @@
                                     <td style="text-align: center; vertical-align: middle;"> {!! $i++ !!}</td>
                                     <td style="text-align: center; vertical-align: middle;">{!! $typeEquipments[$value->type] !!}</td>
                                     <td style="text-align: center; vertical-align: middle;">{!! $value->code !!}</td>
+                                    <td style="text-align: center; vertical-align: middle;"> {!! App\Helper\HString::currencyFormat($value->price) !!} </td>
                                     <td style="text-align: center; vertical-align: middle;">
                                         <div class="col-md-1">
                                             <a href="{!! route('admin.equipments.show', $value->id) !!}" class="btn-detail btn btn-default btn-xs"
@@ -186,10 +188,11 @@
             $('.tab span.noactive-staff a').addClass('active-tab')
         }
         $(document).ready(function() {
+            callInputMaskInteger();
             $(".select2").select2({width: '100%'});
             $('#tableUser thead tr').clone(true).appendTo('#tableUser thead');
             $('#tableUser thead tr:eq(1) th').each(function (i) {
-                if (i == 1 || i == 2) {
+                if (i == 1 || i == 2 || i == 3) {
                     $(this).html('<input type="text" class="search-form input-text" autocomplete="off" />');
                 } else {
                     $(this).html('');

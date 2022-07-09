@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Model;
 class Department extends Model
 {
     protected $table = 'departments';
-    protected $fillable = ['code', 'name', 'telephone', 'description', 'status', 'is_ph'];
+    protected $fillable = ['code', 'name', 'telephone', 'description', 'status', 'is_ph', 'price'];
 
     public static function rules($id = 0)
     {
@@ -28,6 +28,7 @@ class Department extends Model
     public static function countActiveDepts()
     {
         return self::where('status', 1)
+            ->where('is_ph', 1)
             ->count();
     }
     

@@ -34,6 +34,7 @@ class DepartmentsController extends Controller
     {
 
         $request->merge(['status' => intval($request->input('status', 0))]);
+        $request->merge(['price' => intval($request->input('price', 0))]);
         $data = $request->all();
         $validator = Validator::make($data, Department::rules());
         $validator->setAttributeNames(trans('departments'));
@@ -49,6 +50,7 @@ class DepartmentsController extends Controller
             'status' => $data['status'],
             'code' => $data['code'],
             'is_ph' => intval($data['is_ph']),
+            'price' => intval($data['price']),
         ]);
 
         Session::flash('message', trans('system.success'));

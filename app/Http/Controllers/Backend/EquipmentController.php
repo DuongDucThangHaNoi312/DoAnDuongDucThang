@@ -48,6 +48,7 @@ class EquipmentController extends Controller
         // }
         Equipment::create([
             'type' => $data['type'],
+            'price' => intval($data['price']),
             'code' => $data['code'],
             'created_by' => Auth()->id(),
         ]);
