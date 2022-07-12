@@ -2,32 +2,25 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\User;
-use App\Models\Company;
-use App\Models\Contract;
-use App\Helpers\GetOption;
-use App\Models\Department;
+use App\Models\MeetingRoom;
 use Illuminate\Http\Request;
-use App\PermissionUserObject;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
-class DepartmentsController extends Controller
+class MeetingRoomController extends Controller
 {
     public function index(Request $request)
     {
-        $query = "1=1";
-        $departments = Department::whereRaw($query)->orderBy('updated_at', 'DESC')->get();
-        $departmentGroupsName = $departments->groupBy('name');
-        return view('backend.department.index', compact('departmentGroupsName'));
+        $meetingRooms = MeetingRoom::orderBy('updated_at', 'DESC')->get();
+        return view('backend.meeting_rooms.index', compact('meetingRooms'));
     }
 
     function create()
     {
-        return view('backend.department.create');
+        return view('backend.meeting_rooms.create');
     }
 
     public function store(Request $request)
@@ -36,81 +29,78 @@ class DepartmentsController extends Controller
         $request->merge(['status' => intval($request->input('status', 0))]);
         $request->merge(['price' => intval($request->input('price', 0))]);
         $data = $request->all();
-        $validator = Validator::make($data, Department::rules());
-        $validator->setAttributeNames(trans('departments'));
+        $validator = Validator::make($data, MeetingRoom::rules());
+        $validator->setAttributeNames(trans('meeting-rooms'));
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
         }
-       
-        Department::create([
+        MeetingRoom::create([
             'name' => $data['name'],
             'telephone' => $data['telephone'],
-            'company_id' => $company,
             'description' => $data['description'],
             'status' => $data['status'],
-            'code' => $data['code'],
+            'price' => intval($data['price']),
         ]);
 
         Session::flash('message', trans('system.success'));
         Session::flash('alert-class', 'success');
-        return redirect()->route('admin.departments.index');
+        return redirect()->route('admin.meeting-rooms.index');
     }
 
     public function show($id)
     {
-        $department = Department::find($id);
-        if (is_null($department)) {
+        $meetingRoom = MeetingRoom::find($id);
+        if (is_null($meetingRoom)) {
             Session::flash('message', trans('system.have_an_error'));
             Session::flash('alert-class', 'danger');
-            return redirect()->route('admin.departments.index');
+            return redirect()->route('admin.meeting-rooms.index');
         }
-        return view('backend.department.show', compact('department'));
+        return view('backend.meeting_rooms.show', compact('meetingRoom'));
     }
 
     public function edit($id)
     {
-        $department = Department::find($id);
-        if (is_null($department)) {
+        $meetingRoom = MeetingRoom::find($id);
+        if (is_null($meetingRoom)) {
             Session::flash('message', trans('system.have_an_error'));
             Session::flash('alert-class', 'danger');
-            return redirect()->route('admin.departments.index');
+            return redirect()->route('admin.meeting-rooms.index');
         }
-        return view('backend.department.edit', compact('department'));
+        return view('backend.meeting_rooms.edit', compact('meetingRoom'));
     }
 
     public function update(Request $request, $id)
     {
         $request->merge(['status' => $request->input('status', 0)]);
         $data = $request->all();
-        $department = Department::find(intval($id));
-        if (is_null($department)) {
+        $meetingRoom = MeetingRoom::find(intval($id));
+        if (is_null($meetingRoom)) {
             Session::flash('message', trans('system.have_an_error'));
             Session::flash('alert-class', 'danger');
-            return redirect()->route('admin.departments.index');
+            return redirect()->route('admin.meeting-rooms.index');
         }
-        $validator = Validator::make($data, Department::rules(intval($id)));
-        $validator->setAttributeNames(trans('departments'));
+        $validator = Validator::make($data, MeetingRoom::rules(intval($id)));
+        $validator->setAttributeNames(trans('meeting-rooms'));
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
         }
-        $department->update($data);
+        $meetingRoom->update($data);
         Session::flash('message', trans('system.success'));
         Session::flash('alert-class', 'success');
-        return redirect()->route('admin.departments.index');
+        return redirect()->route('admin.meeting-rooms.index');
     }
 
     public function destroy($id)
     {
-        $department = Department::find(intval($id));    
-        if (is_null($department)) {
+        $meetingRoom = MeetingRoom::find(intval($id));    
+        if (is_null($meetingRoom)) {
             Session::flash('message', trans('system.have_an_error'));
             Session::flash('alert-class', 'danger');
-            return redirect()->route('admin.departments.index');
+            return redirect()->route('admin.meeting-rooms.index');
         }
-        $department->delete();
+        $meetingRoom->delete();
         Session::flash('message', trans('system.success'));
         Session::flash('alert-class', 'success');
-        return redirect()->route('admin.departments.index');
+        return redirect()->route('admin.meeting-rooms.index');
     }
-
 }

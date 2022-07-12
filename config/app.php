@@ -134,6 +134,11 @@ return [
     |
     */
 
+
+    // ất cả những service provider class này sẽ được load vào trong ứng dụng. 
+    // Một điều hiển nhiên là nhiều trong số đó được gọi là "deferred" providers, nghĩa là chúng không phải được load trong mọi request, 
+    // chỉ khi có service nào yêu cầu thì mới thực hiện cung cấp.
+
     'providers' => [
 
         /*

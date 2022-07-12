@@ -28,7 +28,7 @@ class EquipmentController extends Controller
     public function index(Request $request)
     {
         $typeEquipments = \App\Defines\Equipment::OptionEquipment();
-        $equipments = Equipment::get();
+        $equipments = Equipment::orderBy('updated_at', 'desc')->get();
         return view('backend.equipments.index', compact('equipments', 'typeEquipments'));
     }
 
@@ -41,14 +41,16 @@ class EquipmentController extends Controller
     {
 
         $data = $request->all();
-        // $validator = Validator::make($data, Department::rules());
-        // $validator->setAttributeNames(trans('departments'));
-        // if ($validator->fails()) {
-        //     return back()->withErrors($validator)->withInput();
-        // }
+        $validator = Validator::make($data, Equipment::rules());
+        $validator->setAttributeNames(trans('equipments'));
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
+
         Equipment::create([
             'type' => $data['type'],
             'price' => intval($data['price']),
+            'number' => intval($data['number']),
             'code' => $data['code'],
             'created_by' => Auth()->id(),
         ]);
@@ -90,6 +92,11 @@ class EquipmentController extends Controller
             Session::flash('message', trans('system.have_an_error'));
             Session::flash('alert-class', 'danger');
             return redirect()->route('admin.equipments.index');
+        }
+        $validator = Validator::make($data, Equipment::rules(intval($id)));
+        $validator->setAttributeNames(trans('equipments'));
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
         }
         $equipment->update($data);
         Session::flash('message', trans('system.success'));

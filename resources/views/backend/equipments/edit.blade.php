@@ -24,7 +24,7 @@
                 Loại
             </th>
             <td>
-                <select name="type" class="select2" style="width: 70%">
+                <select name="type" class="select2" style="width: 70%" required>
                     <option value="">{!! trans('system.dropdown_all') !!}</option>
                     @foreach (\App\Defines\Equipment::OptionEquipment() as $key => $value)
                     <option value="{!! $key !!}" {!! $key == $equipment->type ? 'selected' : '' !!}>{!! $value !!}</option>
@@ -38,7 +38,7 @@
         </tr>
         <tr>
             <th class="table_right_middle " style="width: 15%;">
-                Mã
+                Tên thiết bị
             </th>
             <td>
                 {!! Form::text('code', old('code', $equipment->code), ['class' => 'form-control', 'required']) !!}
@@ -47,6 +47,15 @@
             </th>
             <td>
             </td>
+        </tr>
+        <tr>
+            <th class="table_right_middle" style="width: 15%">
+                Số lượng
+            </th>
+            <td style="width: 70%;"> 
+                {!! Form::text('number', old('number', $equipment->number), ['class' => 'form-control currency',  'required']) !!}
+            </td>
+            <th class="table_right_middle " style="width: 15%;"></th>
         </tr>
         <tr>
             <th class="table_right_middle" style="width: 15%">

@@ -21,16 +21,6 @@
     <table class='table borderless'>
         <tr>
             <th class="table_right_middle " style="width: 15%;">
-                {!! trans('departments.code') !!}
-            </th>
-            <td style="width: 70%;"> 
-                {!! Form::text('code', old('code'), ['class' => 'form-control']) !!}
-            </td>
-            <th class="table_right_middle " style="width: 15%;"></th>
-        </tr>
-
-        <tr>
-            <th class="table_right_middle " style="width: 15%;">
                 {!! trans('departments.name') !!}
             </th>
             <td style="width: 70%;"> 
@@ -50,16 +40,6 @@
         </tr>
 
         <tr>
-            <th class="table_right_middle" style="width: 15%">
-                Giá thuê
-            </th>
-            <td style="width: 70%;"> 
-                {!! Form::text('price', old('price'), ['class' => 'form-control currency',  'required']) !!}
-            </td>
-            <th class="table_right_middle " style="width: 15%;"></th>
-        </tr>
-
-        <tr>
             <th class="table_right_middle">
                 {!! trans('departments.description') !!}
             </th>
@@ -74,10 +54,6 @@
                 <label>
                     {!! Form::checkbox('status', 1, old('status', 1), [ 'class' => 'minimal' ]) !!}
                     {!! trans('system.status.active') !!}
-                </label>
-                <label>
-                    {!! Form::checkbox('is_ph', 1, old('is_ph', 0), [ 'class' => 'minimal' ]) !!}
-                    {!! 'Phòng Họp' !!}
                 </label>
             </td>
         </tr>

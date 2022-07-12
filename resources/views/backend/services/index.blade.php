@@ -105,6 +105,16 @@
     <link rel="stylesheet" type="text/css" href="{!! asset('assets/backend/plugins/bootstrap-datepicker/css/bootstrap-datepicker.css') !!}"/>
 @stop
 @section('content')
+<section class="content-header">
+    <h1>
+        {!! trans('services.label') !!}
+        <small>{!! trans('system.action.list') !!}</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="{!! route('admin.home') !!}">{!! trans('system.home') !!}</a></li>
+        <li><a href="{!! route('admin.services.index') !!}">{!! trans('services.label') !!}</a></li>
+    </ol>
+</section>
     <section class="content overlay">
         <div class="row">
             <div class="col-md-4">

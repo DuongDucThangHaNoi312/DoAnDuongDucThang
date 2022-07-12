@@ -20,6 +20,8 @@ define('LARAVEL_START', microtime(true));
 |
 */
 
+// Load tất cả khai báo của các thư viện trong file autoload.php 
+// (File này xuất hiện khi ta chạy lệnh composer dump autoload hoặc khi cài mới hoặc update một thư viện nào đó trong file composer.json).
 require __DIR__.'/../vendor/autoload.php';
 
 /*
@@ -33,7 +35,7 @@ require __DIR__.'/../vendor/autoload.php';
 | the responses back to the browser and delight our users.
 |
 */
-
+// Lấy ra tất cả các instance được tạo ra ở trong file bootstrap/app.php. Các instance này được tạo ra từ việc resolve các binding từ trong Service Container
 $app = require_once __DIR__.'/../bootstrap/app.php';
 
 /*
@@ -48,6 +50,7 @@ $app = require_once __DIR__.'/../bootstrap/app.php';
 |
 */
 
+// Sau đó, request được đẩy tiếp theo đến file Kernel.php (HTTP hoặc Console)  thông qua đoạn mã dưới
 $kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
 
 $response = $kernel->handle(

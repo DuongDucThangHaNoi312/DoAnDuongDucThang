@@ -105,6 +105,16 @@
     <link rel="stylesheet" type="text/css" href="{!! asset('assets/backend/plugins/bootstrap-datepicker/css/bootstrap-datepicker.css') !!}"/>
 @stop
 @section('content')
+  <section class="content-header">
+        <h1>
+            {!! trans('equipments.label') !!}
+            <small>{!! trans('system.action.list') !!}</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="{!! route('admin.home') !!}">{!! trans('system.home') !!}</a></li>
+            <li><a href="{!! route('admin.equipments.index') !!}">{!! trans('equipments.label') !!}</a></li>
+        </ol>
+    </section>
     <section class="content overlay">
         <div class="row">
             <div class="col-md-4">
@@ -125,6 +135,7 @@
                                 <th style="text-align: center; vertical-align: middle;">{!! trans('system.no.') !!}</th>
                                 <th style="text-align: center; vertical-align: middle;">Loại</th>
                                 <th style="text-align: center; vertical-align: middle;">Tên</th>
+                                <th style="text-align: center; vertical-align: middle;">Số lượng</th>
                                 <th style="text-align: center; vertical-align: middle;">Giá Thuê</th>
                                 <th style="text-align: center; vertical-align: middle; width: 14%">{!! trans('system.action.label') !!}</th>
                             </tr>
@@ -137,6 +148,7 @@
                                     <td style="text-align: center; vertical-align: middle;"> {!! $i++ !!}</td>
                                     <td style="text-align: center; vertical-align: middle;">{!! $typeEquipments[$value->type] !!}</td>
                                     <td style="text-align: center; vertical-align: middle;">{!! $value->code !!}</td>
+                                    <td style="text-align: center; vertical-align: middle;"> {!! App\Helper\HString::currencyFormat($value->number) !!} </td>
                                     <td style="text-align: center; vertical-align: middle;"> {!! App\Helper\HString::currencyFormat($value->price) !!} </td>
                                     <td style="text-align: center; vertical-align: middle;">
                                         <div class="col-md-1">

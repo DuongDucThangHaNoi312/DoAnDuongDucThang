@@ -6,6 +6,11 @@ use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
 {
+    // Như các bạn thấy trong file Kernel.php chứa rất nhiều biến liên quan đến middleware. 
+    // Từ đó chúng ta có thể dễ dàng đoán được nhiệm vụ của file Http Kernel.php này, đó là định nghĩa danh sách các middleware mà tất cả các request gửi đến ứng dụng phải vượt qua được (pass – một trong những mục đích của middleware là dùng để xác thực) trước khi được xử lý logic.
+    // Thực tế, không chỉ khai báo các middleware của ứng dụng, Http Kernel còn định nghĩa một mảng các bootstrappers cần phải chạy trước khi các request được xử lý bao gồm: cấu hình xử lý lỗi (error handling), cấu hình ghi log (logging), phát hiện môi trường của ứng dụng (detect the application environment) thông qua các biến env và thực hiện các tác vụ khác cần được hoàn thành trước khi request thực sự được xử lý.
+    // Về cơ bản Http Kernel nhận vào một request và trả lại một response để tiếp tục vòng đời của một request.
+
     /**
      * The application's global HTTP middleware stack.
      *

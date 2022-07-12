@@ -9,6 +9,13 @@ return [
 
     ],
     [
+        'name' => 'meeting-rooms.label',
+        'route' => 'admin.meeting-rooms.index',
+        'glyphicon' => 'fas fa-house-damage fa-fw',
+        'hide' => false,
+
+    ],
+    [
         'name' => 'human-management.staffs',
         'route' => 'admin.staffs.index',
         'glyphicon' => 'fas fa-users fa-fw',

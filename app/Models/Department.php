@@ -14,14 +14,14 @@ use Illuminate\Database\Eloquent\Model;
 class Department extends Model
 {
     protected $table = 'departments';
-    protected $fillable = ['code', 'name', 'telephone', 'description', 'status', 'is_ph', 'price'];
+    protected $fillable = ['name', 'telephone', 'description', 'status'];
 
     public static function rules($id = 0)
     {
         return [
-            'code' => 'required|max:255',
             'name' => 'required|max:255',
             'telephone' => 'required|regex:/(0)[0-9]/iD|numeric|min:10',
+            'description' => 'required|max:255',
         ];
     }
 

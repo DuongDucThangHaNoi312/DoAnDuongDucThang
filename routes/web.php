@@ -38,6 +38,10 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Backend', 'as' => 'admin.'], 
         Route::get('equipments', ['as' => 'equipments.index', 'uses' => 'EquipmentController@index']);
         Route::get('departments', ['as' => 'departments.index', 'uses' => 'DepartmentsController@index']);
         Route::get('staffs', ['as' => 'staffs.index', 'uses' => 'StaffsController@index']);
+        
+        Route::resource('meeting-rooms', 'MeetingRoomController');
+
+
 
         Route::group(['middleware' => ['admin.middleware']], function() {
             // dịch vụ

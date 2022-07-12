@@ -1,6 +1,6 @@
 @extends('backend.master')
 @section('title')
-    {!! trans('system.action.list') !!} {!! trans('departments.label') !!}
+    {!! trans('system.action.list') !!} {!! trans('meeting-rooms.label') !!}
 @stop
 @section('head')
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -107,19 +107,19 @@
 @section('content')
     <section class="content-header">
         <h1>
-            {!! trans('departments.label') !!}
+            {!! trans('meeting-rooms.label') !!}
             <small>{!! trans('system.action.list') !!}</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="{!! route('admin.home') !!}">{!! trans('system.home') !!}</a></li>
-            <li><a href="{!! route('admin.departments.index') !!}">{!! trans('departments.label') !!}</a></li>
+            <li><a href="{!! route('admin.meeting-rooms.index') !!}">{!! trans('meeting-rooms.label') !!}</a></li>
         </ol>
     </section>
     <section class="content overlay">
         <div class="row">
             <div class="col-md-4">
                 <div class="btn-group">
-                    <a href="{!! route('admin.departments.create') !!}" class='btn btn-primary btn-flat'>
+                    <a href="{!! route('admin.meeting-rooms.create') !!}" class='btn btn-primary btn-flat'>
                         <span class="glyphicon glyphicon-plus"></span>&nbsp;{!! trans('system.action.create') !!}
                     </a>
                 </div>
@@ -132,51 +132,44 @@
                     <table class="table table-striped table-bordered table-hover" id="tableUser">
                         <thead>
                             <tr>
-                                <th style="text-align: center; vertical-align: middle;">{!! trans('system.no.') !!}</th>
-                                <th style="text-align: center; vertical-align: middle;">{!! trans('departments.name') !!}</th>
+                                <th style="text-align: center; vertical-align: middle;">{!! 'STT' !!}</th>
+                                <th style="text-align: center; vertical-align: middle;">{!! 'Tên phòng họp' !!}</th>
                                 <th style="text-align: center; vertical-align: middle;">{!! trans('departments.telephone') !!}</th>
                                 <th style="text-align: center; vertical-align: middle;">{!! 'Loại phòng' !!}</th>
+                                <th style="text-align: center; vertical-align: middle;">{!! 'Giá thuê' !!}</th>
                                 <th style="text-align: center; vertical-align: middle; width: 14%">{!! trans('system.action.label') !!}</th>
                             </tr>
                         </thead>
-                        @if (count($departmentGroupsName) > 0)
+                        @if (count($meetingRooms) > 0)
                         <tbody>
                             <?php $i = 1; ?>
-                            @foreach ($departmentGroupsName as $key => $value)
+                            @foreach ($meetingRooms as $key => $value)
                                 <tr>
                                     <td style="text-align: center; vertical-align: middle;"> {!! $i++ !!}</td>
+                                    <td style="text-align: center; vertical-align: middle;"> {!! $value->name !!}</td>
+                                    <td style="text-align: center; vertical-align: middle;">{!! $value->telephone !!}</td>
                                     <td style="text-align: center; vertical-align: middle;">
-                                        <a>{!! $key !!}</a>
-                                    </td>
-                                    <td style="text-align: center; vertical-align: middle;">{!! $value[0]->telephone !!}</td>
-                                    <td style="text-align: center; vertical-align: middle;">
-                                        @if ( $value[0]->is_ph == 1)
                                         <span class="label label-success" style="font-size: 14px">Phòng họp</span><br>
-                                        @else
-                                        <span class="label label-default" style="font-size: 14px">Phòng làm việc</span><br>
-                                        @endif
                                     </td>
-                                    {{-- <td style="text-align: center; vertical-align: middle;"> 
-                                        @if ( $value[0]->is_ph == 1)
-                                            {!! App\Helper\HString::currencyFormat($value[0]->price) !!} 
-                                        @endif
-                                    </td> --}}
+                                    <td style="text-align: center; vertical-align: middle;"> 
+                                            {!! App\Helper\HString::currencyFormat($value->price) !!} 
+                                    </td>
                                     <td style="text-align: center; vertical-align: middle;">
                                         <div class="col-md-1">
-                                            <a href="{!! route('admin.departments.show', $value[0]->id) !!}" class="btn-detail btn btn-default btn-xs"
+                                            <a href="{!! route('admin.meeting-rooms.show', $value->id) !!}" class="btn-detail btn btn-default btn-xs"
                                                 data-toggle="tooltip" data-placement="top" title="{!! trans('system.action.detail') !!}">
                                                 <i class="text-info glyphicon glyphicon-eye-open"></i>
                                             </a>
                                         </div>
                                         <div class="col-md-1">
-                                            <a href="{!! route('admin.departments.edit', $value[0]->id) !!}" data-toggle="tooltip" data-placement="top"
+                                            <a href="{!! route('admin.meeting-rooms.edit', $value->id) !!}" data-toggle="tooltip" data-placement="top"
                                                 class="btn btn-xs btn-default" title="{!! trans('system.action.update') !!}"><i
                                                     class="text-warning glyphicon glyphicon-edit"></i></a>
                                         </div>
                                        
                                         <div class="col-md-1">
                                             <a href="javascript:void(0)" data-toggle="tooltip" data-placement="top"
-                                                link="{!! route('admin.departments.destroy', $value[0]->id) !!}"
+                                                link="{!! route('admin.meeting-rooms.destroy', $value->id) !!}"
                                                 class="btn-confirm-del btn btn-default btn-xs"
                                                 title="{!! trans('system.action.delete') !!}">
                                                 <i class="text-danger glyphicon glyphicon-remove"></i>
@@ -215,7 +208,7 @@
             $('#tableUser thead tr').clone(true).appendTo('#tableUser thead');
             $('#tableUser thead tr:eq(1) th').each(function (i) {
                
-                if (i != 0 && i != 4) {
+                if (i != 0 && i != 6) {
                     $(this).html('<input type="text" class="search-form input-text" autocomplete="off" />');
                 } else {
                     $(this).html('');
