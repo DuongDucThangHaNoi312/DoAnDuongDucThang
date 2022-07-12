@@ -19,4 +19,9 @@ class MeetingRoom extends Model
         ];
     }
 
+    public static function countMeetingRoom()
+    {
+        return self::where('status', 1)->count();
+    }
+
 }

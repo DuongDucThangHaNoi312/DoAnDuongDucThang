@@ -18,9 +18,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Backend', 'as' => 'admin.'], 
         Route::post('login', ['as' => 'login', 'uses' => "HomeController@postLogin"]);
     });
     Route::group(['middleware' => 'admin'], function () {
-        Route::post('images/upload', ['as' => 'images.upload', 'role' => 'backend', 'uses' => 'HomeController@uploadImage']);
-        Route::get('', ['as' => 'home', 'uses' => 'HomeController@index']);
-        Route::post('get-district-by-province', ['as' => 'get-district-by-province', 'uses' => 'HomeController@getDistrictByProvince']);
         Route::get('404', ['as' => '404', 'uses' => 'HomeController@get404']);
         Route::get('403', ['as' => '403', 'uses' => 'HomeController@get403']);
         Route::get('logout', ['as' => 'logout', 'uses' => "HomeController@getLogout"]);
@@ -33,17 +30,15 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Backend', 'as' => 'admin.'], 
         Route::resource('users', 'UsersController');
         Route::resource('roles', 'RolesController');
         Route::post('login-as', ['as' => 'login-as', 'uses' => 'HomeController@loginAs']);
-
-        Route::get('services', ['as' => 'services.index', 'uses' => 'ServiceController@index']);
-        Route::get('equipments', ['as' => 'equipments.index', 'uses' => 'EquipmentController@index']);
-        Route::get('departments', ['as' => 'departments.index', 'uses' => 'DepartmentsController@index']);
-        Route::get('staffs', ['as' => 'staffs.index', 'uses' => 'StaffsController@index']);
         
-        Route::resource('meeting-rooms', 'MeetingRoomController');
-
-
-
         Route::group(['middleware' => ['admin.middleware']], function() {
+            
+            Route::get('', ['as' => 'home', 'uses' => 'HomeController@index']);
+            Route::get('services', ['as' => 'services.index', 'uses' => 'ServiceController@index']);
+            Route::get('equipments', ['as' => 'equipments.index', 'uses' => 'EquipmentController@index']);
+            Route::get('departments', ['as' => 'departments.index', 'uses' => 'DepartmentsController@index']);
+            Route::get('staffs', ['as' => 'staffs.index', 'uses' => 'StaffsController@index']);
+            Route::resource('meeting-rooms', 'MeetingRoomController');
             // dịch vụ
             Route::post('services', ['as' => 'services.store', 'uses' => 'ServiceController@store']);
             Route::get('services/create', ['as' => 'services.create', 'uses' => 'ServiceController@create']);
@@ -79,7 +74,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Backend', 'as' => 'admin.'], 
     });
 });
 
-Route::group([], function () {
+Route::group(['middleware' => ['admin.middleware']], function() {
     Route::get('/', function () {
         return redirect()->route('admin.home');
     });

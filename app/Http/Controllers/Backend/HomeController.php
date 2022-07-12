@@ -8,7 +8,6 @@ use App\Container;
 use App\StaffDayOff;
 use App\Defines\Staff;
 use Illuminate\Http\Request;
-use App\Models\CalendarDepartment;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Routing\Controller as BaseController;
@@ -21,27 +20,7 @@ class HomeController extends BaseController
 
     public function index(Request $request)
     {
-        $loginUser = Auth::user();
-        if ($loginUser->active != 1) {
-            Auth::logout();
-            $errors = new \Illuminate\Support\MessageBag;
-            $errors->add('error', 'Nhân viên chưa có hợp đồng hoạt động.');
-            return redirect()->route('admin.logout')->withErrors($errors);
-        }
-        $departmentId = $loginUser->department_id;
-        $infoPermission = \App\PermissionUserObject::getMorePermissions(Auth::id(), 'staffs.read');
-        $nearLeaves = StaffDayOff::getLeaveFollowManager($infoPermission);
-        $countLeavePending = StaffDayOff::countLeavePendingFollowPer($infoPermission);
-        $countStaffsFollowPer = User::countStaffFollowPer($infoPermission);
-
-        $events = StaffDayOff::getLeaveFromPrevMonth($loginUser->id);
-        $countLeavePerStaff = \App\StaffDayOff::countLeavePendingStaff($loginUser->id);
-
-		$dayOffDepartments = $departmentId ? CalendarDepartment::getDayOff($departmentId) : [];
-		$dayOffDepartments = collect($dayOffDepartments);
-		$countStaffs  = User::whereNotIn('fullname', Staff::USER_EXCEPT)->count();
-
-        return view('backend.pages.home', compact('departmentId', 'dayOffDepartments', 'countStaffs', 'nearLeaves', 'countLeavePending', 'countStaffsFollowPer', 'events', 'countLeavePerStaff'));
+        return view('backend.pages.home');
     }
 
     public function getLogin()
@@ -166,30 +145,6 @@ class HomeController extends BaseController
         dd('done');
     }
 
-    public function getDistrictByProvince(Request $request)
-    {
-        $response = [ 'message' => trans('system.have_an_error') ];
-        $statusCode = 200;
-        if($request->ajax()) {
-            try {
-                $districts = \App\Library\Giaohangtietkiem::getActiveDistrictByProvince($request->province);
-                //$districts = \App\Library\Giaohangnhanh::getDistrictByProvince($request->province);
-                if (!$districts['success']) {
-                    $statusCode = 404;
-                    throw new \Exception($districts['message'], 1);
-                }
-                $response['message'] = $districts['message'];
-            } catch (\Exception $e) {
-                if ($statusCode == 200) $statusCode = 500;
-                $response['message'] = $e->getMessage();
-            } finally {
-                return response()->json($response, $statusCode);
-            }
-        } else {
-            $statusCode = 405;
-            return response()->json($response, $statusCode);
-        }
-    }
 
     public function uploadImage(Request $request)
     {

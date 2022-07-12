@@ -16,7 +16,9 @@ use App\PermissionUser;
 use App\Models\Company;
 use App\Models\Contract;
 use App\Models\Department;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Traits\GenCodeTraits;
 use App\PermissionUserObject;
 use Illuminate\Support\Carbon;
 use App\Models\DepartmentGroup;
@@ -30,6 +32,7 @@ use Illuminate\Support\Facades\Session;
 class StaffsController extends Controller
 {
     use StorageImageTraits;
+    use GenCodeTraits;
 
     public function index(Request $request)
     {   
@@ -52,8 +55,11 @@ class StaffsController extends Controller
 
     public function create(Request $request)
     {
+        $codeMax = ($this->genCodeUser(new User, 'code'));
+        $codeRemoveDA = intval(Str::after($codeMax, 'DA'));
+        $codeNew = "DA". intval($codeRemoveDA + 1);
         $departments = Department::pluck("name", "id")->toArray();
-        return view('backend.staffs.create', compact('roles', 'departments'));
+        return view('backend.staffs.create', compact('roles', 'departments', 'codeNew'));
     }
 
     public function store(Request $request)

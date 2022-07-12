@@ -173,6 +173,11 @@
                                     <td style="text-align: center; vertical-align: middle; white-space: nowrap;">&nbsp;&nbsp;
                                         <div class="row">
                                             <div class="col-md-1">
+                                                <a data-toggle="tooltip" title="Chi tiết"
+                                                href="{!! route('admin.staffs.show', $item->id) !!}"
+                                                   class="btn btn-xs btn-default"><i class="text-info glyphicon glyphicon-eye-open"></i></a>
+                                            </div>
+                                            <div class="col-md-1">
                                                 <a data-toggle="tooltip" title="Cập nhật"
                                                    href="{!! route('admin.staffs.edit', $item->id) !!}"
                                                    class="btn btn-xs btn-default"><i class="text-warning glyphicon glyphicon-edit"></i></a>

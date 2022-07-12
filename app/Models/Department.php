@@ -25,11 +25,5 @@ class Department extends Model
         ];
     }
 
-    public static function countActiveDepts()
-    {
-        return self::where('status', 1)
-            ->where('is_ph', 1)
-            ->count();
-    }
     
 }

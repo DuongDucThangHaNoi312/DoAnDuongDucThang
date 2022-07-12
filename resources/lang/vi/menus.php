@@ -4,7 +4,7 @@ return [
     'organizations' => [
         'label' => 'Cơ cấu tổ chức',
         'companies' => 'Công ty',
-        'departments' => 'Phòng ban',
+        'departments' => 'Văn phòng',
         'title' => 'Chức danh',
         'position' => 'Chức vụ',
         'departmentGroups' => 'Nhóm phòng ban',
@@ -31,7 +31,7 @@ return [
     ],
     
     'departments' => [
-        'label' => 'Phòng Ban',
+        'label' => 'Văn phòng',
         'redis' => 'Cache',
         'list' => 'Danh sách',
     ],

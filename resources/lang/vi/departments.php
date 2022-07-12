@@ -1,8 +1,8 @@
 <?php
 return [
-    'label' => 'Phòng ban',
-    'name'=>'Tên phòng ban',
+    'label' => 'Văn phòng',
+    'name'=>'Tên văn phòng',
     'address'=>'Địa chỉ ',
     'telephone'=>'Số điện thoại ',
-    'description'=>'Mô tả phòng ban',
+    'description'=>'Mô tả văn phòng',
 ];

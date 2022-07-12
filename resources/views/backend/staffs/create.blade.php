@@ -85,7 +85,7 @@
                                         {!! trans('staffs.code') !!}
                                     </th>
                                     <td>
-                                        {!! Form::text('code', old('code'), ['class' => 'form-control', 'maxlength' => 50, 'required', 'placeholder' => trans('staffs.code_placeholder')]) !!}
+                                        {!! Form::text('code', old('code', $codeNew), ['class' => 'form-control', 'maxlength' => 50, 'required', 'placeholder' => trans('staffs.code_placeholder')]) !!}
                                     </td>
                                     <th class="table_right_middle">
                                         {!! trans('staffs.fullname') !!}
@@ -195,9 +195,9 @@
                                     </th>
                                     <td>
                                         <select name="deparment" class="select2">
-                                            <option value="">{!! trans('system.dropdown_all') !!}</option>
+                                            <option >{!! trans('system.dropdown_all') !!}</option>
                                             @foreach ($departments as $key => $value)
-                                            <option value="{!! $key !!}">{!! $value !!}</option>
+                                            <option value="{!! $key !!}"  {!! old('deparment') == $key ? 'selected' : ''  !!}>{!! $value !!}</option>
                                             @endforeach
                                         </select>
                                     </td>

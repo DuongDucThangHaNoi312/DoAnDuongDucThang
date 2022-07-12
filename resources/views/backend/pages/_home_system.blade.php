@@ -13,26 +13,13 @@
 
     <div class="col-md-4 col-sm-6 col-xs-12">
         <div class="info-box">
-            <span class="info-box-icon bg-blue"><i class="far fa-building"></i></span>
-
+            <a href="{!! route('admin.meeting-rooms.index') !!}">
+                <span class="info-box-icon bg-blue"><i class="far fa-building"></i></span>
+            </a>
             <div class="info-box-content">
-                <span class="info-box-text">Phòng họp trống </span>
-                <span class="info-box-number">{!! \App\Models\Department::countActiveDepts() !!}</span>
+                <span class="info-box-text">Phòng họp </span>
+                <span class="info-box-number">{!! \App\Models\MeetingRoom::countMeetingRoom() !!}</span>
             </div>
         </div>
     </div>
-   
-    <div class="col-md-4 col-sm-6 col-xs-12">
-        <div class="info-box">
-            <span class="info-box-icon bg-blue"><i class="far fa-building"></i></span>
-
-            <div class="info-box-content">
-                <span class="info-box-text">Phòng đã thuê </span>
-                <span class="info-box-number"> 0 </span>
-            </div>
-        </div>
-    </div>
-
-
-
 </div>
