@@ -2,7 +2,8 @@
 
 use Illuminate\Http\Request;
 
-Route::group(['prefix' => 'v1', 'namespace' => 'Api\v1'], function() {
-    Route::get('departments', ['data' => 'DepartmentController@index']);
-
-});
+Route::apiResource('departments', 'Api\DepartmentController');
+Route::apiResource('users', 'Api\UserController');
+Route::apiResource('meeting-rooms', 'Api\MeetingRoomController');
+Route::apiResource('equipments', 'Api\EquipmentController');
+Route::apiResource('services', 'Api\ServiceController');

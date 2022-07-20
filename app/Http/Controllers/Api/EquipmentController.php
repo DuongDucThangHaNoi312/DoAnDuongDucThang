@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\Department;
+use App\Models\Equipment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class DepartmentController extends Controller
+class EquipmentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +15,9 @@ class DepartmentController extends Controller
      */
     public function index()
     {
-        $departments = Department::get();
+        $equipments = Equipment::get();
         return  response()->json([
-            'data'=> $departments
+            'data'=> $equipments
         ]);
     }
 
