@@ -8,6 +8,8 @@ use App\Http\Controllers\Controller;
 
 class UserController extends Controller
 {
+    protected $msgNoData = "Không tìm thấy dữ liệu";
+    protected $success = "Thành công";
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +19,9 @@ class UserController extends Controller
     {
         $users = User::get();
         return  response()->json([
-            'data'=> $users
+            'data'=> $users,
+            'status' => 200,
+            'message' => $this->success,
         ]);
     }
 
@@ -29,7 +33,12 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = User::create( $request->all());
+        return  response()->json([
+            'data'=> $user,
+            'message' => $this->success,
+            'status' => 200,
+        ]);
     }
 
     /**
@@ -40,7 +49,18 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::find($id);
+        if (is_null($user)) {
+            return  response()->json([
+                'message' => $this->msgNoData
+            ]);
+        }
+        
+        return  response()->json([
+            'data'=> $user,
+            'status' => 200,
+            'message' => $this->success,
+        ]);
     }
 
     /**
@@ -52,7 +72,18 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::find($id);
+        if (is_null($user)) {
+            return  response()->json([
+                'message' => $this->msgNoData
+            ]);
+        }
+        
+        $user->update($request->all());
+        return  response()->json([
+            'status' => 200,
+            'message' => $this->success,
+        ]);
     }
 
     /**
@@ -63,6 +94,17 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+        if (is_null($user)) {
+            return  response()->json([
+                'message' => $this->msgNoData
+            ]);
+        }
+
+        $user->delete();
+        return  response()->json([
+            'status' => 200,
+            'message' => $this->success,
+        ]);
     }
 }

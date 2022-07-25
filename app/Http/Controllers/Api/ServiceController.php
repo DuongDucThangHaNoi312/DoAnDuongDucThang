@@ -8,6 +8,8 @@ use App\Http\Controllers\Controller;
 
 class ServiceController extends Controller
 {
+    protected $msgNoData = "Không tìm thấy dữ liệu";
+    protected $success = "Thành công";
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +19,9 @@ class ServiceController extends Controller
     {
         $services = Service::get();
         return  response()->json([
-            'data'=> $services
+            'data'=> $services,
+            'status' => 200,
+            'message' => $this->success,
         ]);
     }
 
@@ -29,7 +33,12 @@ class ServiceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $service = Service::create( $request->all());
+        return  response()->json([
+            'data'=> $service,
+            'message' => $this->success,
+            'status' => 200,
+        ]);
     }
 
     /**
@@ -40,7 +49,18 @@ class ServiceController extends Controller
      */
     public function show($id)
     {
-        //
+        $service = Service::find($id);
+        if (is_null($service)) {
+            return  response()->json([
+                'message' => $this->msgNoData
+            ]);
+        }
+        
+        return  response()->json([
+            'data'=> $service,
+            'status' => 200,
+            'message' => $this->success,
+        ]);
     }
 
     /**
@@ -52,7 +72,18 @@ class ServiceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $service = Service::find($id);
+        if (is_null($service)) {
+            return  response()->json([
+                'message' => $this->msgNoData
+            ]);
+        }
+        
+        $service->update($request->all());
+        return  response()->json([
+            'status' => 200,
+            'message' => $this->success,
+        ]);
     }
 
     /**
@@ -63,6 +94,17 @@ class ServiceController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $service = Service::find($id);
+        if (is_null($service)) {
+            return  response()->json([
+                'message' => $this->msgNoData
+            ]);
+        }
+
+        $service->delete();
+        return  response()->json([
+            'status' => 200,
+            'message' => $this->success,
+        ]);
     }
 }

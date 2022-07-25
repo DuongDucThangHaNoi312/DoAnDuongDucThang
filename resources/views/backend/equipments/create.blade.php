@@ -38,7 +38,7 @@
                 Tên thiết bị
             </th>
             <td style="width: 70%;"> 
-                {!! Form::text('code', old('code'), ['class' => 'form-control',  'required']) !!}
+                {!! Form::text('name', old('name'), ['class' => 'form-control',  'required']) !!}
             </td>
             <th class="table_right_middle " style="width: 15%;"></th>
         </tr>

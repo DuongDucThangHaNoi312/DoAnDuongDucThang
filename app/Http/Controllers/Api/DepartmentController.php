@@ -8,6 +8,8 @@ use App\Http\Controllers\Controller;
 
 class DepartmentController extends Controller
 {
+    protected $msgNoData = "Không tìm thấy dữ liệu";
+    protected $success = "Thành công";
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +19,9 @@ class DepartmentController extends Controller
     {
         $departments = Department::get();
         return  response()->json([
-            'data'=> $departments
+            'data'=> $departments,
+            'status' => 200,
+            'message' => $this->success,
         ]);
     }
 
@@ -29,7 +33,12 @@ class DepartmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $departments = Department::create( $request->all());
+        return  response()->json([
+            'data'=> $departments,
+            'message' => $this->success,
+            'status' => 200,
+        ]);
     }
 
     /**
@@ -40,7 +49,18 @@ class DepartmentController extends Controller
      */
     public function show($id)
     {
-        //
+        $departments = Department::find($id);
+        if (is_null($departments)) {
+            return  response()->json([
+                'message' => $this->msgNoData
+            ]);
+        }
+        
+        return  response()->json([
+            'data'=> $departments,
+            'status' => 200,
+            'message' => $this->success,
+        ]);
     }
 
     /**
@@ -52,7 +72,18 @@ class DepartmentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $department = Department::find($id);
+        if (is_null($department)) {
+            return  response()->json([
+                'message' => $this->msgNoData
+            ]);
+        }
+        
+        $department->update($request->all());
+        return  response()->json([
+            'status' => 200,
+            'message' => $this->success,
+        ]);
     }
 
     /**
@@ -63,6 +94,17 @@ class DepartmentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $department = Department::find($id);
+        if (is_null($department)) {
+            return  response()->json([
+                'message' => $this->msgNoData
+            ]);
+        }
+
+        $department->delete();
+        return  response()->json([
+            'status' => 200,
+            'message' => $this->success,
+        ]);
     }
 }

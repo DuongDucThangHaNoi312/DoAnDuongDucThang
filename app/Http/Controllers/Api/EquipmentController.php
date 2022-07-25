@@ -8,6 +8,8 @@ use App\Http\Controllers\Controller;
 
 class EquipmentController extends Controller
 {
+    protected $msgNoData = "Không tìm thấy dữ liệu";
+    protected $success = "Thành công";
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +19,9 @@ class EquipmentController extends Controller
     {
         $equipments = Equipment::get();
         return  response()->json([
-            'data'=> $equipments
+            'data'=> $equipments,
+            'status' => 200,
+            'message' => $this->success,
         ]);
     }
 
@@ -29,7 +33,12 @@ class EquipmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $equipment = Equipment::create( $request->all());
+        return  response()->json([
+            'data'=> $equipment,
+            'message' => $this->success,
+            'status' => 200,
+        ]);
     }
 
     /**
@@ -40,7 +49,18 @@ class EquipmentController extends Controller
      */
     public function show($id)
     {
-        //
+        $equipment = Equipment::find($id);
+        if (is_null($equipment)) {
+            return  response()->json([
+                'message' => $this->msgNoData
+            ]);
+        }
+        
+        return  response()->json([
+            'data'=> $equipment,
+            'status' => 200,
+            'message' => $this->success,
+        ]);
     }
 
     /**
@@ -52,7 +72,18 @@ class EquipmentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $equipment = Equipment::find($id);
+        if (is_null($equipment)) {
+            return  response()->json([
+                'message' => $this->msgNoData
+            ]);
+        }
+        
+        $equipment->update($request->all());
+        return  response()->json([
+            'status' => 200,
+            'message' => $this->success,
+        ]);
     }
 
     /**
@@ -63,6 +94,17 @@ class EquipmentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $equipment = Equipment::find($id);
+        if (is_null($equipment)) {
+            return  response()->json([
+                'message' => $this->msgNoData
+            ]);
+        }
+
+        $equipment->delete();
+        return  response()->json([
+            'status' => 200,
+            'message' => $this->success,
+        ]);
     }
 }

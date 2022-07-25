@@ -51,7 +51,7 @@ class EquipmentController extends Controller
             'type' => $data['type'],
             'price' => intval($data['price']),
             'number' => intval($data['number']),
-            'code' => $data['code'],
+            'name' => $data['name'],
             'created_by' => Auth()->id(),
         ]);
 

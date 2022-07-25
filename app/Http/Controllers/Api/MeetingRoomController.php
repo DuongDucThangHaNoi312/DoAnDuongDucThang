@@ -8,6 +8,8 @@ use App\Http\Controllers\Controller;
 
 class MeetingRoomController extends Controller
 {
+    protected $msgNoData = "Không tìm thấy dữ liệu";
+    protected $success = "Thành công";
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +19,9 @@ class MeetingRoomController extends Controller
     {
         $meetingRooms = MeetingRoom::get();
         return  response()->json([
-            'data'=> $meetingRooms
+            'data'=> $meetingRooms,
+            'status' => 200,
+            'message' => $this->success,
         ]);
     }
 
@@ -29,7 +33,12 @@ class MeetingRoomController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $meetingRooms = MeetingRoom::create( $request->all());
+        return  response()->json([
+            'data'=> $meetingRooms,
+            'message' => $this->success,
+            'status' => 200,
+        ]);
     }
 
     /**
@@ -40,7 +49,18 @@ class MeetingRoomController extends Controller
      */
     public function show($id)
     {
-        //
+        $meetingRoom = MeetingRoom::find($id);
+        if (is_null($meetingRoom)) {
+            return  response()->json([
+                'message' => $this->msgNoData
+            ]);
+        }
+        
+        return  response()->json([
+            'data'=> $meetingRoom,
+            'status' => 200,
+            'message' => $this->success,
+        ]);
     }
 
     /**
@@ -52,7 +72,18 @@ class MeetingRoomController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $meetingRoom = MeetingRoom::find($id);
+        if (is_null($meetingRoom)) {
+            return  response()->json([
+                'message' => $this->msgNoData
+            ]);
+        }
+        
+        $meetingRoom->update($request->all());
+        return  response()->json([
+            'status' => 200,
+            'message' => $this->success,
+        ]);
     }
 
     /**
@@ -63,6 +94,17 @@ class MeetingRoomController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $meetingRoom = MeetingRoom::find($id);
+        if (is_null($meetingRoom)) {
+            return  response()->json([
+                'message' => $this->msgNoData
+            ]);
+        }
+
+        $meetingRoom->delete();
+        return  response()->json([
+            'status' => 200,
+            'message' => $this->success,
+        ]);
     }
 }

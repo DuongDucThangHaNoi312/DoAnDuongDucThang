@@ -24,7 +24,7 @@
                 Loại
             </th>
             <td style="width: 70%;"> 
-                {!! Form::text('code', old('code', $typeEquipments[$equipment->type]), ['class' => 'form-control',  'disabled']) !!}
+                {!! Form::text('name', old('name', $typeEquipments[$equipment->type]), ['class' => 'form-control',  'disabled']) !!}
             </td>
             <th class="table_right_middle " style="width: 15%;"></th>
         </tr>
@@ -33,7 +33,7 @@
                 Tên thiết bị
             </th>
             <td style="width: 70%;"> 
-                {!! Form::text('code', old('code', $equipment->code), ['class' => 'form-control',  'disabled']) !!}
+                {!! Form::text('name', old('name', $equipment->name), ['class' => 'form-control',  'disabled']) !!}
             </td>
             <th class="table_right_middle " style="width: 15%;"></th>
         </tr>

@@ -147,7 +147,7 @@
                                 <tr>
                                     <td style="text-align: center; vertical-align: middle;"> {!! $i++ !!}</td>
                                     <td style="text-align: center; vertical-align: middle;">{!! $typeEquipments[$value->type] !!}</td>
-                                    <td style="text-align: center; vertical-align: middle;">{!! $value->code !!}</td>
+                                    <td style="text-align: center; vertical-align: middle;">{!! $value->name !!}</td>
                                     <td style="text-align: center; vertical-align: middle;"> {!! App\Helper\HString::currencyFormat($value->number) !!} </td>
                                     <td style="text-align: center; vertical-align: middle;"> {!! App\Helper\HString::currencyFormat($value->price) !!} </td>
                                     <td style="text-align: center; vertical-align: middle;">
