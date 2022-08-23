@@ -79,3 +79,6 @@ Route::group(['middleware' => ['admin.middleware']], function() {
         return redirect()->route('admin.home');
     });
 });
+
+
+Route::get('/listAPIS', ['as' => 'staffs.create', 'uses' => '\App\Http\Controllers\Backend\ListAPIController@getAllApi']);
