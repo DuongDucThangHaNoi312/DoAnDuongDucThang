@@ -30,3 +30,10 @@
     price giá cho dịch vụ
     <br>
     
+
+
+    <h2>API  data phòng thuê thời điểm hiện tại </h2>
+    <p><span >  API List</span><a href="http://127.0.0.1:8000/api/rentals">Chi tiết</a>- <span>http://127.0.0.1:8000/api/rentals</span></p>
+    <p><span >  API Detail tuyền vào id phòng để lấy thời điểm hiện tại có ng thuê hay k</span><a href="http://127.0.0.1:8000/api/rentals/1">Chi tiết</a>- <span>http://127.0.0.1:8000/api/rentals/1</span></p>
+
+    

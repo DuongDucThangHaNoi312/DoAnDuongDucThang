@@ -7,3 +7,4 @@ Route::apiResource('users', 'Api\UserController');
 Route::apiResource('meeting-rooms', 'Api\MeetingRoomController');
 Route::apiResource('equipments', 'Api\EquipmentController');
 Route::apiResource('services', 'Api\ServiceController');
+Route::apiResource('rentals', '\App\Http\Controllers\Api\RentalController');
