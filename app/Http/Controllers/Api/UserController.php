@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\User;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -15,13 +15,18 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::get();
+        $query = User::query();
+        if ($request->id) {
+            $query->where('id', $request->id);
+        }
+        $data = $query->get();
+
         return  response()->json([
-            'data'=> $users,
             'status' => 200,
             'message' => $this->success,
+            'data'=> $data,
         ]);
     }
 
@@ -33,35 +38,16 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $user = User::create( $request->all());
+        $data = $request->all();
+        $data = $data['data'];
+        $user = User::create($data);
         return  response()->json([
-            'data'=> $user,
             'message' => $this->success,
             'status' => 200,
+            'data'=> $user,
         ]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $user = User::find($id);
-        if (is_null($user)) {
-            return  response()->json([
-                'message' => $this->msgNoData
-            ]);
-        }
-        
-        return  response()->json([
-            'data'=> $user,
-            'status' => 200,
-            'message' => $this->success,
-        ]);
-    }
 
     /**
      * Update the specified resource in storage.
@@ -70,19 +56,26 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
+        $data = $request->all();
+        $data = $data['data'];
+        $id   = ($data['id']);
+              
         $user = User::find($id);
         if (is_null($user)) {
             return  response()->json([
-                'message' => $this->msgNoData
+                'status'  => 404,
+                'message' => $this->msgNoData,
+                'data'    => [],
             ]);
         }
         
-        $user->update($request->all());
+        $user->update($data);
         return  response()->json([
-            'status' => 200,
+            'status'  => 200,
             'message' => $this->success,
+            'data'    => $user,
         ]);
     }
 
@@ -92,12 +85,15 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        $user = User::find($id);
+        $data = $request->data;
+        $user = User::find($data['id']);
         if (is_null($user)) {
             return  response()->json([
-                'message' => $this->msgNoData
+                'status' => 404,
+                'message' => $this->msgNoData,
+                'data'=> [],
             ]);
         }
 
@@ -105,6 +101,7 @@ class UserController extends Controller
         return  response()->json([
             'status' => 200,
             'message' => $this->success,
+            'data'=> [],
         ]);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use GuzzleHttp\Client;
 use App\Models\Department;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -15,13 +16,18 @@ class DepartmentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $departments = Department::get();
+        $query = Department::query();
+        if ($request->id) {
+            $query->where('id', $request->id);
+        }
+        $data = $query->get();
+
         return  response()->json([
-            'data'=> $departments,
             'status' => 200,
             'message' => $this->success,
+            'data'=> $data,
         ]);
     }
 
@@ -33,35 +39,16 @@ class DepartmentController extends Controller
      */
     public function store(Request $request)
     {
-        $departments = Department::create( $request->all());
+        $data = $request->all();
+        $data = $data['data'];
+        $departments = Department::create($data);
         return  response()->json([
-            'data'=> $departments,
             'message' => $this->success,
             'status' => 200,
+            'data'=> $departments,
         ]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $departments = Department::find($id);
-        if (is_null($departments)) {
-            return  response()->json([
-                'message' => $this->msgNoData
-            ]);
-        }
-        
-        return  response()->json([
-            'data'=> $departments,
-            'status' => 200,
-            'message' => $this->success,
-        ]);
-    }
 
     /**
      * Update the specified resource in storage.
@@ -70,19 +57,26 @@ class DepartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
+        $data = $request->all();
+        $data = $data['data'];
+        $id   = ($data['id']);
+              
         $department = Department::find($id);
         if (is_null($department)) {
             return  response()->json([
-                'message' => $this->msgNoData
+                'status'  => 404,
+                'message' => $this->msgNoData,
+                'data'    => [],
             ]);
         }
         
-        $department->update($request->all());
+        $department->update($data);
         return  response()->json([
-            'status' => 200,
+            'status'  => 200,
             'message' => $this->success,
+            'data'    => $department,
         ]);
     }
 
@@ -92,12 +86,15 @@ class DepartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        $department = Department::find($id);
+        $data = $request->data;
+        $department = Department::find($data['id']);
         if (is_null($department)) {
             return  response()->json([
-                'message' => $this->msgNoData
+                'status' => 404,
+                'message' => $this->msgNoData,
+                'data'=> [],
             ]);
         }
 
@@ -105,6 +102,7 @@ class DepartmentController extends Controller
         return  response()->json([
             'status' => 200,
             'message' => $this->success,
+            'data'=> [],
         ]);
     }
 }

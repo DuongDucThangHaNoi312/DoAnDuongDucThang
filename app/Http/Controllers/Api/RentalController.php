@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Rental;
+use App\Models\RentalService;
+use App\Models\RentalEquipment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -15,17 +17,25 @@ class RentalController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $meetingRoomId = $request->meeting_room_id;
         $dateCurrent = date("Y-m-d H:i:s");
-        $data = Rental::with('rentalServices', 'rentalEquipments')
-            ->where('rental_start', '<=', $dateCurrent)
+        $data = Rental::query();
+        $data->with('rentalServices', 'rentalEquipments');
+        if ($meetingRoomId) {
+            $data->where('meeting_room_id', $meetingRoomId);
+        }
+
+        $data = $data->where('rental_start', '<=', $dateCurrent)
             ->where('renral_end', '>=', $dateCurrent)
             ->get();
+
+
         return  response()->json([
-            'data'=> $data,
             'status' => 200,
             'message' => $this->success,
+            'data'=> $data,
         ]);
     }
 
@@ -37,40 +47,36 @@ class RentalController extends Controller
      */
     public function store(Request $request)
     {
-        $meetingRooms = MeetingRoom::create( $request->all());
+        $data = $request->all();
+        $data = $data['data']['0'];
+        $dataRental = [
+            'meeting_room_id' => $data['meeting_room_id'],
+            'user_id' => $data['user_id'],
+            'rental_start' => $data['rental_start'],
+            'renral_end' => $data['renral_end'],
+            'status' => 1,
+        ];
+
+        $rental = Rental::create($dataRental);
+        $rentalServices = $data['rental_services'];
+        $rentalEquipments = $data['rental_equipments'];
+
+        foreach ($rentalServices as $rentalService) {
+            $rentalService['rental_history_id'] = $rental->id;
+            RentalService::create($rentalService);
+        }
+
+        foreach ($rentalEquipments as $rentalEquipment) {
+            $rentalEquipment['rental_history_id'] = $rental->id;
+            RentalEquipment::create($rentalEquipment);
+        }
+
         return  response()->json([
-            'data'=> $meetingRooms,
             'message' => $this->success,
             'status' => 200,
         ]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-    
-        $dateCurrent = date("Y-m-d H:i:s");
-        $data = Rental::with('rentalServices', 'rentalEquipments')
-            ->where('meeting_room_id', $id)
-            ->where('rental_start', '<=', $dateCurrent)
-            ->where('renral_end', '>=', $dateCurrent)
-            ->get();
-        if (count($data) == 0) {
-            return  response()->json([
-                'message' => $this->msgNoData
-            ]);
-        }    
-        return  response()->json([
-            'data'=> $data,
-            'status' => 200,
-            'message' => $this->success,
-        ]);
-    }
 
     /**
      * Update the specified resource in storage.
@@ -79,19 +85,43 @@ class RentalController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        $meetingRoom = MeetingRoom::find($id);
-        if (is_null($meetingRoom)) {
-            return  response()->json([
-                'message' => $this->msgNoData
-            ]);
-        }
+        $data = $request->all();
+        $data = $data['data']['0'];
+
+
+        $dataRental = [
+            'meeting_room_id' => $data['meeting_room_id'],
+            'user_id' => $data['user_id'],
+            'rental_start' => $data['rental_start'],
+            'renral_end' => $data['renral_end'],
+            'status' => 1,
+        ];
+
+        $rental = Rental::create($dataRental);
+        $rentalServices = $data['rental_services'];
+        $rentalEquipments = $data['rental_equipments'];
+
         
-        $meetingRoom->update($request->all());
+
+
+
+
+
+        foreach ($rentalServices as $rentalService) {
+            $rentalService['rental_history_id'] = $rental->id;
+            RentalService::create($rentalService);
+        }
+
+        foreach ($rentalEquipments as $rentalEquipment) {
+            $rentalEquipment['rental_history_id'] = $rental->id;
+            RentalEquipment::create($rentalEquipment);
+        }
+
         return  response()->json([
-            'status' => 200,
             'message' => $this->success,
+            'status' => 200,
         ]);
     }
 
@@ -101,19 +131,23 @@ class RentalController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        $meetingRoom = MeetingRoom::find($id);
-        if (is_null($meetingRoom)) {
+        $data = $request->data;
+        $equipment = Equipment::find($data['id']);
+        if (is_null($equipment)) {
             return  response()->json([
-                'message' => $this->msgNoData
+                'status' => 404,
+                'message' => $this->msgNoData,
+                'data'=> [],
             ]);
         }
 
-        $meetingRoom->delete();
+        $equipment->delete();
         return  response()->json([
             'status' => 200,
             'message' => $this->success,
+            'data'=> [],
         ]);
     }
 }

@@ -15,13 +15,18 @@ class EquipmentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $equipments = Equipment::get();
+        $query = Equipment::query();
+        if ($request->id) {
+            $query->where('id', $request->id);
+        }
+        $data = $query->get();
+
         return  response()->json([
-            'data'=> $equipments,
             'status' => 200,
             'message' => $this->success,
+            'data'=> $data,
         ]);
     }
 
@@ -33,35 +38,16 @@ class EquipmentController extends Controller
      */
     public function store(Request $request)
     {
-        $equipment = Equipment::create( $request->all());
+        $data = $request->all();
+        $data = $data['data'];
+        $equipment = Equipment::create($data);
         return  response()->json([
-            'data'=> $equipment,
             'message' => $this->success,
             'status' => 200,
+            'data'=> $equipment,
         ]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $equipment = Equipment::find($id);
-        if (is_null($equipment)) {
-            return  response()->json([
-                'message' => $this->msgNoData
-            ]);
-        }
-        
-        return  response()->json([
-            'data'=> $equipment,
-            'status' => 200,
-            'message' => $this->success,
-        ]);
-    }
 
     /**
      * Update the specified resource in storage.
@@ -70,19 +56,26 @@ class EquipmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
+        $data = $request->all();
+        $data = $data['data'];
+        $id   = ($data['id']);
+              
         $equipment = Equipment::find($id);
         if (is_null($equipment)) {
             return  response()->json([
-                'message' => $this->msgNoData
+                'status'  => 404,
+                'message' => $this->msgNoData,
+                'data'    => [],
             ]);
         }
         
-        $equipment->update($request->all());
+        $equipment->update($data);
         return  response()->json([
-            'status' => 200,
+            'status'  => 200,
             'message' => $this->success,
+            'data'    => $equipment,
         ]);
     }
 
@@ -92,12 +85,15 @@ class EquipmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        $equipment = Equipment::find($id);
+        $data = $request->data;
+        $equipment = Equipment::find($data['id']);
         if (is_null($equipment)) {
             return  response()->json([
-                'message' => $this->msgNoData
+                'status' => 404,
+                'message' => $this->msgNoData,
+                'data'=> [],
             ]);
         }
 
@@ -105,6 +101,7 @@ class EquipmentController extends Controller
         return  response()->json([
             'status' => 200,
             'message' => $this->success,
+            'data'=> [],
         ]);
     }
 }

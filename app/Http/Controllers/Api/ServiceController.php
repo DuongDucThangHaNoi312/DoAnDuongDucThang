@@ -15,13 +15,18 @@ class ServiceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $services = Service::get();
+        $query = Service::query();
+        if ($request->id) {
+            $query->where('id', $request->id);
+        }
+        $data = $query->get();
+
         return  response()->json([
-            'data'=> $services,
             'status' => 200,
             'message' => $this->success,
+            'data'=> $data,
         ]);
     }
 
@@ -33,35 +38,16 @@ class ServiceController extends Controller
      */
     public function store(Request $request)
     {
-        $service = Service::create( $request->all());
+        $data = $request->all();
+        $data = $data['data'];
+        $service = Service::create($data);
         return  response()->json([
-            'data'=> $service,
             'message' => $this->success,
             'status' => 200,
+            'data'=> $service,
         ]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $service = Service::find($id);
-        if (is_null($service)) {
-            return  response()->json([
-                'message' => $this->msgNoData
-            ]);
-        }
-        
-        return  response()->json([
-            'data'=> $service,
-            'status' => 200,
-            'message' => $this->success,
-        ]);
-    }
 
     /**
      * Update the specified resource in storage.
@@ -70,19 +56,25 @@ class ServiceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
+        $data = $request->all();
+        $data = $data['data'];
+        $id   = ($data['id']);
         $service = Service::find($id);
         if (is_null($service)) {
             return  response()->json([
-                'message' => $this->msgNoData
+                'status'  => 404,
+                'message' => $this->msgNoData,
+                'data'    => [],
             ]);
         }
         
-        $service->update($request->all());
+        $service->update($data);
         return  response()->json([
-            'status' => 200,
+            'status'  => 200,
             'message' => $this->success,
+            'data'    => $service,
         ]);
     }
 
@@ -92,12 +84,15 @@ class ServiceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        $service = Service::find($id);
+        $data = $request->data;
+        $service = Service::find($data['id']);
         if (is_null($service)) {
             return  response()->json([
-                'message' => $this->msgNoData
+                'status' => 404,
+                'message' => $this->msgNoData,
+                'data'=> [],
             ]);
         }
 
@@ -105,6 +100,7 @@ class ServiceController extends Controller
         return  response()->json([
             'status' => 200,
             'message' => $this->success,
+            'data'=> [],
         ]);
     }
 }

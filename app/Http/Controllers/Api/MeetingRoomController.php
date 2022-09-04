@@ -15,13 +15,18 @@ class MeetingRoomController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $meetingRooms = MeetingRoom::get();
+        $query = MeetingRoom::query();
+        if ($request->id) {
+            $query->where('id', $request->id);
+        }
+        $data = $query->get();
+
         return  response()->json([
-            'data'=> $meetingRooms,
             'status' => 200,
             'message' => $this->success,
+            'data'=> $data,
         ]);
     }
 
@@ -33,35 +38,16 @@ class MeetingRoomController extends Controller
      */
     public function store(Request $request)
     {
-        $meetingRooms = MeetingRoom::create( $request->all());
+        $data = $request->all();
+        $data = $data['data'];
+        $meetingRoom = MeetingRoom::create($data);
         return  response()->json([
-            'data'=> $meetingRooms,
             'message' => $this->success,
             'status' => 200,
+            'data'=> $meetingRoom,
         ]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $meetingRoom = MeetingRoom::find($id);
-        if (is_null($meetingRoom)) {
-            return  response()->json([
-                'message' => $this->msgNoData
-            ]);
-        }
-        
-        return  response()->json([
-            'data'=> $meetingRoom,
-            'status' => 200,
-            'message' => $this->success,
-        ]);
-    }
 
     /**
      * Update the specified resource in storage.
@@ -70,19 +56,26 @@ class MeetingRoomController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
+        $data = $request->all();
+        $data = $data['data'];
+        $id   = ($data['id']);
+              
         $meetingRoom = MeetingRoom::find($id);
         if (is_null($meetingRoom)) {
             return  response()->json([
-                'message' => $this->msgNoData
+                'status'  => 404,
+                'message' => $this->msgNoData,
+                'data'    => [],
             ]);
         }
         
-        $meetingRoom->update($request->all());
+        $meetingRoom->update($data);
         return  response()->json([
-            'status' => 200,
+            'status'  => 200,
             'message' => $this->success,
+            'data'    => $meetingRoom,
         ]);
     }
 
@@ -92,19 +85,23 @@ class MeetingRoomController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        $meetingRoom = MeetingRoom::find($id);
-        if (is_null($meetingRoom)) {
+        $data = $request->data;
+        $meetingRoom = MeetingRoom::find($data['id']);
+        if (is_null($department)) {
             return  response()->json([
-                'message' => $this->msgNoData
+                'status' => 404,
+                'message' => $this->msgNoData,
+                'data'=> [],
             ]);
         }
 
-        $meetingRoom->delete();
+        $department->delete();
         return  response()->json([
             'status' => 200,
             'message' => $this->success,
+            'data'=> [],
         ]);
     }
 }
