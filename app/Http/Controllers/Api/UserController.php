@@ -38,7 +38,6 @@ class UserController extends Controller
     public function login(Request $request)
     {
         $data = $request->all();
-        $data = $data['data']['0'];
         $user = User::where('fullname', $data['fullname'])
             // ->where('password', bcrypt($data['password']))
             ->first();
