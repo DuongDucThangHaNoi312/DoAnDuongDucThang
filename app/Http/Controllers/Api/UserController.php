@@ -31,6 +31,34 @@ class UserController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function login(Request $request)
+    {
+        $data = $request->all();
+        $data = $data['data']['0'];
+        $user = User::where('fullname', $data['fullname'])
+            // ->where('password', bcrypt($data['password']))
+            ->first();
+
+        if (is_null($user)) {
+             return  response()->json([
+                'status' => 404,
+                'message' => $this->msgNoData,
+                'data'=> [],
+            ]);
+        }
+
+        return  response()->json([
+            'status' => 200,
+            'message' => $this->success,
+            'data'=> $user,
+        ]);
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -39,7 +67,8 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        $data = $data['data'];
+        $data = $data['data']['0'];
+
         $user = User::create($data);
         return  response()->json([
             'message' => $this->success,
@@ -59,7 +88,8 @@ class UserController extends Controller
     public function update(Request $request)
     {
         $data = $request->all();
-        $data = $data['data'];
+        $data = $data['data']['0'];
+
         $id   = ($data['id']);
               
         $user = User::find($id);
@@ -87,7 +117,9 @@ class UserController extends Controller
      */
     public function destroy(Request $request)
     {
-        $data = $request->data;
+        $data = $request->all();
+        $data = $data['data']['0'];
+        
         $user = User::find($data['id']);
         if (is_null($user)) {
             return  response()->json([

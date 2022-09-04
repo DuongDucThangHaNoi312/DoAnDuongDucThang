@@ -39,7 +39,8 @@ class MeetingRoomController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        $data = $data['data'];
+        $data = $data['data']['0'];
+
         $meetingRoom = MeetingRoom::create($data);
         return  response()->json([
             'message' => $this->success,
@@ -59,7 +60,7 @@ class MeetingRoomController extends Controller
     public function update(Request $request)
     {
         $data = $request->all();
-        $data = $data['data'];
+        $data = $data['data']['0'];
         $id   = ($data['id']);
               
         $meetingRoom = MeetingRoom::find($id);
@@ -87,7 +88,9 @@ class MeetingRoomController extends Controller
      */
     public function destroy(Request $request)
     {
-        $data = $request->data;
+        $data = $request->all();
+        $data = $data['data']['0'];
+        
         $meetingRoom = MeetingRoom::find($data['id']);
         if (is_null($department)) {
             return  response()->json([

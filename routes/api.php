@@ -32,6 +32,8 @@ Route::get('users', 'Api\UserController@index');
 Route::post('users', 'Api\UserController@store');
 Route::put('users', 'Api\UserController@update');
 Route::delete('users', 'Api\UserController@destroy');
+Route::get('login', 'Api\UserController@login');
+
 
 
 Route::get('rentals', 'Api\RentalController@index');

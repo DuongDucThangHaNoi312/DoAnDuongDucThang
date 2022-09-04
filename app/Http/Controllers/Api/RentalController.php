@@ -106,9 +106,6 @@ class RentalController extends Controller
         
 
 
-
-
-
         foreach ($rentalServices as $rentalService) {
             $rentalService['rental_history_id'] = $rental->id;
             RentalService::create($rentalService);
@@ -133,7 +130,9 @@ class RentalController extends Controller
      */
     public function destroy(Request $request)
     {
-        $data = $request->data;
+        $data = $request->all();
+        $data = $data['data']['0'];
+        
         $equipment = Equipment::find($data['id']);
         if (is_null($equipment)) {
             return  response()->json([

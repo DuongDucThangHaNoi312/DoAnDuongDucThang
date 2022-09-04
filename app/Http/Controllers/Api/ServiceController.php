@@ -39,7 +39,8 @@ class ServiceController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        $data = $data['data'];
+        $data = $data['data']['0'];
+
         $service = Service::create($data);
         return  response()->json([
             'message' => $this->success,
@@ -59,7 +60,7 @@ class ServiceController extends Controller
     public function update(Request $request)
     {
         $data = $request->all();
-        $data = $data['data'];
+        $data = $data['data']['0'];
         $id   = ($data['id']);
         $service = Service::find($id);
         if (is_null($service)) {
@@ -86,7 +87,9 @@ class ServiceController extends Controller
      */
     public function destroy(Request $request)
     {
-        $data = $request->data;
+        $data = $request->all();
+        $data = $data['data']['0'];
+        
         $service = Service::find($data['id']);
         if (is_null($service)) {
             return  response()->json([
