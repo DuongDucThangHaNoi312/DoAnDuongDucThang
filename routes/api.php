@@ -33,6 +33,7 @@ Route::post('users', 'Api\UserController@store');
 Route::post('users', 'Api\UserController@store');
 Route::delete('users', 'Api\UserControllerdestroy@');
 Route::post('login', 'Api\UserController@login');
+Route::post('getUserSameDep', 'Api\UserController@getUserSameDep');
 
 
 

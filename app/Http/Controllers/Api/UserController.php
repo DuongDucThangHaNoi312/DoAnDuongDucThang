@@ -150,4 +150,24 @@ class UserController extends Controller
             'data'=> [],
         ]);
     }
+
+    public function getUserSameDep(Request $request)
+    {
+        $data = $request->all();
+        $user = User::where('department_id', $data['department_id'])->get();
+
+        if (is_null($user)) {
+             return  response()->json([
+                'status' => 404,
+                'message' => $this->msgNoData,
+                'data'=> [],
+            ]);
+        }
+
+        return  response()->json([
+            'status' => 200,
+            'message' => $this->success,
+            'data'=> $user,
+        ]);
+    }
 }

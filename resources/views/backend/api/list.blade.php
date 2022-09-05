@@ -56,4 +56,11 @@
     <p><span >  API all phòng thuê</span><a href="http://127.0.0.1:8000/api/rentals">Chi tiết</a>- <span>http://127.0.0.1:8000/api/rentals</span></p>
     <p><span >  API phòng thuê theo phòng truyền vào meeting_room_id phòng </span><a href="http://127.0.0.1:8000/api/rentals?meeting_room_id=1">Chi tiết</a>- <span>http://127.0.0.1:8000/api/rentals?meeting_room_id=1</span></p>
 
+    <br>
+    API lấy user cùng phòng ban với user đang đăng nhập method POST
+    http://127.0.0.1:8000/api/getUserSameDep 
+    truyền vào object ví dụ:
+    {
+        "department_id": 6
+    }
     
