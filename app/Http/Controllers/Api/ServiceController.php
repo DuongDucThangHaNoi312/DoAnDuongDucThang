@@ -22,6 +22,13 @@ class ServiceController extends Controller
             $query->where('id', $request->id);
         }
         $data = $query->get();
+        if (count($data) < 1 ) {
+            return  response()->json([
+                'status'  => 404,
+                'message' => $this->msgNoData,
+                'data'    => [],
+            ]);
+        }
 
         return  response()->json([
             'status' => 200,
@@ -39,13 +46,25 @@ class ServiceController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        $data = $data['data']['0'];
+        if (isset($data['id'])) {
+            $service = Service::find($data['id']);
+            if (is_null($service)) {
+                return  response()->json([
+                    'status'  => 404,
+                    'message' => $this->msgNoData,
+                    'data'    => [],
+                ]);
+            }
+            $service = $service->update($data);
+            $service = Service::find($data['id']);
+        } else {
+            $service = Service::create($data);
+        }
 
-        $service = Service::create($data);
         return  response()->json([
             'message' => $this->success,
             'status' => 200,
-            'data'=> $service,
+            'data'=> $service
         ]);
     }
 
@@ -60,7 +79,6 @@ class ServiceController extends Controller
     public function update(Request $request)
     {
         $data = $request->all();
-        $data = $data['data']['0'];
         $id   = ($data['id']);
         $service = Service::find($id);
         if (is_null($service)) {
@@ -88,7 +106,6 @@ class ServiceController extends Controller
     public function destroy(Request $request)
     {
         $data = $request->all();
-        $data = $data['data']['0'];
         
         $service = Service::find($data['id']);
         if (is_null($service)) {

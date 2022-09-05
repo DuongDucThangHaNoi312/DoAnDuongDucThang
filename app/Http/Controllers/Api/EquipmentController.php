@@ -22,6 +22,14 @@ class EquipmentController extends Controller
             $query->where('id', $request->id);
         }
         $data = $query->get();
+        if (count($data) < 1 ) {
+            return  response()->json([
+                'status'  => 404,
+                'message' => $this->msgNoData,
+                'data'    => [],
+            ]);
+        }
+
 
         return  response()->json([
             'status' => 200,
@@ -38,11 +46,22 @@ class EquipmentController extends Controller
      */
     public function store(Request $request)
     {
-        $$data = $request->all();
-        $data = $data['data']['0'];
+        $data = $request->all();
+        if (isset($data['id'])) {
+            $equipment = Equipment::find($data['id']);
+            if (is_null($equipment)) {
+                return  response()->json([
+                    'status'  => 404,
+                    'message' => $this->msgNoData,
+                    'data'    => [],
+                ]);
+            }
+            $equipment = $equipment->update($data);
+            $equipment = Equipment::find($data['id']);
+        } else {
+            $equipment = Equipment::create($data);
+        }
 
-
-        $equipment = Equipment::create($data);
         return  response()->json([
             'message' => $this->success,
             'status' => 200,
@@ -61,7 +80,6 @@ class EquipmentController extends Controller
     public function update(Request $request)
     {
         $data = $request->all();
-        $data = $data['data']['0'];
         $id   = ($data['id']);
               
         $equipment = Equipment::find($id);
@@ -90,7 +108,6 @@ class EquipmentController extends Controller
     public function destroy(Request $request)
     {
         $data = $request->all();
-        $data = $data['data']['0'];
         
         $equipment = Equipment::find($data['id']);
         if (is_null($equipment)) {

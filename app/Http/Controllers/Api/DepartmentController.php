@@ -24,6 +24,14 @@ class DepartmentController extends Controller
         }
         $data = $query->get();
 
+        if (count($data) < 1 ) {
+            return  response()->json([
+                'status'  => 404,
+                'message' => $this->msgNoData,
+                'data'    => [],
+            ]);
+        }
+
         return  response()->json([
             'status' => 200,
             'message' => $this->success,
@@ -40,14 +48,27 @@ class DepartmentController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        $data = $data['data']['0'];
+        if (isset($data['id'])) {
+            $department = Department::find($data['id']);
+            if (is_null($department)) {
+                return  response()->json([
+                    'status'  => 404,
+                    'message' => $this->msgNoData,
+                    'data'    => [],
+                ]);
+            }
+            $department = $department->update($data);
+            $department = Department::find($data['id']);
+        } else {
+            $department = Department::create($data);
+        }
 
-        $departments = Department::create($data);
         return  response()->json([
             'message' => $this->success,
             'status' => 200,
-            'data'=> $departments,
+            'data'=> $department,
         ]);
+
     }
 
 
@@ -90,7 +111,6 @@ class DepartmentController extends Controller
     public function destroy(Request $request)
     {
         $data = $request->all();
-        $data = $data['data']['0'];
         
         $department = Department::find($data['id']);
         if (is_null($department)) {

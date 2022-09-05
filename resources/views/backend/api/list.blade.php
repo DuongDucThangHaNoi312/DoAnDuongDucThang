@@ -1,39 +1,59 @@
 
     <h2>API  USER</h2>
-    <p><span >  API List Users - </span><a href="http://127.0.0.1:8000/api/users">Chi tiết</a>- <span>http://127.0.0.1:8000/api/users</span></p>
-    <p><span >  API Detail Users - </span><a href="http://127.0.0.1:8000/api/users/1">Chi tiết</a>- <span>http://127.0.0.1:8000/api/users/1</span></p>
-    <p><span >  API Update Users - </span><a href="http://127.0.0.1:8000/api/users/1?addresses=HaNoi&phone=0386592323">Chi tiết</a>- <span>http://127.0.0.1:8000/api/users/1?addresses=HaNoi&phone=0386592323</span></p>
+    <p><span >  API List Users - </span><a href="http://127.0.0.1:8000/api/users">http://127.0.0.1:8000/api/users</a>     method get 
+    <p><span >  API Users có id = 1 </span><a href="http://127.0.0.1:8000/api/users?id=1">http://127.0.0.1:8000/api/users?id=1</a>    method get 
+    <p><span >  API thêm mới user - </span><a href="http://127.0.0.1:8000/api/users">http://127.0.0.1:8000/api/users</a>   method post không truyền id trong body
+    <p><span >  API cập nhật user - </span><a href="http://127.0.0.1:8000/api/users">http://127.0.0.1:8000/api/users</a>   method post có truyền id trong body
+    <p><span >  API xóa user - </span><a href="http://127.0.0.1:8000/api/users">http://127.0.0.1:8000/api/users</a>   method delete có truyền id trong body
+    <p><span >  API login - </span><a href="http://127.0.0.1:8000/api/login">http://127.0.0.1:8000/api/login</a>   method post có truyền fullname trong body
     <br>
+
+
+
     <h2>API  departments (phòng ban mỗi user chỉ thuộc 1 phòng ban) </h2>
-    <p><span >  API List departments - </span><a href="http://127.0.0.1:8000/api/departments">Chi tiết</a>- <span>http://127.0.0.1:8000/api/departments</span></p>
-    <p><span >  API Detail departments có id=3 - </span><a href="http://127.0.0.1:8000/api/departments/3">Chi tiết</a>- <span>http://127.0.0.1:8000/api/departments/1</span></p>
-    <p><span >  API Update departments có id=3- </span><a href="http://127.0.0.1:8000/api/departments/3?name=NAME&telephone=0386592323&description=description&status=1">Chi tiết</a>- <span>http://127.0.0.1:8000/api/departments/3?name=NAME&telephone=0386592323&description=description&status=1</span></p>
+    <p><span >  API List departments - </span><a href="http://127.0.0.1:8000/api/departments">http://127.0.0.1:8000/api/departments</a>     method get 
+    <p><span >  API departments có id = 1 </span><a href="http://127.0.0.1:8000/api/departments?id=1">http://127.0.0.1:8000/api/departments?id=1</a>    method get 
+    <p><span >  API  thêm mới departments - </span><a href="http://127.0.0.1:8000/api/departments">http://127.0.0.1:8000/api/departments</a>   method post không truyền id trong body
+    <p><span >  API cập nhật departments - </span><a href="http://127.0.0.1:8000/api/departments">http://127.0.0.1:8000/api/departments</a>   method post có truyền id trong body
+    <p><span >  API xóa departments - </span><a href="http://127.0.0.1:8000/api/departments">http://127.0.0.1:8000/api/departments</a>   method delete có truyền id trong body
     <br>
-    <h2>API  meeting-rooms (phòng họp để thuê) </h2>
-    <p><span >  API List meeting-rooms - </span><a href="http://127.0.0.1:8000/api/meeting-rooms">Chi tiết</a>- <span>http://127.0.0.1:8000/api/meeting-rooms</span></p>
-    <p><span >  API Detail meeting-rooms có id=3 - </span><a href="http://127.0.0.1:8000/api/meeting-rooms/3">Chi tiết</a>- <span>http://127.0.0.1:8000/api/meeting-rooms/3</span></p>
-    <p><span >  API Update meeting-rooms có id=3 - </span><a href="http://127.0.0.1:8000/api/meeting-rooms/3?name=name&telephone=0386592323&description=description&status=1&price=2000">Chi tiết</a>- <span>http://127.0.0.1:8000/api/meeting-rooms/3?name=name&telephone=0386592323&description=description&status=1&price=2000</span></p>
-    price giá thuê phòng
+
+
+
+    <h2>API  meeting-rooms (phòng ban mỗi user chỉ thuộc 1 phòng ban) </h2>
+    <p><span >  API List meeting-rooms - </span><a href="http://127.0.0.1:8000/api/meeting-rooms">http://127.0.0.1:8000/api/meeting-rooms</a>     method get 
+    <p><span >  API meeting-rooms có id = 1 </span><a href="http://127.0.0.1:8000/api/meeting-rooms?id=1">http://127.0.0.1:8000/api/meeting-rooms?id=1</a>    method get 
+    <p><span >  API  thêm mới meeting-rooms - </span><a href="http://127.0.0.1:8000/api/meeting-rooms">http://127.0.0.1:8000/api/meeting-rooms</a>   method post không truyền id trong body
+    <p><span >  API cập nhật meeting-rooms - </span><a href="http://127.0.0.1:8000/api/meeting-rooms">http://127.0.0.1:8000/api/meeting-rooms</a>   method post có truyền id trong body
+    <p><span >  API xóa meeting-rooms - </span><a href="http://127.0.0.1:8000/api/meeting-rooms">http://127.0.0.1:8000/api/meeting-rooms</a>   method delete có truyền id trong body
     <br>
-    <h2>API  equipments (thiết bị đi kèm khi thuê phòng (bàn, ghế, ...)) số lượng khi đặt theo phòng có thể hết thiết bị </h2>
-    <p><span >  API List equipments - </span><a href="http://127.0.0.1:8000/api/equipments">Chi tiết</a>- <span>http://127.0.0.1:8000/api/equipments</span></p>
-    <p><span >  API Detail equipments có id=3 - </span><a href="http://127.0.0.1:8000/api/equipments/3">Chi tiết</a>- <span>http://127.0.0.1:8000/api/equipments/3</span></p>
-    <p><span >  API Update equipments có id=3 - </span><a href="http://127.0.0.1:8000/api/equipments/3?name=name&price=2000&number=20">Chi tiết</a>- <span>http://127.0.0.1:8000/api/equipments/3?name=name&price=2000&number=20</span></p>
-    number: là số lượng thiết bị
+
+
+
+
+    <h2>API  equipments (phòng ban mỗi user chỉ thuộc 1 phòng ban) </h2>
+    <p><span >  API List equipments - </span><a href="http://127.0.0.1:8000/api/equipments">http://127.0.0.1:8000/api/equipments</a>     method get 
+    <p><span >  API equipments có id = 1 </span><a href="http://127.0.0.1:8000/api/equipments?id=1">http://127.0.0.1:8000/api/equipments?id=1</a>    method get 
+    <p><span >  API  thêm mới equipments - </span><a href="http://127.0.0.1:8000/api/equipments">http://127.0.0.1:8000/api/equipments</a>   method post không truyền id trong body
+    <p><span >  API cập nhật equipments - </span><a href="http://127.0.0.1:8000/api/equipments">http://127.0.0.1:8000/api/equipments</a>   method post có truyền id trong body
+    <p><span >  API xóa equipments - </span><a href="http://127.0.0.1:8000/api/equipments">http://127.0.0.1:8000/api/equipments</a>   method delete có truyền id trong body
     <br>
-    price giá thuê 1 thiết bị
+
+
+
+    <h2>API  services (phòng ban mỗi user chỉ thuộc 1 phòng ban) </h2>
+    <p><span >  API List services - </span><a href="http://127.0.0.1:8000/api/services">http://127.0.0.1:8000/api/services</a>     method get 
+    <p><span >  API services có id = 1 </span><a href="http://127.0.0.1:8000/api/services?id=1">http://127.0.0.1:8000/api/services?id=1</a>    method get 
+    <p><span >  API  thêm mới services - </span><a href="http://127.0.0.1:8000/api/services">http://127.0.0.1:8000/api/services</a>   method post không truyền id trong body
+    <p><span >  API cập nhật services - </span><a href="http://127.0.0.1:8000/api/services">http://127.0.0.1:8000/api/services</a>   method post có truyền id trong body
+    <p><span >  API xóa services - </span><a href="http://127.0.0.1:8000/api/services">http://127.0.0.1:8000/api/services</a>   method delete có truyền id trong body
     <br>
-    <h2>API  services (dịch vụ đi kèm khi thuê phòng( nước uống, cafe., không giới hạn số lượng)) </h2>
-    <p><span >  API List services - </span><a href="http://127.0.0.1:8000/api/services">Chi tiết</a>- <span>http://127.0.0.1:8000/api/services</span></p>
-    <p><span >  API Detail services có id=3 - </span><a href="http://127.0.0.1:8000/api/services/3">Chi tiết</a>- <span>http://127.0.0.1:8000/api/services/3</span></p>
-    <p><span >  API Update services có id=3 - </span><a href="http://127.0.0.1:8000/api/services/3?name=name&&price=2000">Chi tiết</a>- <span>http://127.0.0.1:8000/api/services/3?name=name&&price=2000</span></p>
-    price giá cho dịch vụ
-    <br>
-    
+
+
 
 
     <h2>API  data phòng thuê thời điểm hiện tại </h2>
-    <p><span >  API List</span><a href="http://127.0.0.1:8000/api/rentals">Chi tiết</a>- <span>http://127.0.0.1:8000/api/rentals</span></p>
-    <p><span >  API Detail tuyền vào id phòng để lấy thời điểm hiện tại có ng thuê hay k</span><a href="http://127.0.0.1:8000/api/rentals/1">Chi tiết</a>- <span>http://127.0.0.1:8000/api/rentals/1</span></p>
+    <p><span >  API all phòng thuê</span><a href="http://127.0.0.1:8000/api/rentals">Chi tiết</a>- <span>http://127.0.0.1:8000/api/rentals</span></p>
+    <p><span >  API phòng thuê theo phòng truyền vào meeting_room_id phòng </span><a href="http://127.0.0.1:8000/api/rentals?meeting_room_id=1">Chi tiết</a>- <span>http://127.0.0.1:8000/api/rentals?meeting_room_id=1</span></p>
 
     

@@ -23,6 +23,15 @@ class MeetingRoomController extends Controller
         }
         $data = $query->get();
 
+        if (count($data) < 1 ) {
+            return  response()->json([
+                'status'  => 404,
+                'message' => $this->msgNoData,
+                'data'    => [],
+            ]);
+        }
+
+        
         return  response()->json([
             'status' => 200,
             'message' => $this->success,
@@ -39,9 +48,21 @@ class MeetingRoomController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        $data = $data['data']['0'];
+        if (isset($data['id'])) {
+            $meetingRoom = MeetingRoom::find($data['id']);
+            if (is_null($meetingRoom)) {
+                return  response()->json([
+                    'status'  => 404,
+                    'message' => $this->msgNoData,
+                    'data'    => [],
+                ]);
+            }
+            $meetingRoom = $meetingRoom->update($data);
+            $meetingRoom = MeetingRoom::find($data['id']);
+        } else {
+            $meetingRoom = MeetingRoom::create($data);
+        }
 
-        $meetingRoom = MeetingRoom::create($data);
         return  response()->json([
             'message' => $this->success,
             'status' => 200,
@@ -89,10 +110,9 @@ class MeetingRoomController extends Controller
     public function destroy(Request $request)
     {
         $data = $request->all();
-        $data = $data['data']['0'];
         
         $meetingRoom = MeetingRoom::find($data['id']);
-        if (is_null($department)) {
+        if (is_null($meetingRoom)) {
             return  response()->json([
                 'status' => 404,
                 'message' => $this->msgNoData,
@@ -100,7 +120,7 @@ class MeetingRoomController extends Controller
             ]);
         }
 
-        $department->delete();
+        $meetingRoom->delete();
         return  response()->json([
             'status' => 200,
             'message' => $this->success,

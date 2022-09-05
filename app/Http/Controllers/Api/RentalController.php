@@ -23,13 +23,21 @@ class RentalController extends Controller
         $dateCurrent = date("Y-m-d H:i:s");
         $data = Rental::query();
         $data->with('rentalServices', 'rentalEquipments');
+        
         if ($meetingRoomId) {
             $data->where('meeting_room_id', $meetingRoomId);
         }
-
-        $data = $data->where('rental_start', '<=', $dateCurrent)
-            ->where('renral_end', '>=', $dateCurrent)
-            ->get();
+        $data = $data->get();
+        // $data = $data->where('rental_start', '<=', $dateCurrent)
+        //     ->where('renral_end', '>=', $dateCurrent)
+        //     ->get();
+        if (count($data) < 1 ) {
+            return  response()->json([
+                'status'  => 404,
+                'message' => $this->msgNoData,
+                'data'    => [],
+            ]);
+        }
 
 
         return  response()->json([
@@ -103,7 +111,6 @@ class RentalController extends Controller
         $rentalServices = $data['rental_services'];
         $rentalEquipments = $data['rental_equipments'];
 
-        
 
 
         foreach ($rentalServices as $rentalService) {

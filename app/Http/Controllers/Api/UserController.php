@@ -23,6 +23,14 @@ class UserController extends Controller
         }
         $data = $query->get();
 
+        if (count($data) < 1 ) {
+            return  response()->json([
+                'status'  => 404,
+                'message' => $this->msgNoData,
+                'data'    => [],
+            ]);
+        }
+        
         return  response()->json([
             'status' => 200,
             'message' => $this->success,
@@ -66,9 +74,21 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        $data = $data['data']['0'];
+        if (isset($data['id'])) {
+            $user = User::find($data['id']);
+            if (is_null($user)) {
+                return  response()->json([
+                    'status'  => 404,
+                    'message' => $this->msgNoData,
+                    'data'    => [],
+                ]);
+            }
+            $user = $user->update($data);
+            $user = User::find($data['id']);
+        } else {
+            $user = User::create($data);
+        }
 
-        $user = User::create($data);
         return  response()->json([
             'message' => $this->success,
             'status' => 200,
@@ -87,10 +107,6 @@ class UserController extends Controller
     public function update(Request $request)
     {
         $data = $request->all();
-        $data = $data['data']['0'];
-
-        $id   = ($data['id']);
-              
         $user = User::find($id);
         if (is_null($user)) {
             return  response()->json([
@@ -117,7 +133,6 @@ class UserController extends Controller
     public function destroy(Request $request)
     {
         $data = $request->all();
-        $data = $data['data']['0'];
         
         $user = User::find($data['id']);
         if (is_null($user)) {
