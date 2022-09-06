@@ -17,7 +17,7 @@
             <li><a href="{!! route('admin.meeting-rooms.index') !!}">{!! trans('meeting-rooms.label') !!}</a></li>
         </ol>
     </section>
-    {!! Form::open(['url' => route('admin.meeting-rooms.store'), 'method'=>'POST']) !!}
+    {!! Form::open(['url' => route('admin.meeting-rooms.store'), 'method'=>'POST', "enctype" => "multipart/form-data" ]) !!}
     <table class='table borderless'>
         <tr>
             <th class="table_right_middle " style="width: 15%;">
@@ -45,6 +45,16 @@
             </th>
             <td style="width: 70%;"> 
                 {!! Form::text('price', old('price'), ['class' => 'form-control currency',  'required']) !!}
+            </td>
+            <th class="table_right_middle " style="width: 15%;"></th>
+        </tr>
+        
+        <tr>
+            <th class="table_right_middle" style="width: 15%">
+                Ảnh
+            </th>
+            <td style="width: 70%;"> 
+                <input type="file" name="file[]" class="form-control" multiple="">
             </td>
             <th class="table_right_middle " style="width: 15%;"></th>
         </tr>

@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\User;
+// use App\User;
+use App\Models\User;
 use App\Config;
 use App\Container;
 use App\StaffDayOff;
@@ -41,24 +42,24 @@ class HomeController extends BaseController
         // $this->validate($data = $request, $rules);
         $errors = new \Illuminate\Support\MessageBag;
         try {
-            if (\Auth::guard('admin')->attempt(['code' => $request->input('code'), 'password' => $request->input('password'), 'activated' => 1], $data['remember'])) {
-                \Auth::guard('admin')->user()->last_login = date('Y-m-d H:i:s');
-                \Auth::guard('admin')->user()->save();
-                if (\Auth::guard('admin')->user()->hasRole(['system', 'administrator'])) {
-                    Session::put('is_admin', 1);
-                }
-                // if(\Auth::guard('customer')->check()) \Auth::guard('customer')->logout();
-                if (Session::get('loginRedirect_admin', '') == '') {
-                    return redirect()->route('admin.home');
-                }
-                if ($request->input('password') == '123@123') {
-                    Session::flash('message', 'Đổi mật khẩu mặc định để sử dụng hệ thống');
-                    Session::flash('alert-class', 'warning');
-                    return redirect()->route('admin.change-password');
-                }
-                return redirect()->intended(Session::get('loginRedirect_admin', route('admin.home')));
-            }
-            $errors->add('invalid', "Invalid code/password.");
+            // if (\Auth::guard('admin')->attempt(['code' => $request->input('code'), 'password' => $request->input('password'), 'activated' => 1], $data['remember'])) {
+            //     \Auth::guard('admin')->user()->last_login = date('Y-m-d H:i:s');
+            //     \Auth::guard('admin')->user()->save();
+            //     if (\Auth::guard('admin')->user()->hasRole(['system', 'administrator'])) {
+            //         Session::put('is_admin', 1);
+            //     }
+            //     // if(\Auth::guard('customer')->check()) \Auth::guard('customer')->logout();
+            //     if (Session::get('loginRedirect_admin', '') == '') {
+            //         return redirect()->route('admin.home');
+            //     }
+            //     if ($request->input('password') == '123@123') {
+            //         Session::flash('message', 'Đổi mật khẩu mặc định để sử dụng hệ thống');
+            //         Session::flash('alert-class', 'warning');
+            //         return redirect()->route('admin.change-password');
+            //     }
+                return redirect()->route('admin.home');
+            // }
+            // $errors->add('invalid', "Invalid code/password.");
         } catch (\Exception $e) {
             $errors->add('error', $e->getMessage());
         }

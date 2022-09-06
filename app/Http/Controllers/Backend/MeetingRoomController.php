@@ -34,12 +34,24 @@ class MeetingRoomController extends Controller
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
         }
+
+        $pathName = null;
+        if ($request->hasFile('file')) {
+            // Nếu có thì thục hiện lưu trữ file vào public/images
+            $file = $request->file('file');
+            $image = $file[0];
+            $storedPath = $image->move('images', $image->getClientOriginalName());
+            $pathName = "images\\". $image->getClientOriginalName();
+        }
+        
+
         MeetingRoom::create([
             'name' => $data['name'],
             'telephone' => $data['telephone'],
             'description' => $data['description'],
             'status' => $data['status'],
             'price' => intval($data['price']),
+            'path_img' => $pathName,
         ]);
 
         Session::flash('message', trans('system.success'));

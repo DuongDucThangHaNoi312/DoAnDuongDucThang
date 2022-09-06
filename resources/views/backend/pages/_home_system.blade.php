@@ -6,7 +6,7 @@
             </a>
             <div class="info-box-content">
                 <span class="info-box-text">Tổng nhân viên</span>
-                <span class="info-box-number">{!! App\User::countActives() !!}</span>
+                <span class="info-box-number">{!!  App\Models\User::countActives() !!}</span>
             </div>
         </div>
     </div>

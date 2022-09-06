@@ -137,6 +137,7 @@
                                 <th style="text-align: center; vertical-align: middle;">{!! trans('departments.telephone') !!}</th>
                                 <th style="text-align: center; vertical-align: middle;">{!! 'Loại phòng' !!}</th>
                                 <th style="text-align: center; vertical-align: middle;">{!! 'Giá thuê' !!}</th>
+                                <th style="text-align: center; vertical-align: middle;">{!! 'Ảnh' !!}</th>
                                 <th style="text-align: center; vertical-align: middle; width: 14%">{!! trans('system.action.label') !!}</th>
                             </tr>
                         </thead>
@@ -153,6 +154,9 @@
                                     </td>
                                     <td style="text-align: center; vertical-align: middle;"> 
                                             {!! App\Helper\HString::currencyFormat($value->price) !!} 
+                                    </td>
+                                    <td style="text-align: center; vertical-align: middle;"> 
+                                        <img style="width: 60px; height:60px" src='{!! asset($value->path_img) !!}'>
                                     </td>
                                     <td style="text-align: center; vertical-align: middle;">
                                         <div class="col-md-1">

@@ -17,7 +17,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Backend', 'as' => 'admin.'], 
     Route::group(['before' => 'csrf'], function () {
         Route::post('login', ['as' => 'login', 'uses' => "HomeController@postLogin"]);
     });
-    Route::group(['middleware' => 'admin'], function () {
+    // Route::group(['middleware' => 'admin'], function () {
         Route::get('404', ['as' => '404', 'uses' => 'HomeController@get404']);
         Route::get('403', ['as' => '403', 'uses' => 'HomeController@get403']);
         Route::get('logout', ['as' => 'logout', 'uses' => "HomeController@getLogout"]);
@@ -31,7 +31,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Backend', 'as' => 'admin.'], 
         Route::resource('roles', 'RolesController');
         Route::post('login-as', ['as' => 'login-as', 'uses' => 'HomeController@loginAs']);
         
-        Route::group(['middleware' => ['admin.middleware']], function() {
+        // Route::group(['middleware' => ['admin.middleware']], function() {
             
             Route::get('', ['as' => 'home', 'uses' => 'HomeController@index']);
             Route::get('services', ['as' => 'services.index', 'uses' => 'ServiceController@index']);
@@ -71,8 +71,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Backend', 'as' => 'admin.'], 
             Route::put('staffs/{id}', ['as' => 'staffs.update', 'uses' => 'StaffsController@update']);
             Route::delete('staffs/{id}', ['as' => 'staffs.destroy', 'uses' => 'StaffsController@destroy']);
         });
-    });
-});
+    // });
+// });
 
 Route::group(['middleware' => ['admin.middleware']], function() {
     Route::get('/', function () {

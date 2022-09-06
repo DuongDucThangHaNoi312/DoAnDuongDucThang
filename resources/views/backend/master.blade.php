@@ -166,11 +166,11 @@
                         <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
                             <img src="{!! asset('assets/backend/img/user.png') !!}" class="user-image" alt="User Image">
                             <span class="hidden-xs">{!! $user->fullname !!}</span>
-                            @if(\Auth::user()->company->name)
+                            {{-- @if(\Auth::user()->company->name)
                                 | {!! \Auth::user()->position->name !!}
                                 - {!! \Auth::user()->department->name !!}
                                 - {!! \Auth::user()->company->shortened_name !!}
-                            @endif
+                            @endif --}}
                         </a>
                         <ul class="dropdown-menu">
                             <li class="user-header">
@@ -208,8 +208,8 @@
         <section class="sidebar">
             <ul class="sidebar-menu">
                 <?php
-                $currentRoute = explode('.', Route::getCurrentRoute()->getName())[1];
-                $roles = auth()->guard('admin')->user()->roles()->pluck('roles.name')->toArray();
+                // $currentRoute = explode('.', Route::getCurrentRoute()->getName())[1];
+                // $roles = auth()->guard('admin')->user()->roles()->pluck('roles.name')->toArray();
                 ?>3
                 @foreach(config('menu')  as $menu)
                     @if(isset($menu['child']) && count($menu['child']) > 0)

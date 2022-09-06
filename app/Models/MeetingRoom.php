@@ -8,7 +8,7 @@ class MeetingRoom extends Model
 {
     protected $table = 'meeting_rooms';
 
-    protected $fillable = ['name', 'telephone', 'description', 'status', 'price'];
+    protected $fillable = ['name', 'telephone', 'description', 'status', 'price', 'path_img'];
 
     public static function rules($id = 0)
     {
