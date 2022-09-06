@@ -155,5 +155,33 @@ class RentalController extends Controller
             'message' => $this->success,
             'data'=> [],
         ]);
+    
+    }
+
+
+
+    public function getMettingRoomOfUser(Request $request)
+    {
+        $userId = $request->user_id;
+        $data = Rental::query();
+        $data->with('rentalServices', 'rentalEquipments');
+        $data->where(function($q) use ($userId) {
+            $q->where('user_id', 'LIKE', '%' . ',' . $userId . '%')
+            ->orWhere('user_id', 'LIKE', '%' . $userId . ',' . '%');
+        });
+        $data = $data->get();
+        if (count($data) < 1 ) {
+            return  response()->json([
+                'status'  => 404,
+                'message' => $this->msgNoData,
+                'data'    => [],
+            ]);
+        }
+
+        return  response()->json([
+            'status' => 200,
+            'message' => $this->success,
+            'data'=> $data,
+        ]);
     }
 }

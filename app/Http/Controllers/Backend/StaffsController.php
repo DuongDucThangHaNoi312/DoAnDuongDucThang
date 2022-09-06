@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Role;
-use App\User;
+use App\Models\User;
 use App\Bank;
 use App\Staff;
 use Validator;
