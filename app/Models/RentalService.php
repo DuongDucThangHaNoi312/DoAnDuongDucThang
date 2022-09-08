@@ -8,6 +8,6 @@ class RentalService extends Model
 {
     protected $table = 'rental_services';
 
-    protected $fillable = ['service_id', 'count', 'rental_history_id'];
+    protected $fillable = ['service_id', 'quantity', 'rental_history_id'];
 
 }

@@ -31,7 +31,7 @@ Route::delete('equipments', 'Api\EquipmentController@destroy');
 Route::get('users', 'Api\UserController@index');
 Route::post('users', 'Api\UserController@store');
 Route::post('users', 'Api\UserController@store');
-Route::delete('users', 'Api\UserControllerdestroy@');
+Route::delete('users', 'Api\UserController@destroy');
 Route::post('login', 'Api\UserController@login');
 Route::post('getUserSameDep', 'Api\UserController@getUserSameDep');
 

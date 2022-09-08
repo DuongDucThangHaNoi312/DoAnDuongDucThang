@@ -41,7 +41,7 @@ class MeetingRoomController extends Controller
             $file = $request->file('file');
             $image = $file[0];
             $storedPath = $image->move('images', $image->getClientOriginalName());
-            $pathName = "images\\". $image->getClientOriginalName();
+            $pathName = "images//". $image->getClientOriginalName();
         }
         
 

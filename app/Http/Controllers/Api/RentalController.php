@@ -56,18 +56,19 @@ class RentalController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        $data = $data['data']['0'];
         $dataRental = [
             'meeting_room_id' => $data['meeting_room_id'],
             'user_id' => $data['user_id'],
             'rental_start' => $data['rental_start'],
             'renral_end' => $data['renral_end'],
             'status' => 1,
+            'total_money' => $data['total_money']
         ];
 
-        $rental = Rental::create($dataRental);
+
         $rentalServices = $data['rental_services'];
         $rentalEquipments = $data['rental_equipments'];
+        $rental = Rental::create($dataRental);
 
         foreach ($rentalServices as $rentalService) {
             $rentalService['rental_history_id'] = $rental->id;
