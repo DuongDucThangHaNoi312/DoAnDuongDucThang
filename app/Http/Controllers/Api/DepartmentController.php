@@ -26,7 +26,7 @@ class DepartmentController extends Controller
 
         if (count($data) < 1 ) {
             return  response()->json([
-                'status'  => 404,
+                'status'  => 200,
                 'message' => $this->msgNoData,
                 'data'    => [],
             ]);
@@ -52,7 +52,7 @@ class DepartmentController extends Controller
             $department = Department::find($data['id']);
             if (is_null($department)) {
                 return  response()->json([
-                    'status'  => 404,
+                    'status'  => 200,
                     'message' => $this->msgNoData,
                     'data'    => [],
                 ]);
@@ -88,7 +88,7 @@ class DepartmentController extends Controller
         $department = Department::find($id);
         if (is_null($department)) {
             return  response()->json([
-                'status'  => 404,
+                'status'  => 200,
                 'message' => $this->msgNoData,
                 'data'    => [],
             ]);
@@ -115,7 +115,7 @@ class DepartmentController extends Controller
         $department = Department::find($data['id']);
         if (is_null($department)) {
             return  response()->json([
-                'status' => 404,
+                'status' => 200,
                 'message' => $this->msgNoData,
                 'data'=> [],
             ]);

@@ -24,7 +24,7 @@ class EquipmentController extends Controller
         $data = $query->get();
         if (count($data) < 1 ) {
             return  response()->json([
-                'status'  => 404,
+                'status'  => 200,
                 'message' => $this->msgNoData,
                 'data'    => [],
             ]);
@@ -51,7 +51,7 @@ class EquipmentController extends Controller
             $equipment = Equipment::find($data['id']);
             if (is_null($equipment)) {
                 return  response()->json([
-                    'status'  => 404,
+                    'status'  => 200,
                     'message' => $this->msgNoData,
                     'data'    => [],
                 ]);
@@ -85,7 +85,7 @@ class EquipmentController extends Controller
         $equipment = Equipment::find($id);
         if (is_null($equipment)) {
             return  response()->json([
-                'status'  => 404,
+                'status'  => 200,
                 'message' => $this->msgNoData,
                 'data'    => [],
             ]);
@@ -112,7 +112,7 @@ class EquipmentController extends Controller
         $equipment = Equipment::find($data['id']);
         if (is_null($equipment)) {
             return  response()->json([
-                'status' => 404,
+                'status' => 200,
                 'message' => $this->msgNoData,
                 'data'=> [],
             ]);

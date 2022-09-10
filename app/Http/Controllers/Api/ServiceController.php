@@ -24,7 +24,7 @@ class ServiceController extends Controller
         $data = $query->get();
         if (count($data) < 1 ) {
             return  response()->json([
-                'status'  => 404,
+                'status'  => 200,
                 'message' => $this->msgNoData,
                 'data'    => [],
             ]);
@@ -50,7 +50,7 @@ class ServiceController extends Controller
             $service = Service::find($data['id']);
             if (is_null($service)) {
                 return  response()->json([
-                    'status'  => 404,
+                    'status'  => 200,
                     'message' => $this->msgNoData,
                     'data'    => [],
                 ]);
@@ -83,7 +83,7 @@ class ServiceController extends Controller
         $service = Service::find($id);
         if (is_null($service)) {
             return  response()->json([
-                'status'  => 404,
+                'status'  => 200,
                 'message' => $this->msgNoData,
                 'data'    => [],
             ]);
@@ -110,7 +110,7 @@ class ServiceController extends Controller
         $service = Service::find($data['id']);
         if (is_null($service)) {
             return  response()->json([
-                'status' => 404,
+                'status' => 200,
                 'message' => $this->msgNoData,
                 'data'=> [],
             ]);

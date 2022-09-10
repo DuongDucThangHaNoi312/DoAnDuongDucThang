@@ -33,7 +33,7 @@ class RentalController extends Controller
         //     ->get();
         if (count($data) < 1 ) {
             return  response()->json([
-                'status'  => 404,
+                'status'  => 200,
                 'message' => $this->msgNoData,
                 'data'    => [],
             ]);
@@ -144,7 +144,7 @@ class RentalController extends Controller
         $equipment = Equipment::find($data['id']);
         if (is_null($equipment)) {
             return  response()->json([
-                'status' => 404,
+                'status' => 200,
                 'message' => $this->msgNoData,
                 'data'=> [],
             ]);
@@ -173,7 +173,7 @@ class RentalController extends Controller
         $data = $data->get();
         if (count($data) < 1 ) {
             return  response()->json([
-                'status'  => 404,
+                'status'  => 200,
                 'message' => $this->msgNoData,
                 'data'    => [],
             ]);

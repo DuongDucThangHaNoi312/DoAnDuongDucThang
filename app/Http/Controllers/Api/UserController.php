@@ -25,7 +25,7 @@ class UserController extends Controller
 
         if (count($data) < 1 ) {
             return  response()->json([
-                'status'  => 404,
+                'status'  => 200,
                 'message' => $this->msgNoData,
                 'data'    => [],
             ]);
@@ -52,7 +52,7 @@ class UserController extends Controller
 
         if (is_null($user)) {
              return  response()->json([
-                'status' => 404,
+                'status' => 200,
                 'message' => $this->msgNoData,
                 'data'=> [],
             ]);
@@ -78,7 +78,7 @@ class UserController extends Controller
             $user = User::find($data['id']);
             if (is_null($user)) {
                 return  response()->json([
-                    'status'  => 404,
+                    'status'  => 200,
                     'message' => $this->msgNoData,
                     'data'    => [],
                 ]);
@@ -110,7 +110,7 @@ class UserController extends Controller
         $user = User::find($id);
         if (is_null($user)) {
             return  response()->json([
-                'status'  => 404,
+                'status'  => 200,
                 'message' => $this->msgNoData,
                 'data'    => [],
             ]);
@@ -137,7 +137,7 @@ class UserController extends Controller
         $user = User::find($data['id']);
         if (is_null($user)) {
             return  response()->json([
-                'status' => 404,
+                'status' => 200,
                 'message' => $this->msgNoData,
                 'data'=> [],
             ]);
@@ -158,7 +158,7 @@ class UserController extends Controller
 
         if (is_null($user)) {
              return  response()->json([
-                'status' => 404,
+                'status' => 200,
                 'message' => $this->msgNoData,
                 'data'=> [],
             ]);
