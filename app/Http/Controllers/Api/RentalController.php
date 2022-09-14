@@ -63,7 +63,7 @@ class RentalController extends Controller
        
         $equipments = Equipment::selectRaw("CONCAT(name, '-', price) as text, id")->pluck('text', 'id')->toArray();
         $services = Service::selectRaw("CONCAT(name, '-', price) as text, id")->pluck('text', 'id')->toArray();
-        $meetingRooms = MeetingRoom::selectRaw("CONCAT(name, '-', price) as text, id")->pluck('text', 'id')->toArray();
+        $meetingRooms = MeetingRoom::selectRaw("CONCAT(name, '-', price, '-', path_img) as text, id")->pluck('text', 'id')->toArray();
 
         $detailMeetingRoom =  explode('-', $meetingRooms[$data['meeting_room_id']]);
 
@@ -76,6 +76,7 @@ class RentalController extends Controller
             'status' => 1,
             'price_meeting_room' => $detailMeetingRoom[1],
             'name_meeting_room' => $detailMeetingRoom[0],
+            'path_img_meeting_room' => $detailMeetingRoom[2],
         ];
 
 
