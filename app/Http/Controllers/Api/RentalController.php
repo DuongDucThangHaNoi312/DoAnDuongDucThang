@@ -7,6 +7,10 @@ use App\Models\RentalService;
 use App\Models\RentalEquipment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Equipment;
+use App\Models\Service;
+use App\Models\MeetingRoom;
+
 
 class RentalController extends Controller
 {
@@ -56,29 +60,55 @@ class RentalController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
+       
+        $equipments = Equipment::selectRaw("CONCAT(name, '-', price) as text, id")->pluck('text', 'id')->toArray();
+        $services = Service::selectRaw("CONCAT(name, '-', price) as text, id")->pluck('text', 'id')->toArray();
+        $meetingRooms = MeetingRoom::selectRaw("CONCAT(name, '-', price) as text, id")->pluck('text', 'id')->toArray();
+
+        $detailMeetingRoom =  explode('-', $meetingRooms[$data['meeting_room_id']]);
+
+
         $dataRental = [
             'meeting_room_id' => $data['meeting_room_id'],
             'user_id' => $data['user_id'],
             'rental_start' => $data['rental_start'],
             'renral_end' => $data['renral_end'],
             'status' => 1,
-            'total_money' => $data['total_money']
+            'price_meeting_room' => $detailMeetingRoom[1],
+            'name_meeting_room' => $detailMeetingRoom[0],
         ];
 
 
         $rentalServices = $data['rental_services'];
         $rentalEquipments = $data['rental_equipments'];
         $rental = Rental::create($dataRental);
+        $totalMoneyService = $totalMoneyEquipment = 0;
 
         foreach ($rentalServices as $rentalService) {
+            $detailService =  explode('-', $services[$rentalService['service_id']]);
             $rentalService['rental_history_id'] = $rental->id;
+            $rentalService['price_service'] = $detailService[1];
+            $rentalService['name_service'] =  $detailService[0];
+            $rentalService['total_money']   = intval($rentalService['quantity'])*intval($rentalService['price_service']);
+            $totalMoneyService += $rentalService['total_money'];
             RentalService::create($rentalService);
         }
 
         foreach ($rentalEquipments as $rentalEquipment) {
             $rentalEquipment['rental_history_id'] = $rental->id;
+            $detailEquipment =  explode('-', $equipments[$rentalEquipment['equipment_id']]);
+            $rentalEquipment['rental_history_id'] = $rental->id;
+            $rentalEquipment['price_equipment'] = $detailEquipment[1];
+            $rentalEquipment['name_equipment'] =  $detailEquipment[0];
+            $rentalEquipment['total_money']   = intval($rentalEquipment['quantity'])*intval($rentalEquipment['price_equipment']);
+            $totalMoneyEquipment += $rentalEquipment['total_money'];
             RentalEquipment::create($rentalEquipment);
         }
+
+        $rentalHistory = Rental::find($rental->id);
+        $rentalHistory->update([
+            'total_money' => intval($detailMeetingRoom[1]) + $totalMoneyService + $totalMoneyEquipment,
+        ]);
 
         return  response()->json([
             'message' => $this->success,

@@ -8,7 +8,7 @@ class Rental extends Model
 {
     protected $table = 'rental_histories';
 
-    protected $fillable = ['meeting_room_id', 'user_id', 'rental_start', 'renral_end', 'status'];
+    protected $fillable = ['meeting_room_id', 'user_id', 'rental_start', 'renral_end', 'status', 'price_meeting_room', 'name_meeting_room', 'total_money'];
 
     public function rentalServices()
 	{

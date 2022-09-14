@@ -8,6 +8,6 @@ class RentalEquipment extends Model
 {
     protected $table = 'rental_equipments';
 
-    protected $fillable = ['equipment_id', 'quantity', 'rental_history_id'];
+    protected $fillable = ['equipment_id', 'quantity', 'rental_history_id', 'total_money', 'price_equipment', 'name_equipment'];
 
 }
