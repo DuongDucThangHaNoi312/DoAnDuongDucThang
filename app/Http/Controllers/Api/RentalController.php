@@ -170,10 +170,11 @@ class RentalController extends Controller
     public function destroy(Request $request)
     {
         $data = $request->all();
-        $data = $data['data']['0'];
+        $id = intval($data['id']);
         
-        $equipment = Equipment::find($data['id']);
-        if (is_null($equipment)) {
+        $rental = Rental::find($id);
+        
+        if (is_null($rental)) {
             return  response()->json([
                 'status' => 200,
                 'message' => $this->msgNoData,
@@ -181,7 +182,11 @@ class RentalController extends Controller
             ]);
         }
 
-        $equipment->delete();
+        $rental->delete();
+
+        RentalService::where('rental_history_id', 20)->delete();
+        RentalEquipment::where('rental_history_id', 20)->delete();
+
         return  response()->json([
             'status' => 200,
             'message' => $this->success,
