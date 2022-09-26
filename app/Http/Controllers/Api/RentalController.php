@@ -30,11 +30,14 @@ class RentalController extends Controller
         
         if ($meetingRoomId) {
             $data->where('meeting_room_id', $meetingRoomId);
+
+            $data = $data->where('rental_start', '<=', $dateCurrent)
+                ->where('rental_end', '>=', $dateCurrent);
         }
+            
         $data = $data->get();
-        // $data = $data->where('rental_start', '<=', $dateCurrent)
-        //     ->where('renral_end', '>=', $dateCurrent)
-        //     ->get();
+
+        
         if (count($data) < 1 ) {
             return  response()->json([
                 'status'  => 200,
@@ -59,29 +62,97 @@ class RentalController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
-       
         $equipments = Equipment::selectRaw("CONCAT(name, '-', price) as text, id")->pluck('text', 'id')->toArray();
         $services = Service::selectRaw("CONCAT(name, '-', price) as text, id")->pluck('text', 'id')->toArray();
         $meetingRooms = MeetingRoom::selectRaw("CONCAT(name, '-', price, '-', path_img) as text, id")->pluck('text', 'id')->toArray();
-
         $detailMeetingRoom =  explode('-', $meetingRooms[$data['meeting_room_id']]);
+        $data = $request->all();
 
+        if (!isset($data['meeting_room_id'])) {
+            return  response()->json([
+                'message' => 'Chọn phòng thuê',
+                'status' => 406,
+                'data' => null,
+            ]);
+        }
+        
+        if (!isset($data['date'])) {
+            return  response()->json([
+                'message' => 'Nhập ngày thuê phòng',
+                'status' => 406,
+                'data' => null,
+            ]);
+        }
+
+        if (!isset($data['hour_start'])) {
+            return  response()->json([
+                'message' => 'Nhập thời gian bắt đầu thuê phòng',
+                'status' => 406,
+                'data' => null,
+            ]);
+        }
+        
+        if (!isset($data['hour_end'])) {
+            return  response()->json([
+                'message' => 'Nhập thời gian kết thúc thuê phòng',
+                'status' => 406,
+                'data' => null,
+            ]);
+        }
+
+        $data['rental_start'] = $data['date'] . ' ' . $data['hour_start'];
+        $data['rental_end'] = $data['date'] . ' ' . $data['hour_end'];
+
+        if ($data['rental_start'] >= $data['rental_end']) {
+            return  response()->json([
+                'message' => 'Thời gian kết thúc phải lớn hơn thời gian bắt đầu',
+                'status' => 406,
+                'data' => null,
+            ]);
+        }
+        
+        $checkRentaled1 = $this->checkAvaibleMeetingRoom1($data['rental_start'], $data['rental_end'], $data['meeting_room_id']);
+        $checkRentaled2 = $this->checkAvaibleMeetingRoom2($data['rental_start'], $data['rental_end'], $data['meeting_room_id']);
+        $checkRentaled3 = $this->checkAvaibleMeetingRoom3($data['rental_start'], $data['rental_end'], $data['meeting_room_id']);
+        $checkRentaled = [];
+        $checkRentaled[] = $checkRentaled1; 
+        $checkRentaled[] = $checkRentaled2; 
+        $checkRentaled[] = $checkRentaled3; 
+
+        $checkRentaled = array_filter($checkRentaled);
+        
+        if(!empty($checkRentaled)) {
+            return  response()->json([
+                'message' => 'Phòng đã được thuê !',
+                'status' => 200,
+                'data' => null,
+            ]);
+        }
+
+        // thêm mới data
+        if (isset($data['id'])) {
+            $rentalDeleted = Rental::find($data['id']);
+            $rentalDeleted->delete();
+
+            RentalService::where('rental_history_id', $data['id'])->delete();
+            RentalEquipment::where('rental_history_id', $data['id'])->delete();
+        
+        } 
 
         $dataRental = [
             'meeting_room_id' => $data['meeting_room_id'],
             'user_id' => $data['user_id'],
             'rental_start' => $data['rental_start'],
-            'renral_end' => $data['renral_end'],
+            'rental_end' => $data['rental_end'],
             'status' => 1,
             'price_meeting_room' => $detailMeetingRoom[1],
             'name_meeting_room' => $detailMeetingRoom[0],
             'path_img_meeting_room' => $detailMeetingRoom[2],
         ];
 
-
         $rentalServices = $data['rental_services'];
         $rentalEquipments = $data['rental_equipments'];
+
         $rental = Rental::create($dataRental);
         $totalMoneyService = $totalMoneyEquipment = 0;
 
@@ -115,51 +186,13 @@ class RentalController extends Controller
             'message' => $this->success,
             'status' => 200,
         ]);
+
+
+        
     }
 
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request)
-    {
-        $data = $request->all();
-        $data = $data['data']['0'];
-
-
-        $dataRental = [
-            'meeting_room_id' => $data['meeting_room_id'],
-            'user_id' => $data['user_id'],
-            'rental_start' => $data['rental_start'],
-            'renral_end' => $data['renral_end'],
-            'status' => 1,
-        ];
-
-        $rental = Rental::create($dataRental);
-        $rentalServices = $data['rental_services'];
-        $rentalEquipments = $data['rental_equipments'];
-
-
-
-        foreach ($rentalServices as $rentalService) {
-            $rentalService['rental_history_id'] = $rental->id;
-            RentalService::create($rentalService);
-        }
-
-        foreach ($rentalEquipments as $rentalEquipment) {
-            $rentalEquipment['rental_history_id'] = $rental->id;
-            RentalEquipment::create($rentalEquipment);
-        }
-
-        return  response()->json([
-            'message' => $this->success,
-            'status' => 200,
-        ]);
-    }
+    
 
     /**
      * Remove the specified resource from storage.
@@ -184,8 +217,8 @@ class RentalController extends Controller
 
         $rental->delete();
 
-        RentalService::where('rental_history_id', 20)->delete();
-        RentalEquipment::where('rental_history_id', 20)->delete();
+        RentalService::where('rental_history_id', $id)->delete();
+        RentalEquipment::where('rental_history_id', $id)->delete();
 
         return  response()->json([
             'status' => 200,
@@ -194,8 +227,6 @@ class RentalController extends Controller
         ]);
     
     }
-
-
 
     public function getMettingRoomOfUser(Request $request)
     {
@@ -221,4 +252,36 @@ class RentalController extends Controller
             'data'=> $data,
         ]);
     }
+
+    public function checkAvaibleMeetingRoom1($rental_start, $rental_end, $meeting_room_id) {
+        
+        $rental = Rental::where('meeting_room_id', $meeting_room_id)
+            ->where('rental_start', '=', $rental_start)
+            ->where('rental_end', '=', $rental_end)
+            ->first();
+
+        return $rental;    
+    }
+    
+    public function checkAvaibleMeetingRoom2($rental_start, $rental_end, $meeting_room_id) {
+        
+        $rental = Rental::where('meeting_room_id', $meeting_room_id)
+            ->where('rental_start', '<', $rental_start)
+            ->where('rental_end', '>', $rental_start)
+            ->first();
+
+        return $rental;    
+    }
+    
+    
+    public function checkAvaibleMeetingRoom3($rental_start, $rental_end, $meeting_room_id) {
+        
+        $rental = Rental::where('meeting_room_id', $meeting_room_id)
+            ->where('rental_start', '>', $rental_start)
+            ->where('rental_end', '>', $rental_start)
+            ->first();
+
+        return $rental;    
+    }
+    
 }
