@@ -47,13 +47,13 @@ class UserController extends Controller
     public function login(Request $request)
     {
         $data = $request->all();
-        $user = User::where('fullname', $data['fullname'])
+        $user = User::where('email', $data['email'])
             ->first();
 
         if (is_null($user)) {
             return  response()->json([
                 'status' => 200,
-                'message' => 'Tên tài khoản hoặc mật khẩu không chính xác!',
+                'message' => 'Email hoặc mật khẩu không chính xác!',
                 'data'=> [],
             ]);
         }
@@ -61,7 +61,7 @@ class UserController extends Controller
         if (!(Hash::check($data['password'], $user->password))) {
             return  response()->json([
                 'status' => 200,
-                'message' => 'Tên tài khoản hoặc mật khẩu không chính xác!',
+                'message' => 'Email hoặc mật khẩu không chính xác!',
                 'data'=> [],
             ]);
         }
