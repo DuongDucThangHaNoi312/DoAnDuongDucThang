@@ -110,7 +110,25 @@ class RentalController extends Controller
                 'data' => null,
             ]);
         }
+
+        // thêm mới data
+        if (isset($data['id'])) {
+            $rentalDeleted = Rental::find($data['id']);
+            
+            if (is_null($rentalDeleted)) {
+                return  response()->json([
+                    'message' => 'Không tìm thấy dữ liệu !',
+                    'status' => 200,
+                    'data' => null,
+                ]);
+            }
+
+            $rentalDeleted->delete();
+            RentalService::where('rental_history_id', $data['id'])->delete();
+            RentalEquipment::where('rental_history_id', $data['id'])->delete();
         
+        }
+
         $checkRentaled1 = $this->checkAvaibleMeetingRoom1($data['rental_start'], $data['rental_end'], $data['meeting_room_id']);
         $checkRentaled2 = $this->checkAvaibleMeetingRoom2($data['rental_start'], $data['rental_end'], $data['meeting_room_id']);
         $checkRentaled3 = $this->checkAvaibleMeetingRoom3($data['rental_start'], $data['rental_end'], $data['meeting_room_id']);
@@ -118,7 +136,6 @@ class RentalController extends Controller
         $checkRentaled[] = $checkRentaled1; 
         $checkRentaled[] = $checkRentaled2; 
         $checkRentaled[] = $checkRentaled3; 
-
         $checkRentaled = array_filter($checkRentaled);
         
         if(!empty($checkRentaled)) {
@@ -127,16 +144,6 @@ class RentalController extends Controller
                 'status' => 200,
                 'data' => null,
             ]);
-        }
-
-        // thêm mới data
-        if (isset($data['id'])) {
-            $rentalDeleted = Rental::find($data['id']);
-            $rentalDeleted->delete();
-
-            RentalService::where('rental_history_id', $data['id'])->delete();
-            RentalEquipment::where('rental_history_id', $data['id'])->delete();
-        
         } 
 
         $dataRental = [
@@ -192,8 +199,6 @@ class RentalController extends Controller
     }
 
 
-    
-
     /**
      * Remove the specified resource from storage.
      *
@@ -204,7 +209,7 @@ class RentalController extends Controller
     {
         $data = $request->all();
         $id = intval($data['id']);
-        
+
         $rental = Rental::find($id);
         
         if (is_null($rental)) {
@@ -266,19 +271,18 @@ class RentalController extends Controller
     public function checkAvaibleMeetingRoom2($rental_start, $rental_end, $meeting_room_id) {
         
         $rental = Rental::where('meeting_room_id', $meeting_room_id)
-            ->where('rental_start', '<', $rental_start)
+            ->where('rental_start', '<=', $rental_start)
             ->where('rental_end', '>', $rental_start)
             ->first();
 
         return $rental;    
     }
     
-    
     public function checkAvaibleMeetingRoom3($rental_start, $rental_end, $meeting_room_id) {
         
         $rental = Rental::where('meeting_room_id', $meeting_room_id)
-            ->where('rental_start', '>', $rental_start)
-            ->where('rental_end', '>', $rental_start)
+            ->where('rental_start', '>=', $rental_start)
+            ->where('rental_start', '<', $rental_end)
             ->first();
 
         return $rental;    
