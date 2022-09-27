@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -47,13 +48,20 @@ class UserController extends Controller
     {
         $data = $request->all();
         $user = User::where('fullname', $data['fullname'])
-            // ->where('password', bcrypt($data['password']))
             ->first();
 
         if (is_null($user)) {
-             return  response()->json([
+            return  response()->json([
                 'status' => 200,
-                'message' => $this->msgNoData,
+                'message' => 'Tên tài khoản hoặc mật khẩu không chính xác!',
+                'data'=> [],
+            ]);
+        }
+
+        if (!(Hash::check($data['password'], $user->password))) {
+            return  response()->json([
+                'status' => 200,
+                'message' => 'Tên tài khoản hoặc mật khẩu không chính xác!',
                 'data'=> [],
             ]);
         }

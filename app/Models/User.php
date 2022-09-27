@@ -29,7 +29,7 @@ class User extends Authenticatable
     use HasApiTokens, Notifiable, SoftDeletes, LaratrustUserTrait;
 
     protected $dates = ['deleted_at', 'date_of_birth', 'issued_on'];
-    protected $hidden = ['password', 'remember_token'];
+    // protected $hidden = ['password', 'remember_token'];
     protected $guarded = [];
 
     public static function rules($id = 0)
