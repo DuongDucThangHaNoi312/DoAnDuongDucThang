@@ -100,8 +100,8 @@ class RentalController extends Controller
             ]);
         }
 
-        $data['rental_start'] = $data['date'] . ' ' . $data['hour_start'];
-        $data['rental_end'] = $data['date'] . ' ' . $data['hour_end'];
+        $data['rental_start'] = $data['date'] . ' ' . $data['hour_start'].":00";
+        $data['rental_end'] = $data['date'] . ' ' . $data['hour_end'].":00";
 
         if ($data['rental_start'] >= $data['rental_end']) {
             return  response()->json([
@@ -193,7 +193,6 @@ class RentalController extends Controller
             'message' => $this->success,
             'status' => 200,
         ]);
-
 
         
     }

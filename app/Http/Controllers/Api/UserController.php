@@ -47,8 +47,7 @@ class UserController extends Controller
     public function login(Request $request)
     {
         $data = $request->all();
-        $user = User::where('email', $data['email'])
-            ->first();
+        $user = User::where('email', (string) $data['email'])->first();
 
         if (is_null($user)) {
             return  response()->json([
