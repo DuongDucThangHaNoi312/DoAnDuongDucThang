@@ -40,7 +40,7 @@ class RentalController extends Controller
         
         if (count($data) < 1 ) {
             return  response()->json([
-                'status'  => 200,
+                'status'  => 404,
                 'message' => $this->msgNoData,
                 'data'    => [],
             ]);
@@ -118,7 +118,7 @@ class RentalController extends Controller
             if (is_null($rentalDeleted)) {
                 return  response()->json([
                     'message' => 'Không tìm thấy dữ liệu !',
-                    'status' => 200,
+                    'status' => 406,
                     'data' => null,
                 ]);
             }
@@ -141,7 +141,7 @@ class RentalController extends Controller
         if(!empty($checkRentaled)) {
             return  response()->json([
                 'message' => 'Phòng đã được thuê !',
-                'status' => 200,
+                'status' => 406,
                 'data' => null,
             ]);
         } 
@@ -213,7 +213,7 @@ class RentalController extends Controller
         
         if (is_null($rental)) {
             return  response()->json([
-                'status' => 200,
+                'status' => 404,
                 'message' => $this->msgNoData,
                 'data'=> [],
             ]);
