@@ -63,11 +63,12 @@ class RentalController extends Controller
     public function store(Request $request)
     {
         $dateCurrent = date('Y-m-d H:i:s');
+        $data = $request->all();
+
         $equipments = Equipment::selectRaw("CONCAT(name, '-', price) as text, id")->pluck('text', 'id')->toArray();
         $services = Service::selectRaw("CONCAT(name, '-', price) as text, id")->pluck('text', 'id')->toArray();
         $meetingRooms = MeetingRoom::selectRaw("CONCAT(name, '-', price, '-', path_img) as text, id")->pluck('text', 'id')->toArray();
         $detailMeetingRoom =  explode('-', $meetingRooms[$data['meeting_room_id']]);
-        $data = $request->all();
 
         if (!isset($data['meeting_room_id'])) {
             return  response()->json([
@@ -248,7 +249,8 @@ class RentalController extends Controller
         $data->with('rentalServices', 'rentalEquipments');
         $data->where(function($q) use ($userId) {
             $q->where('user_id', 'LIKE', '%' . ',' . $userId . '%')
-            ->orWhere('user_id', 'LIKE', '%' . $userId . ',' . '%');
+            ->orWhere('user_id', 'LIKE', '%' . $userId . ',' . '%')
+            ->orWhere('user_id', '=',  $userId);
         });
         $data = $data->get();
         if (count($data) < 1 ) {
