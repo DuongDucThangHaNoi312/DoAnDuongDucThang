@@ -42,4 +42,4 @@ Route::get('rentals_get_metting_room_of_user', 'Api\RentalController@getMettingR
 Route::post('rentals', 'Api\RentalController@store');
 Route::post('rentals', 'Api\RentalController@store');
 Route::delete('rentals', 'Api\RentalController@destroy');
-Route::get('room_empty', 'Api\RentalController@getRoomEmpty');
+Route::post('room_empty', 'Api\RentalController@getRoomEmpty');
