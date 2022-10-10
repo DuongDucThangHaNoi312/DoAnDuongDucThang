@@ -29,8 +29,12 @@
         <div class="login-box-body">
             <p class="login-box-msg">Đăng nhập để bắt đầu phiên làm việc</p>
             {!! Form::open(['url' => route('admin.login')]) !!}
-                <div class="form-group has-feedback">
+                {{-- <div class="form-group has-feedback">
                     {!! Form::text('code', null, ['class' => 'form-control', 'placeholder' => 'Mã nhân viên', 'required']) !!}
+                    <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                </div> --}}
+                <div class="form-group has-feedback">
+                    {!! Form::text('email', null, ['class' => 'form-control', 'placeholder' => 'Email', 'required']) !!}
                     <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                 </div>
                 <div class="form-group has-feedback">

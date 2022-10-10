@@ -135,7 +135,6 @@
                                 <th style="text-align: center; vertical-align: middle;">{!! trans('system.no.') !!}</th>
                                 <th style="text-align: center; vertical-align: middle;">Loại</th>
                                 <th style="text-align: center; vertical-align: middle;">Tên</th>
-                                <th style="text-align: center; vertical-align: middle;">Số lượng</th>
                                 <th style="text-align: center; vertical-align: middle;">Giá Thuê</th>
                                 <th style="text-align: center; vertical-align: middle; width: 14%">{!! trans('system.action.label') !!}</th>
                             </tr>
@@ -148,29 +147,23 @@
                                     <td style="text-align: center; vertical-align: middle;"> {!! $i++ !!}</td>
                                     <td style="text-align: center; vertical-align: middle;">{!! $typeEquipments[$value->type] !!}</td>
                                     <td style="text-align: center; vertical-align: middle;">{!! $value->name !!}</td>
-                                    <td style="text-align: center; vertical-align: middle;"> {!! App\Helper\HString::currencyFormat($value->number) !!} </td>
+                                    {{-- <td style="text-align: center; vertical-align: middle;"> {!! App\Helper\HString::currencyFormat($value->number) !!} </td> --}}
                                     <td style="text-align: center; vertical-align: middle;"> {!! App\Helper\HString::currencyFormat($value->price) !!} </td>
                                     <td style="text-align: center; vertical-align: middle;">
-                                        <div class="col-md-1">
-                                            <a href="{!! route('admin.equipments.show', $value->id) !!}" class="btn-detail btn btn-default btn-xs"
-                                                data-toggle="tooltip" data-placement="top" title="{!! trans('system.action.detail') !!}">
-                                                <i class="text-info glyphicon glyphicon-eye-open"></i>
-                                            </a>
-                                        </div>
-                                        <div class="col-md-1">
-                                            <a href="{!! route('admin.equipments.edit', $value->id) !!}" data-toggle="tooltip" data-placement="top"
-                                                class="btn btn-xs btn-default" title="{!! trans('system.action.update') !!}"><i
-                                                    class="text-warning glyphicon glyphicon-edit"></i></a>
-                                        </div>
-                                       
-                                        <div class="col-md-1">
-                                            <a href="javascript:void(0)" data-toggle="tooltip" data-placement="top"
-                                                link="{!! route('admin.equipments.destroy', $value->id) !!}"
-                                                class="btn-confirm-del btn btn-default btn-xs"
-                                                title="{!! trans('system.action.delete') !!}">
-                                                <i class="text-danger glyphicon glyphicon-remove"></i>
-                                            </a>
-                                        </div>
+                                        <a href="{!! route('admin.equipments.show', $value->id) !!}" class="btn-detail btn btn-default btn-xs"
+                                            data-toggle="tooltip" data-placement="top" title="{!! trans('system.action.detail') !!}">
+                                            <i class="text-info glyphicon glyphicon-eye-open"></i>
+                                        </a>
+                                        <a href="{!! route('admin.equipments.edit', $value->id) !!}" data-toggle="tooltip" data-placement="top"
+                                            class="btn btn-xs btn-default" title="{!! trans('system.action.update') !!}">
+                                            <i class="text-warning glyphicon glyphicon-edit"></i>
+                                        </a>
+                                        <a href="javascript:void(0)" data-toggle="tooltip" data-placement="top"
+                                            link="{!! route('admin.equipments.destroy', $value->id) !!}"
+                                            class="btn-confirm-del btn btn-default btn-xs"
+                                            title="{!! trans('system.action.delete') !!}">
+                                            <i class="text-danger glyphicon glyphicon-remove"></i>
+                                        </a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -204,7 +197,7 @@
             $(".select2").select2({width: '100%'});
             $('#tableUser thead tr').clone(true).appendTo('#tableUser thead');
             $('#tableUser thead tr:eq(1) th').each(function (i) {
-                if (i == 1 || i == 2 || i == 3) {
+                if (i == 1 || i == 2  || i == 3) {
                     $(this).html('<input type="text" class="search-form input-text" autocomplete="off" />');
                 } else {
                     $(this).html('');

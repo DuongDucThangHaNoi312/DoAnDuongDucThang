@@ -17,7 +17,7 @@
             <li><a href="{!! route('admin.meeting-rooms.index') !!}">{!! trans('meeting-rooms.label') !!}</a></li>
         </ol>
     </section>
-    {!! Form::open(['url' => route('admin.meeting-rooms.update', $meetingRoom->id), 'method' => 'PUT', 'role' => 'form']) !!}
+    {!! Form::open(['url' => route('admin.meeting-rooms.update', $meetingRoom->id), 'method' => 'PUT', 'role' => 'form', "enctype" => "multipart/form-data"]) !!}
     <table class='table borderless'>
         <tr>
             <th class="table_right_middle " style="width: 15%;">
@@ -48,6 +48,18 @@
             </td>
             <th class="table_right_middle " style="width: 15%;"></th>
         </tr>
+
+        <tr>
+            <th class="table_right_middle" style="width: 15%">
+                Ảnh
+            </th>
+            <td style="width: 70%;">
+                <img style="width: 160px; height:auto"  src='{!! asset($meetingRoom->path_img) !!}'>
+                <input type="file" name="file[]" class="form-control" multiple="" value="{{ $meetingRoom->path_img }}">
+            </td>
+            <th class="table_right_middle " style="width: 15%;"></th>
+        </tr>
+
         <tr>
             <th class="table_right_middle">
                 {!! trans('departments.description') !!}

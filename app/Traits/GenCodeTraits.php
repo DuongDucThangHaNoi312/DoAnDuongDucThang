@@ -3,12 +3,14 @@ namespace App\Traits;
 
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
+use DB;
 
 trait GenCodeTraits{
 
-    public function genCodeUser($model, $fied){
-       $fiedMax = $model->max($fied);
-       return $fiedMax;
+    public function genCodeUser(){
+       $code = DB::table('users')->max('code');
+       return $code;
     }
 
 }

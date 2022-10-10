@@ -37,7 +37,7 @@
             </td>
             <th class="table_right_middle " style="width: 15%;"></th>
         </tr>
-        <tr>
+        {{-- <tr>
             <th class="table_right_middle" style="width: 15%">
                 Số lượng
             </th>
@@ -45,7 +45,7 @@
                 {!! Form::text('number', old('number', $equipment->number), ['class' => 'form-control currency',  'required', 'disabled']) !!}
             </td>
             <th class="table_right_middle " style="width: 15%;"></th>
-        </tr>
+        </tr> --}}
         <tr>
             <th class="table_right_middle" style="width: 15%">
                 Giá thuê

@@ -91,11 +91,22 @@ class MeetingRoomController extends Controller
             Session::flash('alert-class', 'danger');
             return redirect()->route('admin.meeting-rooms.index');
         }
+        
         $validator = Validator::make($data, MeetingRoom::rules(intval($id)));
         $validator->setAttributeNames(trans('meeting-rooms'));
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
         }
+
+        if ($request->hasFile('file')) {
+            // Nếu có thì thục hiện lưu trữ file vào public/images
+            $file = $request->file('file');
+            $image = $file[0];
+            $storedPath = $image->move('images', $image->getClientOriginalName());
+            $pathName = "images//". $image->getClientOriginalName();
+            $data['path_img'] = $pathName;
+        }
+        
         $meetingRoom->update($data);
         Session::flash('message', trans('system.success'));
         Session::flash('alert-class', 'success');

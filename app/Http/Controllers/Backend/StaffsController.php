@@ -55,7 +55,7 @@ class StaffsController extends Controller
 
     public function create(Request $request)
     {
-        $codeMax = ($this->genCodeUser(new User, 'code'));
+        $codeMax = $this->genCodeUser();
         $codeRemoveDA = intval(Str::after($codeMax, 'DA'));
         $codeNew = "DA". intval($codeRemoveDA + 1);
         $departments = Department::pluck("name", "id")->toArray();
@@ -90,8 +90,6 @@ class StaffsController extends Controller
             'domicile' => $request->domicile,
             'marital_status' => $request->marital_status,
             'admin' => intval($request->admin),
-            
-            
         ]);
         $user = User::create($arrData);
         Session::flash('message', trans('system.success'));

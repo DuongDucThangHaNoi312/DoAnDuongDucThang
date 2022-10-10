@@ -35,6 +35,24 @@
             </td>
         </tr>
         <tr>
+            <th class="table_right_middle" style="width: 15%">
+                Ảnh
+            </th>
+            <td style="width: 70%;">
+                <img style="width: 160px; height:auto"  src='{!! asset($meetingRoom->path_img) !!}'>
+            </td>
+            <th class="table_right_middle " style="width: 15%;"></th>
+        </tr>
+        <tr>
+            <th class="table_right_middle" style="width: 15%">
+                Giá thuê
+            </th>
+            <td style="width: 70%;"> 
+                {!! Form::text('price', old('price', $meetingRoom->price), ['class' => 'form-control currency',  'required', 'disabled']) !!}
+            </td>
+            <th class="table_right_middle " style="width: 15%;"></th>
+        </tr>
+        <tr>
             <th class="table_right_middle" style="width: 15%;">
                 {!! trans('departments.telephone') !!}
             </th>

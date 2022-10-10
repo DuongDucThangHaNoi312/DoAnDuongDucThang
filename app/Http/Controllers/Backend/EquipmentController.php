@@ -50,7 +50,6 @@ class EquipmentController extends Controller
         Equipment::create([
             'type' => $data['type'],
             'price' => intval($data['price']),
-            'number' => intval($data['number']),
             'name' => $data['name'],
             'created_by' => Auth()->id(),
         ]);

@@ -33,36 +33,31 @@ class HomeController extends BaseController
     public function postLogin(Request $request)
     {
         $request->merge(['remember' => $request->input('remember', 0)]);
-        // $rules = [
-        //     'code'     => 'required|max:50',
-        //     'password'  => 'required|min:6|max:25',
-        //     //'g-recaptcha-response' => 'required|captcha',
-        // ];
+        $rules = [
+            'email'     => 'required|max:50',
+            'password'  => 'required',
+        ];
 
-        // $this->validate($data = $request, $rules);
         $errors = new \Illuminate\Support\MessageBag;
         try {
-            // if (\Auth::guard('admin')->attempt(['code' => $request->input('code'), 'password' => $request->input('password'), 'activated' => 1], $data['remember'])) {
-            //     \Auth::guard('admin')->user()->last_login = date('Y-m-d H:i:s');
-            //     \Auth::guard('admin')->user()->save();
-            //     if (\Auth::guard('admin')->user()->hasRole(['system', 'administrator'])) {
-            //         Session::put('is_admin', 1);
-            //     }
-            //     // if(\Auth::guard('customer')->check()) \Auth::guard('customer')->logout();
-            //     if (Session::get('loginRedirect_admin', '') == '') {
-            //         return redirect()->route('admin.home');
-            //     }
-            //     if ($request->input('password') == '123@123') {
-            //         Session::flash('message', 'Đổi mật khẩu mặc định để sử dụng hệ thống');
-            //         Session::flash('alert-class', 'warning');
-            //         return redirect()->route('admin.change-password');
-            //     }
-                return redirect()->route('admin.home');
-            // }
-            // $errors->add('invalid', "Invalid code/password.");
+            if (\Auth::guard('admin')->attempt(['email' => $request->input('email'), 'password' => $request->input('password'), 'activated' => 1], $data['remember'])) {
+                \Auth::guard('admin')->user()->last_login = date('Y-m-d H:i:s');
+                \Auth::guard('admin')->user()->save();
+                
+                if (\Auth::guard('admin')->user()->hasRole(['system', 'administrator'])) {
+                    Session::put('is_admin', 1);
+                }
+
+                // if(\Auth::guard('customer')->check()) \Auth::guard('customer')->logout();
+                if (Session::get('loginRedirect_admin', '') == '') {
+                    return redirect()->route('admin.home');
+
+                }
+            } 
         } catch (\Exception $e) {
             $errors->add('error', $e->getMessage());
         }
+
         return back()->withErrors($errors)->withInput();
     }
 
