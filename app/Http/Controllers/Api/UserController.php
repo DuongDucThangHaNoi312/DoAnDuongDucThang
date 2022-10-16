@@ -53,7 +53,7 @@ class UserController extends Controller
             return  response()->json([
                 'status' => 200,
                 'message' => 'Email hoặc mật khẩu không chính xác!',
-                'data'=> [],
+                'data'=> null,
             ]);
         }
 
@@ -61,7 +61,7 @@ class UserController extends Controller
             return  response()->json([
                 'status' => 200,
                 'message' => 'Email hoặc mật khẩu không chính xác!',
-                'data'=> [],
+                'data'=> null,
             ]);
         }
 
