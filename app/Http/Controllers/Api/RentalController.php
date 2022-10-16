@@ -122,7 +122,7 @@ class RentalController extends Controller
         }
 
         // thêm mới data
-        if (isset($data['id'])) {
+        if (isset($data['id']) &&  ($data['id']) != -1) {
             $rentalDeleted = Rental::find($data['id']);
             
             if (is_null($rentalDeleted)) {
