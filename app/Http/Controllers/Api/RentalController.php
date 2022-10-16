@@ -261,6 +261,15 @@ class RentalController extends Controller
             ]);
         }
 
+        if (count($data) > 0) {
+                $data->map(function ($item) {
+                    $item['hour_start'] = date('H:i', strtotime($item->rental_start));
+                    $item['hour_end'] = date('H:i', strtotime($item->rental_end));
+                    $item['date'] = date('Y-m-d', strtotime($item->rental_start));
+                    return $item;
+                });
+        }
+
         return  response()->json([
             'status' => 200,
             'message' => $this->success,
